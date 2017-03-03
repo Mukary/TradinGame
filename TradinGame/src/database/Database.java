@@ -37,9 +37,7 @@ public class Database {
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		InputStream fichierProperties = classLoader.getResourceAsStream( FICHIER_PROPERTIES );
 		try {
-			System.out.println("Ici");
-			properties.load( fichierProperties );
-			
+			properties.load( fichierProperties );		
 			url = properties.getProperty( PROPERTY_URL );
 	        driver = properties.getProperty( PROPERTY_DRIVER );
 	        nomUtilisateur = properties.getProperty( PROPERTY_USERNAME);

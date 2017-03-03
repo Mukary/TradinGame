@@ -1,9 +1,13 @@
 package views;
 
+import java.sql.SQLException;
+
+import DAO.UserDAO;
 import application.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import models.User;
 
 public class LoginController {
 
@@ -41,7 +45,15 @@ public class LoginController {
      */
     @FXML
     private void handleSignInButton(){
-    	System.out.println("Clicked on sign in button");
+    	UserDAO dao = new UserDAO();
+    	User u;
+		try {
+			u = dao.find(nicknameField.getText());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
     
     /**
