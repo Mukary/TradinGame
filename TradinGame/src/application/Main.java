@@ -14,7 +14,6 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	
 	private Stage primaryStage;
-	private BorderPane rootLayout;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
