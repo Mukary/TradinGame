@@ -1,11 +1,13 @@
 package DAO;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import models.User;
+import util.Util;
 
 public class UserDAO extends AbstractDAO<User>{
 
@@ -31,6 +33,39 @@ public class UserDAO extends AbstractDAO<User>{
 	public User find(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/**
+	 * Finds an user in the database given the nickname and the password
+	 * @param nickname nickname of the user to find
+	 * @param password password NOT HASHED YET of the user to find
+	 * @return the user object if it was found, null otherwise
+	 * @throws SQLException
+	 */
+	public User find(String nickname, String password) throws SQLException{
+		PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"user\" WHERE nickname = ? AND password = ?");
+		stmt.setString(1, nickname);
+		try {
+			stmt.setString(2,  Util.sha1(password));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()){
+			String firstname = rs.getString("firstname");
+			String lastname = rs.getString("lastname");
+			String country = rs.getString("country");
+			String city = rs.getString("city");
+			String address = rs.getString("address");
+			Boolean isBanned = rs.getBoolean("is_banned");
+			Boolean isAdmin = rs.getBoolean("is_admin");
+			rs.close();
+			stmt.close();
+			return new User(nickname, firstname, lastname, password, country, city, address, isBanned, isAdmin);
+		}
+		else
+			return null;
+		
 	}
 
 	

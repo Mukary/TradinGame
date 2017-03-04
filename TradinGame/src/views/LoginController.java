@@ -1,13 +1,19 @@
 package views;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import DAO.UserDAO;
 import application.Main;
+import facades.UserFacade;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.scene.control.Alert.AlertType;
 import models.User;
+import util.Util;
 
 public class LoginController {
 
@@ -16,19 +22,26 @@ public class LoginController {
 	@FXML
 	private PasswordField passwordField;
 	
+	private Stage stage;
+	
 	private Main mainApp;
+	private UserFacade uf;
 	
 	/**
      * The constructor.
      * The constructor is called before the initialize() method.
      */
     public LoginController() {
-    	
+    	uf = new UserFacade();
     }
     
     @FXML
     private void initialize() {
     
+    }
+    
+    public void setStage(Stage stage){
+    	this.stage = stage;
     }
     
     /**
@@ -45,14 +58,23 @@ public class LoginController {
      */
     @FXML
     private void handleSignInButton(){
-    	UserDAO dao = new UserDAO();
-    	User u;
+    	User u = null;
 		try {
-			u = dao.find(nicknameField.getText());
+			u = uf.login(nicknameField.getText(), passwordField.getText());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	if(u == null){
+    		 Alert alert = new Alert(AlertType.ERROR);
+             alert.initOwner(stage);
+             alert.setTitle("Invalid Fields");
+             alert.setHeaderText("Please correct invalid fields");
+             alert.setContentText("Nickname or password incorrect");
+             alert.showAndWait();
+    	}
+    	else
+    		System.out.println("oui");
     	
     }
     

@@ -6,6 +6,7 @@ import database.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import views.LoginController;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -41,8 +42,8 @@ public class Main extends Application {
             primaryStage.show();
             
             // Give the controller access to the main app.
-            /*PersonOverviewController controller = loader.getController();
-            controller.setMainApp(this);*/
+            LoginController controller = loader.getController();
+            controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }

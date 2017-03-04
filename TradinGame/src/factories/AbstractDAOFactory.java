@@ -1,8 +1,14 @@
 package factories;
 
-public class AbstractDAOFactory {
+import DAO.AbstractDAO;
+
+public abstract class AbstractDAOFactory {
 	
 	public final static int DAO_FACTORY = 0;
+	
+	
+	
+	public abstract AbstractDAO<?> getDao(int type);
 	
 	/**
 	 * Produces concrete factory given the type in parameter
