@@ -5,8 +5,10 @@ import java.io.IOException;
 import database.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import views.LoginController;
+import views.UserGeneralViewController;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -44,6 +46,27 @@ public class Main extends Application {
             // Give the controller access to the main app.
             LoginController controller = loader.getController();
             controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void showUserGeneralViewDialog() {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/views/UserGeneralView.fxml"));
+            AnchorPane userGeneralView = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            primaryStage.setTitle("TradinGame");
+            Scene scene = new Scene(userGeneralView);
+            primaryStage.setScene(scene);
+
+            // Set the person into the controller.
+            UserGeneralViewController controller = loader.getController();
+            controller.setMainApp(this);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

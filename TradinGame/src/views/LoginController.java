@@ -6,12 +6,14 @@ import java.sql.SQLException;
 import DAO.UserDAO;
 import application.Main;
 import facades.UserFacade;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ChoiceBox;
 import models.User;
 import util.Util;
 
@@ -21,6 +23,7 @@ public class LoginController {
 	private TextField nicknameField;
 	@FXML
 	private PasswordField passwordField;
+	
 	
 	private Stage stage;
 	
@@ -37,7 +40,7 @@ public class LoginController {
     
     @FXML
     private void initialize() {
-    
+    	
     }
     
     public void setStage(Stage stage){
@@ -74,7 +77,7 @@ public class LoginController {
              alert.showAndWait();
     	}
     	else
-    		System.out.println("oui");
+    		mainApp.showUserGeneralViewDialog();
     	
     }
     

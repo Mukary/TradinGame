@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="583.0" prefWidth="439.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginController">
+<AnchorPane prefHeight="583.0" prefWidth="448.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginController">
    <children>
       <Label layoutX="129.0" layoutY="40.0" prefHeight="49.0" prefWidth="182.0" text="TradinGame" AnchorPane.leftAnchor="129.0" AnchorPane.rightAnchor="128.0">
          <font>
@@ -42,6 +42,6 @@
             <Image url="@../../img/TradinGameLogo.jpg" />
          </image>
       </ImageView>
-      <PasswordField fx:id="passwordField" layoutX="115.0" layoutY="252.0" prefHeight="25.0" prefWidth="203.0" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="121.0" />
+      <PasswordField fx:id="passwordField" layoutX="118.0" layoutY="252.0" prefHeight="27.0" prefWidth="203.0" AnchorPane.leftAnchor="118.0" AnchorPane.rightAnchor="127.0" />
    </children>
 </AnchorPane>
