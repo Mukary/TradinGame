@@ -39,6 +39,9 @@ public class LoginController {
     }
     
     @FXML
+    /**
+     * Initializes the controller
+     */
     private void initialize() {
     	
     }

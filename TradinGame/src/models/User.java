@@ -5,6 +5,22 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Model representing an user. An user is composed by :
+ * <ul>
+ * 	<li>a nickname</li>
+ * 	<li>a firstname</li>
+ *  <li>a lastname</li>
+ *  <li>a password</li>
+ *  <li>the country where he lives</li>
+ * 	<li>the city where he lives</li>
+ * 	<li>the address of his living place</li>
+ *  <li>his current state : banned or not</li>
+ *  <li>his status : admin or not</li>
+ * </ul>
+ * @author bouygueq
+ *
+ */
 public class User {
 	
 	private StringProperty nickname;
@@ -17,6 +33,18 @@ public class User {
 	private BooleanProperty isBanned;
 	private BooleanProperty isAdmin;
 	
+	/**
+	 * Constructor with all the attributes of an user
+	 * @param nickname: nickname of the user
+	 * @param firstname: first name of the user
+	 * @param lastname: last name of the user
+	 * @param password: password of the user
+	 * @param country: country of the user
+	 * @param city: city of the user
+	 * @param address: address of the user
+	 * @param isBanned: state of the user
+	 * @param isAdmin: status of the user
+	 */
 	public User(String nickname, String firstname, String lastname, String password,
 			String country, String city, String address, Boolean isBanned,
 			Boolean isAdmin) {

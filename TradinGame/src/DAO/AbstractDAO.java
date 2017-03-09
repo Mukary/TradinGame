@@ -20,7 +20,7 @@ public abstract class AbstractDAO<T> {
   protected Connection connect;
   
   /**
-   * Intializates the database.
+   * Initializes the database.
    */
   public AbstractDAO()
   {

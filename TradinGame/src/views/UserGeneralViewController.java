@@ -18,11 +18,12 @@ public class UserGeneralViewController {
 		
     }
     
+	/**
+	 * Initializes the controller
+	 */
     @FXML
     private void initialize() {
-    	sortingChoiceBox.getItems().removeAll(sortingChoiceBox.getItems());
-        sortingChoiceBox.getItems().addAll("Option A", "Option B", "Option C");
-    	sortingChoiceBox.setPromptText("test");
+
     }
     /**
      * Is called by the main application to give a reference back to itself.

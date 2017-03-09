@@ -18,6 +18,10 @@ public class Main extends Application {
 	
 	private Stage primaryStage;
 	@Override
+	
+	/**
+	 * Entry point of the application
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			this.primaryStage = primaryStage;
@@ -51,6 +55,9 @@ public class Main extends Application {
         }
     }
     
+    /**
+     * Displays the user's main view (market etc..)
+     */
     public void showUserGeneralViewDialog() {
         try {
             // Load the fxml file and create a new stage for the popup dialog.

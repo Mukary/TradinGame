@@ -10,20 +10,35 @@ import models.User;
 import util.Util;
 
 public class UserDAO extends AbstractDAO<User>{
-
+	
 	@Override
+	/**
+	 * Inserts an User object in the database
+	 * @param obj: the user object to be inserted
+	 * @throws SQLException: When the query fails
+	 */
 	public void create(User obj) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+	/**
+	 * Deletes an user in the database
+	 * @param obj: The user to be deleted
+	 * @throws SQLException: When the query fails
+	 */
 	public void delete(User obj) throws SQLException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
+	/**
+	 * Updates an user in the database
+	 * @param obj: the user to be updated in the database
+	 * @throws SQLException: When the query fails
+	 */
 	public void update(User obj) throws SQLException {
 		// TODO Auto-generated method stub
 
@@ -69,6 +84,12 @@ public class UserDAO extends AbstractDAO<User>{
 	}
 
 	
+	/**
+	 * Finds an user in the database given his nickname
+	 * @param nickname: The given nickname to use for the query
+	 * @return the user object if the user was found, null otherwise
+	 * @throws SQLException: When the query fails
+	 */
 	public User find(String nickname) throws SQLException {
 		// TODO Auto-generated method stub
 		PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"user\" WHERE nickname = ?");
@@ -92,6 +113,11 @@ public class UserDAO extends AbstractDAO<User>{
 	}
 	
 	@Override
+	/**
+	 * Finds all the user in the database
+	 * @return an ArrayList containing all the users
+	 * @throws SQLException: When the query fails
+	 */
 	public ArrayList<User> getAll() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;

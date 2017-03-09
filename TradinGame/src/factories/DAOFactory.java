@@ -3,8 +3,16 @@ package factories;
 import DAO.AbstractDAO;
 import DAO.UserDAO;
 
+/**
+ * Concrete factory creating different DAO objects that will manage persistent datas on a PostgreSQL database
+ * @author bouygueq
+ *
+ */
 public class DAOFactory extends AbstractDAOFactory{
 	
+	/**
+	 * Static constant representing an user dao. To be used in the getDao method
+	 */
 	public final static int USER_DAO = 0;
 	
 	/**

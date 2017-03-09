@@ -2,12 +2,24 @@ package factories;
 
 import DAO.AbstractDAO;
 
+/**
+ * Abstract factory creating different types of sub-factories such as XMLFactory for instance. The main goal here is to
+ * provide an easy way to anticipate evolutivity of the program. Developers can easily implement other ways to manage persistent datas.
+ * @author bouygueq
+ *
+ */
 public abstract class AbstractDAOFactory {
-	
+	/**
+	 * static constant reprensenting a DAO factory to be used in the getFactory method
+	 */
 	public final static int DAO_FACTORY = 0;
 	
 	
-	
+	/**
+	 * Abstract method used by the sub-class to create different DAO objects, generally one for each model.
+	 * @param type: type of the DAO to create
+	 * @return
+	 */
 	public abstract AbstractDAO<?> getDao(int type);
 	
 	/**

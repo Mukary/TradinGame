@@ -9,7 +9,7 @@ import java.util.Properties;
 import java.util.concurrent.SynchronousQueue;
 
 /**
- * Utility class that initializes the JDBC driver. It reads a file to get the logins.
+ * Utility class that initializes the JDBC driver. It reads a file to get the logins. It is a singleton.
  * @author MAX
  *
  */
@@ -48,7 +48,7 @@ public class Database {
 			System.out.println("Erreur : fichier de configuration introuvable.");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Erreur lors de la connexion à la base de données.");
+			System.out.println("Erreur lors de la connexion ï¿½ la base de donnï¿½es.");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			System.out.println("Driver introuvable");
@@ -57,6 +57,10 @@ public class Database {
 		        
     }
     
+    /**
+     * Applies the singleton pattern. Checks if there is already a connection in the database. If not, creates the connection.
+     * @return the instance of the database.
+     */
     public static Database getInstance(){
     	if(db==null){
     		db = new Database();
@@ -66,6 +70,10 @@ public class Database {
     	
     }
     
+    /**
+     * 
+     * @return The connection to the database
+     */
     public Connection getConnexion()
     {
     	return conn;
