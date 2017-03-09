@@ -28,14 +28,14 @@ public class LoginController {
 	private Stage stage;
 	
 	private Main mainApp;
-	private UserFacade uf;
+	private UserFacade userFacade;
 	
 	/**
      * The constructor.
      * The constructor is called before the initialize() method.
      */
     public LoginController() {
-    	uf = new UserFacade();
+    	userFacade = new UserFacade();
     }
     
     @FXML
@@ -64,14 +64,14 @@ public class LoginController {
      */
     @FXML
     private void handleSignInButton(){
-    	User u = null;
+    	User userFound = null;
 		try {
-			u = uf.login(nicknameField.getText(), passwordField.getText());
+			userFound = userFacade.login(nicknameField.getText(), passwordField.getText());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	if(u == null){
+    	if(userFound == null){
     		 Alert alert = new Alert(AlertType.ERROR);
              alert.initOwner(stage);
              alert.setTitle("Invalid Fields");
