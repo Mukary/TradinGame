@@ -1,13 +1,13 @@
 package facades;
 
 import factories.AbstractDAOFactory;
-import factories.DAOFactory;
+import factories.PostgresDAOFactory;
 import models.User;
 
 import java.sql.SQLException;
 
 import DAO.AbstractDAO;
-import DAO.UserDAO;
+import DAO.PostgresUserDAO;
 
 /**
  * Class applying the Facade design patterns. It hides the complexity behind the DAO package and the business logic
@@ -17,7 +17,7 @@ import DAO.UserDAO;
 public class UserFacade {
 	
 	private User user;
-	private UserDAO userDAO;
+	private PostgresUserDAO userDAO;
 	
 	/**
 	 * Constructor
@@ -33,9 +33,9 @@ public class UserFacade {
 	 */
 	public UserFacade(){
 		//Creates DAOfactory
-		AbstractDAOFactory daoFactory = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+		AbstractDAOFactory daoFactory = AbstractDAOFactory.getFactory(AbstractDAOFactory.POSTGRES_DAO_FACTORY);
 		//Creates userDAO object with factory;
-		userDAO = (UserDAO) daoFactory.getDao(DAOFactory.USER_DAO);
+		userDAO = (PostgresUserDAO) daoFactory.getDao(PostgresDAOFactory.USER_DAO);
 	}
 	
 	/**

@@ -3,7 +3,7 @@ package views;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-import DAO.UserDAO;
+import DAO.PostgresUserDAO;
 import application.Main;
 import facades.UserFacade;
 import javafx.collections.FXCollections;

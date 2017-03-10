@@ -1,6 +1,7 @@
 package factories;
 
 import DAO.AbstractDAO;
+import database.Database;
 
 /**
  * Abstract factory creating different types of sub-factories such as XMLFactory for instance. The main goal here is to
@@ -12,7 +13,7 @@ public abstract class AbstractDAOFactory {
 	/**
 	 * static constant reprensenting a DAO factory to be used in the getFactory method
 	 */
-	public final static int DAO_FACTORY = 0;
+	public final static int POSTGRES_DAO_FACTORY = 0;
 	
 	
 	/**
@@ -29,8 +30,9 @@ public abstract class AbstractDAOFactory {
 	 */
 	public static AbstractDAOFactory getFactory(int type){
 		switch(type){
-		case DAO_FACTORY:
-			return new DAOFactory();
+		case POSTGRES_DAO_FACTORY:
+			Database.setSgbd(Database.POSTGRESQL);
+			return new PostgresDAOFactory();
 		default:
 			return null;
 		}

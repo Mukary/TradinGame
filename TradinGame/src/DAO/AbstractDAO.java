@@ -16,7 +16,6 @@ import database.Database;
  */
 public abstract class AbstractDAO<T> {
 
-  protected Database db = Database.getInstance();
   protected Connection connect;
   
   /**
@@ -24,7 +23,7 @@ public abstract class AbstractDAO<T> {
    */
   public AbstractDAO()
   {
-	  connect = db.getConnexion();
+	  connect = Database.getInstance().getConnexion();
   }
    
   /**

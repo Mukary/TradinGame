@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import models.User;
 import util.Util;
 
-public class UserDAO extends AbstractDAO<User>{
+public class PostgresUserDAO extends AbstractDAO<User>{
 	
 	@Override
 	/**

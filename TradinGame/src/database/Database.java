@@ -15,7 +15,7 @@ import java.util.concurrent.SynchronousQueue;
  */
 public class Database {
 	
-	private static final String FICHIER_PROPERTIES       = "./database/database.properties";
+	private static String FICHIER_PROPERTIES;
     private static final String PROPERTY_URL             = "url";
     private static final String PROPERTY_DRIVER          = "driver";
     private static final String PROPERTY_USERNAME 		 = "nomutilisateur";
@@ -23,6 +23,7 @@ public class Database {
     public static Connection conn;
     private static Database db;
     
+    public static final int POSTGRESQL = 0;
     /**
      * Initialize the JDBC driver
      */
@@ -68,6 +69,13 @@ public class Database {
     	}
     	return db;
     	
+    }
+    
+    public static void setSgbd(int sgbd_type){
+    	switch(sgbd_type){
+    	case POSTGRESQL:
+    		FICHIER_PROPERTIES = "./database/database.properties";
+    	}
     }
     
     /**
