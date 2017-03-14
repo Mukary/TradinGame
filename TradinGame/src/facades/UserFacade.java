@@ -18,12 +18,13 @@ public class UserFacade {
 	
 	private User user;
 	private PostgresUserDAO userDAO;
+	private static UserFacade userFacade;
 	
 	/**
 	 * Constructor
 	 * @param user: an User object
 	 */
-	public UserFacade(User user){
+	private UserFacade(User user){
 		this();
 		this.user = user;
 	}
@@ -31,11 +32,17 @@ public class UserFacade {
 	/**
 	 * Default constructor. Creates the different DAO objects needed
 	 */
-	public UserFacade(){
+	private UserFacade(){
 		//Creates DAOfactory
 		AbstractDAOFactory daoFactory = AbstractDAOFactory.getFactory(AbstractDAOFactory.POSTGRES_DAO_FACTORY);
 		//Creates userDAO object with factory;
 		userDAO = (PostgresUserDAO) daoFactory.getDao(PostgresDAOFactory.USER_DAO);
+	}
+	
+	public static UserFacade getInstance(){
+		if(userFacade == null)
+			userFacade = new UserFacade();
+		return userFacade;
 	}
 	
 	/**

@@ -35,7 +35,7 @@ public class LoginController {
      * The constructor is called before the initialize() method.
      */
     public LoginController() {
-    	userFacade = new UserFacade();
+    	userFacade = UserFacade.getInstance();
     }
     
     @FXML
