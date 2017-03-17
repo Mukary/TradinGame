@@ -38,6 +38,22 @@ public class UserGeneralViewController {
 
         mainApp.showServiceDetailView();
     }
+    
+    @FXML
+    private void handleMyServiceDetailButton(){
+    	mainApp.showMyServiceDetailView();
+    }
+    
+    @FXML
+    private void handleUnbookButton(){
+    	Alert unbookAlert = new Alert(Alert.AlertType.CONFIRMATION);
+    	unbookAlert.initOwner(stage);
+    	unbookAlert.setTitle("Are you sure to unbook this service ?");
+    	unbookAlert.showAndWait();
+    	
+    	//TODO: call the delete method on the ServiceFacade.
+    }
+    
 
     /**
      * Is called by the main application to give a reference back to itself.

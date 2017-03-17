@@ -19,8 +19,6 @@ public class Comment {
 	private Service service;
 	private User user;
 	private StringProperty content;
-	
-	private
 
 	
 	/**

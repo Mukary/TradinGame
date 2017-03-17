@@ -54,7 +54,9 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Shows the details of the selected service.
+     */
     public void showServiceDetailView(){
         try{
             //Load the service detail view.
@@ -73,6 +75,25 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
+    
+    public void showMyServiceDetailView(){
+    	try {
+    		//Load the booked service detail view
+    		FXMLLoader loader = new FXMLLoader();
+    		loader.setLocation(Main.class.getResource("/views/MyServiceDetailView.fxml"));
+    		AnchorPane myServiceDetailView = (AnchorPane) loader.load();
+    		
+    		Scene scene = new Scene(myServiceDetailView);
+    		primaryStage.setScene(scene);
+    		primaryStage.show();
+    		
+    		
+    	} catch(IOException e){
+    		e.printStackTrace();
+    	}
+    }
+    
     
     /**
      * Displays the user's main view (market etc..)
