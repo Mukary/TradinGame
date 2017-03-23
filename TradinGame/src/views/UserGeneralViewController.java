@@ -1,5 +1,7 @@
 package views;
 
+import java.io.IOException;
+
 import application.Main;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -49,6 +51,15 @@ public class UserGeneralViewController extends ViewController{
     	//TODO: call the delete method on the ServiceFacade.
     }
     
+    @FXML
+    private void addNewServiceButton(){
+    	try {
+			mainApp.showAddServiceDialogView();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
     /**
      * Is called by the main application to give a reference back to itself.

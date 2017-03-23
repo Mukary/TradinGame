@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import views.AddServiceViewController;
 import views.LoginController;
 import views.SignupViewController;
 import views.UserGeneralViewController;
@@ -139,6 +140,28 @@ public class Main extends Application {
         	} catch (IOException e) {
         		e.printStackTrace();
         	}
+    }
+    
+    public void showAddServiceDialogView() throws IOException{
+    	// Load the fxml file and create a new stage for the popup dialog.
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("/views/addServiceView.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+
+        // Create the dialog Stage.
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Add service");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+
+        // Set the person into the controller.
+        AddServiceViewController controller = loader.getController();
+        controller.setStage(dialogStage);
+
+        // Show the dialog and wait until the user closes it
+        dialogStage.showAndWait();
     }
 	
 	public static void main(String[] args) {

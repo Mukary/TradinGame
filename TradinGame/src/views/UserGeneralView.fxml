@@ -53,6 +53,7 @@
                 			</FXCollections>
             			</items>
             			</ComboBox>
+                        <Button layoutX="50.0" layoutY="565.0" mnemonicParsing="false" onAction="#addNewServiceButton" text="Add a service" />
                      </children>
                   </AnchorPane>
             </content>
