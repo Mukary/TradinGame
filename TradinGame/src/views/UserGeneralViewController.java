@@ -7,12 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
-public class UserGeneralViewController {
-	
-	private Main mainApp;
-
-
-	private Stage stage;
+public class UserGeneralViewController extends ViewController{
 	
 	@FXML
 	private ComboBox sortingChoiceBox = new ComboBox(FXCollections.observableArrayList("A - Z", "Date (ASC)", "Date (DESC)", "Game", "Provider"));
@@ -60,8 +55,8 @@ public class UserGeneralViewController {
      * 
      * @param mainApp
      */
-    public void setMainApp(Main mainApp) {
+    /*public void setMainApp(Main mainApp) {
         this.mainApp = mainApp;
-    }
+    }*/
 
 }
