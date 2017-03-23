@@ -18,8 +18,23 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 	 * @throws SQLException: When the query fails
 	 */
 	public void create(User obj) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		try{
+			PreparedStatement stmt = connect.prepareStatement("INSERT INTO user(nickname, firstname, lastname, country, city, address, is_admin, is_banned, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			stmt.setString(1, obj.getNickname());
+			stmt.setString(2, obj.getFirstname());
+			stmt.setString(3, obj.getLastname());
+			stmt.setString(4, obj.getCountry());
+			stmt.setString(5, obj.getCity());
+			stmt.setString(6, obj.getAddress());
+			stmt.setBoolean(7, obj.isIsBanned());
+			stmt.setBoolean(8, obj.isIsAdmin());
+			stmt.setString(9, obj.getPassword());
+			int res = stmt.executeUpdate();
+	   }catch(SQLException se){
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      e.printStackTrace();
+	   }
 	}
 
 	@Override
@@ -46,8 +61,26 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 	
 	@Override
 	public User find(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"user\" WHERE id = ?");
+		stmt.setInt(1, id);
+
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()){
+			String nickname = rs.getString("nickname");
+			String password = rs.getString("password");
+			String firstname = rs.getString("firstname");
+			String lastname = rs.getString("lastname");
+			String country = rs.getString("country");
+			String city = rs.getString("city");
+			String address = rs.getString("address");
+			Boolean isBanned = rs.getBoolean("is_banned");
+			Boolean isAdmin = rs.getBoolean("is_admin");
+			rs.close();
+			stmt.close();
+			return new User(nickname, firstname, lastname, password, country, city, address, isBanned, isAdmin);
+		}
+		else
+			return null;
 	}
 	
 	/**
