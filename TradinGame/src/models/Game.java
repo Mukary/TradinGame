@@ -1,7 +1,8 @@
 package models;
 
-import java.util.Date;
+import java.sql.Date;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -19,6 +20,7 @@ public class Game {
 
 	private StringProperty name;
 	private StringProperty editor;
+	private StringProperty gameTypeLabel;
 	public Date releaseDate;
 	
 	
@@ -28,27 +30,36 @@ public class Game {
 	 * @param editor
 	 * @param releaseDate
 	 */
-	public Game(StringProperty name, StringProperty editor, Date releaseDate){
-		this.name = name;
-		this.editor = editor;
+	public Game(String name, String editor, Date releaseDate, String gameTypeLabel){
+		super();
+		this.name = new SimpleStringProperty(name);
+		this.editor = new SimpleStringProperty(editor);
 		this.releaseDate = releaseDate;
+		this.gameTypeLabel = new SimpleStringProperty(gameTypeLabel);
 	}
 	
-	
-	public StringProperty getName() {
-		return name;
+	public final StringProperty nameProperty() {
+		return this.nameProperty();
 	}
-	public void setName(StringProperty name) {
-		this.name = name;
+	public final String getName() { return this.nameProperty().get(); }
+	public final void setName(final String name) {
+		this.nameProperty().set(name);
 	}
-	public StringProperty getEditor() {
-		return editor;
+
+	public final StringProperty editorProperty() {
+		return this.editorProperty();
 	}
-	public void setEditor(StringProperty editor) {
-		this.editor = editor;
+	public final String getEditor() { return this.editorProperty().get(); }
+	public final void setEditor(final String editor) {this.editorProperty().set(editor);}
+
+	public final StringProperty gameTypeLabelProperty() {
+		return this.gameTypeLabelProperty();
 	}
-	
-	
+	public final String getGameTypeLabel() { return this.gameTypeLabelProperty().get(); }
+	public final void setGameTypeLabel(final String gameTypeLabel) {this.gameTypeLabelProperty().set(gameTypeLabel);}
+
+	public final Date getReleaseDate() { return this.releaseDate; }
+	public final void setReleaseDate(Date releaseDate) { this.releaseDate = releaseDate; }
 	
 	
 	

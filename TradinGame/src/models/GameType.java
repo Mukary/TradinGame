@@ -2,34 +2,33 @@ package models;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class GameType {
 	
 	public StringProperty label;
-	private ArrayList<Game> games;
-	private ArrayList<ServiceType> serviceTypes;
-	
 	
 	/**
 	 * Constructor with all the attributes of a GameType
 	 * @param label
-	 * @param games
 	 */
-	public GameType(StringProperty label, ArrayList<Game> games, ArrayList<ServiceType> serviceTypes){
-		this.label = label;
-		this.setGames(games);
+	public GameType(String label){
+		super();
+		this.label = new SimpleStringProperty(label);
+	}
+
+	public final StringProperty labelProperty() {
+		return this.labelProperty();
 	}
 
 
-	public ArrayList<Game> getGames() {
-		return games;
+	public final String getLabel() {
+		return this.labelProperty().get();
 	}
 
 
-	public void setGames(ArrayList<Game> games) {
-		this.games = games;
+	public final void setLabel(final String label) {
+		this.labelProperty().set(label);
 	}
-	
-	
 }
