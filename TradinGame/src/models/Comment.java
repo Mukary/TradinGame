@@ -21,9 +21,12 @@ public class Comment {
 	private StringProperty content;
 
 	
+	
 	/**
-	 * Constructor with all the attributes of an user
-	 * @param content : the text of the comment
+	 * Constructor with all the attributes for a Comment
+	 * @param service : the service this comment belongs to
+	 * @param user :  the publisher of the comment
+	 * @param content : the comment's content
 	 */
 	public Comment(Service service, User user, String content) {
 		super();
