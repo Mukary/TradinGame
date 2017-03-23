@@ -17,9 +17,10 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 	 * @param obj: the user object to be inserted
 	 * @throws SQLException: When the query fails
 	 */
-	public void create(User obj) throws SQLException {
+	public int create(User obj) throws SQLException {
+		int res = 0;
 		try{
-			PreparedStatement stmt = connect.prepareStatement("INSERT INTO user(nickname, firstname, lastname, country, city, address, is_admin, is_banned, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement stmt = connect.prepareStatement("INSERT INTO \"user\"(nickname, firstname, lastname, country, city, address, is_admin, is_banned, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			stmt.setString(1, obj.getNickname());
 			stmt.setString(2, obj.getFirstname());
 			stmt.setString(3, obj.getLastname());
@@ -29,12 +30,13 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 			stmt.setBoolean(7, obj.isIsBanned());
 			stmt.setBoolean(8, obj.isIsAdmin());
 			stmt.setString(9, Util.sha1(obj.getPassword()));
-			int res = stmt.executeUpdate();
+			res = stmt.executeUpdate();
 	   }catch(SQLException se){
 	      se.printStackTrace();
 	   }catch(Exception e){
 	      e.printStackTrace();
 	   }
+		return res;
 	}
 
 	@Override

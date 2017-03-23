@@ -31,7 +31,7 @@ public abstract class AbstractDAO<T> {
   * @param obj the object to insert in the database
   * @throws SQLException
   */
-  public abstract void create(T obj) throws SQLException;
+  public abstract int create(T obj) throws SQLException;
 
   /**
   * Deletes a T object in the database

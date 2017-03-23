@@ -55,5 +55,9 @@ public class UserFacade {
 	public User login(String nickname, String password) throws SQLException{
 		return userDAO.find(nickname, password);
 	}
+	
+	public int insertUser(User user) throws SQLException{
+		return userDAO.create(user);
+	}
 
 }
