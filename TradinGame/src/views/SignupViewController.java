@@ -26,29 +26,41 @@ public class SignupViewController extends ViewController{
 	
 	@FXML
 	private void handleRegisterButton(){
+		Alert alert;
 		if(!passwordMatches()){
-			Alert alert = new Alert(AlertType.ERROR);
+			alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText(null);
 	        alert.initOwner(stage);
 	        alert.setTitle("Invalid Fields");
 	        alert.setContentText("Password and confirmation don't match");
 	        alert.showAndWait();
 		}
 		else if(!validInputs()){
-			Alert alert = new Alert(AlertType.ERROR);
+			alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText(null);
 	        alert.initOwner(stage);
 	        alert.setTitle("Invalid Fields");
 	        alert.setContentText("Please fill the mandatory fields");
 	        alert.showAndWait();
 		}
-		else
-			System.out.println("C'est pas bon");
+		else{
+			alert = new Alert(AlertType.INFORMATION);
+	        alert.initOwner(stage);
+	        alert.setHeaderText(null);
+	        alert.setTitle("User registered");
+	        alert.setContentText("You have been registered correctly !");
+	        alert.showAndWait();
+			//TODO : USE FACADE TO INSERT USER
+	        mainApp.showLoginView();
+		}
+			
 		
         
 	}
 	
 	@FXML
 	private void handleCancelButton(){
-		
+		mainApp.showLoginView();
 	}
 	
 	/**
