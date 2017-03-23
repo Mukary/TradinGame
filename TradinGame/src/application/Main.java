@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import views.LoginController;
+import views.SignupViewController;
 import views.UserGeneralViewController;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -117,6 +118,27 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void showSignupView(){
+    	try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/views/SignupView.fxml"));
+            AnchorPane signupView = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            primaryStage.setTitle("Register form");
+            Scene scene = new Scene(signupView);
+            primaryStage.setScene(scene);
+
+            // Set the person into the controller.
+            SignupViewController controller = loader.getController();
+            controller.setMainApp(this);
+
+        	} catch (IOException e) {
+        		e.printStackTrace();
+        	}
     }
 	
 	public static void main(String[] args) {
