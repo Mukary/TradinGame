@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class ServiceType {
@@ -15,26 +16,23 @@ public class ServiceType {
 	 * @param label
 	 * @param description
 	 */
-	public ServiceType(StringProperty label, StringProperty description, ArrayList<Service> services){
-		this.setLabel(label);
-		this.setDescription(description);
+	public ServiceType(String label, String description){
+		this.label = new SimpleStringProperty(label);
+		this.description = new SimpleStringProperty(description);
 	}
 
-	public StringProperty getLabel() {
-		return label;
-	}
-
+	public StringProperty labelProperty() { return label;}
+	public final String getLabel() {return this.labelProperty().get();}
 	public void setLabel(StringProperty label) {
 		this.label = label;
 	}
 
-	public StringProperty getDescription() {
-		return description;
-	}
-
+	public StringProperty descriptionProperty() { return description;}
+	public final String getDescription() {return this.descriptionProperty().get();}
 	public void setDescription(StringProperty description) {
 		this.description = description;
 	}
+
 
 	public ArrayList<Service> getServices() {
 		return services;

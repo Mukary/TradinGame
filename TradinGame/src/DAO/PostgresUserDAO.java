@@ -45,9 +45,18 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 	 * @param obj: The user to be deleted
 	 * @throws SQLException: When the query fails
 	 */
-	public void delete(User obj) throws SQLException {
-		// TODO Auto-generated method stub
-
+	public int delete(User obj) throws SQLException {
+		int res = 0;
+		try{
+			PreparedStatement stmt = connect.prepareStatement("DELETE FROM \"user\" WHERE nickname = ?");
+			stmt.setString(1, obj.getNickname());
+			res = stmt.executeUpdate();
+		}catch(SQLException se){
+			se.printStackTrace();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	@Override
@@ -56,8 +65,27 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 	 * @param obj: the user to be updated in the database
 	 * @throws SQLException: When the query fails
 	 */
-	public void update(User obj) throws SQLException {
-		// TODO Auto-generated method stub
+	public int update(User obj) throws SQLException {
+        int res = 0;
+        try{
+            PreparedStatement stmt = connect.prepareStatement("UPDATE \"user\" SET (nickname = ?, firstname = ?, lastname = ?, country = ?, city = ?, address = ?, is_admin = ?, is_banned = ?, password = ?) WHERE nickname = ?");
+            stmt.setString(1, obj.getNickname());
+            stmt.setString(2, obj.getFirstname());
+            stmt.setString(3, obj.getLastname());
+            stmt.setString(4, obj.getCountry());
+            stmt.setString(5, obj.getCity());
+            stmt.setString(6, obj.getAddress());
+            stmt.setBoolean(7, obj.isIsBanned());
+            stmt.setBoolean(8, obj.isIsAdmin());
+            stmt.setString(9, Util.sha1(obj.getPassword()));
+            stmt.setString(10, obj.getNickname());
+            res = stmt.executeUpdate();
+        }catch(SQLException se){
+            se.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return res;
 
 	}
 	
@@ -126,7 +154,6 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 	 * @throws SQLException: When the query fails
 	 */
 	public User find(String nickname) throws SQLException {
-		// TODO Auto-generated method stub
 		PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"user\" WHERE nickname = ?");
 		stmt.setString(1, nickname);
 		ResultSet rs = stmt.executeQuery();
@@ -154,9 +181,23 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 	 * @throws SQLException: When the query fails
 	 */
 	public ArrayList<User> getAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
+        ArrayList<User> users = new ArrayList<User>();
+	    PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"user\" ");
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            String nickname = rs.getString("nickname");
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            String password = rs.getString("password");
+            String country = rs.getString("country");
+            String city = rs.getString("city");
+            String address = rs.getString("address");
+            Boolean isBanned = rs.getBoolean("is_banned");
+            Boolean isAdmin = rs.getBoolean("is_admin");
+            users.add(new User(nickname, firstname, lastname, password, country, city, address, isBanned, isAdmin));
+        }
+        rs.close();
+        stmt.close();
+        return users;
+    }
 }

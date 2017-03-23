@@ -38,14 +38,14 @@ public abstract class AbstractDAO<T> {
   * @param obj the object to delete
   * @throws SQLException 
   */
-  public abstract void delete(T obj) throws SQLException;
+  public abstract int delete(T obj) throws SQLException;
 
   /**
   * Updates a T object in the database
   * @param obj the object to update
   * @throws SQLException 
   */
-  public abstract void update(T obj) throws SQLException;
+  public abstract int update(T obj) throws SQLException;
 
   /**
   * Finds an object in the database thanks to its ID
