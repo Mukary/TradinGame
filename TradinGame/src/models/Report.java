@@ -10,9 +10,9 @@ public class Report {
 	
 	/**
 	 * Constructor with all the attributes for a Report
-	 * @param user
-	 * @param service
-	 * @param content
+	 * @param user : the user who emitted the report
+	 * @param service : the service concerned by the report
+	 * @param content : what the report is about
 	 */
 	public Report(User user, Service service, StringProperty content){
 		this.user = user;
