@@ -39,7 +39,7 @@ public class Game {
 	}
 	
 	public final StringProperty nameProperty() {
-		return this.nameProperty();
+		return this.name;
 	}
 	public final String getName() { return this.nameProperty().get(); }
 	public final void setName(final String name) {
@@ -47,13 +47,13 @@ public class Game {
 	}
 
 	public final StringProperty editorProperty() {
-		return this.editorProperty();
+		return this.editor;
 	}
 	public final String getEditor() { return this.editorProperty().get(); }
 	public final void setEditor(final String editor) {this.editorProperty().set(editor);}
 
 	public final StringProperty gameTypeLabelProperty() {
-		return this.gameTypeLabelProperty();
+		return this.gameTypeLabel;
 	}
 	public final String getGameTypeLabel() { return this.gameTypeLabelProperty().get(); }
 	public final void setGameTypeLabel(final String gameTypeLabel) {this.gameTypeLabelProperty().set(gameTypeLabel);}
