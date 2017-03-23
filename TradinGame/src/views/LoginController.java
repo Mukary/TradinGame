@@ -17,7 +17,7 @@ import javafx.scene.control.ChoiceBox;
 import models.User;
 import util.Util;
 
-public class LoginController {
+public class LoginController extends ViewController{
 
 	@FXML
 	private TextField nicknameField;
@@ -25,9 +25,6 @@ public class LoginController {
 	private PasswordField passwordField;
 	
 	
-	private Stage stage;
-	
-	private Main mainApp;
 	private UserFacade userFacade;
 	
 	/**
@@ -46,18 +43,6 @@ public class LoginController {
     	
     }
     
-    public void setStage(Stage stage){
-    	this.stage = stage;
-    }
-    
-    /**
-     * Is called by the main application to give a reference back to itself.
-     * 
-     * @param mainApp
-     */
-    public void setMainApp(Main mainApp) {
-        this.mainApp = mainApp;
-    }
     
     /**
      * Method triggered by a click on the sign in button
@@ -89,7 +74,7 @@ public class LoginController {
      */
     @FXML
     private void handleSignUpButton(){
-    	System.out.println("Clicked on sign up button");
+    	mainApp.showSignupView();
     }
     
     
