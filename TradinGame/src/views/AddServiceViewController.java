@@ -20,9 +20,9 @@ public class AddServiceViewController extends ViewController{
 	@FXML
 	private TextArea descriptionArea;	
 	@FXML
-	private ComboBox gameBox;
+	private ComboBox<String> gameBox;
 	@FXML
-	private ComboBox serviceTypeBox;
+	private ComboBox<String> serviceTypeBox;
 	@FXML
 	private DatePicker datePicker;
 	
@@ -34,10 +34,16 @@ public class AddServiceViewController extends ViewController{
 	@FXML
 	private void initialize(){
 		gameFacade = GameFacade.getInstance();
-		serviceTypeFacade = ServiceTypeFacade.getInstance();
+		serviceTypeFacade = ServiceTypeFacade.getInstance();		
 		try {
 			proposableGames = gameFacade.getAllGames();
 			proposableServiceTypes = serviceTypeFacade.getAllServiceTypes();
+			for(Game g: proposableGames){
+				gameBox.getItems().add(g.getName());
+			}
+			for(ServiceType st: proposableServiceTypes){
+				serviceTypeBox.getItems().add(st.getLabel());
+			}
 			//proposableServiceTypes = 
 		} catch (SQLException e) {
 			e.printStackTrace();
