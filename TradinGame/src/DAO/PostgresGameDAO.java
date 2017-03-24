@@ -122,8 +122,8 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
     
     public ArrayList<Game> getAllByServiceType(ServiceType serviceType) throws SQLException{
     	ArrayList<Game> games = new ArrayList<Game>();
-    	PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"Game\" g,\"GameType\" gt, \"Compatibilities\" c "
-    			+ "WHERE g.GameTypeLabel = gt.label AND c.GameTypeLabel = "+serviceType.labelProperty().get());
+    	PreparedStatement stmt = connect.prepareStatement("SELECT g.name as name, g.editor as editor, g.releaseDate as releaseDate, g.GameTypeLabel as GameTypeLabel FROM \"Game\" g,\"GameType\" gt, \"Compatibilities\" c "
+    			+ "WHERE g.GameTypeLabel = gt.label AND c.GameTypeLabel = '"+serviceType.labelProperty().get()+"';");
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             String name = rs.getString("name");
