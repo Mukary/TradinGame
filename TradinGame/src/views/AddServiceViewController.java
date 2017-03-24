@@ -5,12 +5,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import facades.GameFacade;
+import facades.ServiceTypeFacade;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import models.Game;
+import models.ServiceType;
 import javafx.scene.control.Alert.AlertType;
 
 public class AddServiceViewController extends ViewController{
@@ -25,13 +27,18 @@ public class AddServiceViewController extends ViewController{
 	private DatePicker datePicker;
 	
 	private ArrayList<Game> proposableGames;
+	private ArrayList<ServiceType> proposableServiceTypes;
 	private GameFacade gameFacade;
+	private ServiceTypeFacade serviceTypeFacade;
 	
 	@FXML
 	private void initialize(){
 		gameFacade = GameFacade.getInstance();
+		serviceTypeFacade = ServiceTypeFacade.getInstance();
 		try {
 			proposableGames = gameFacade.getAllGames();
+			proposableServiceTypes = serviceTypeFacade.getAllServiceTypes();
+			//proposableServiceTypes = 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
