@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by mukary on 23/03/2017.
  */
-public class ServiceDAO extends AbstractDAO<Service>{
+public class PostgresServiceDAO extends AbstractDAO<Service>{
 
     @Override
 

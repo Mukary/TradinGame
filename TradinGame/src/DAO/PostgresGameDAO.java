@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by mukary on 23/03/2017.
  */
-public class GameDAO extends AbstractDAO<Game> {
+public class PostgresGameDAO extends AbstractDAO<Game> {
 
     @Override
 

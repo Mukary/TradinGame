@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by mukary on 23/03/2017.
  */
-public class GameTypeDAO extends AbstractDAO<GameType>{
+public class PostgresGameTypeDAO extends AbstractDAO<GameType>{
     @Override
 
     public int create(GameType obj) throws SQLException {

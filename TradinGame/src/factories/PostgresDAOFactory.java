@@ -1,7 +1,7 @@
 package factories;
 
 import DAO.AbstractDAO;
-import DAO.GameDAO;
+import DAO.PostgresGameDAO;
 import DAO.PostgresUserDAO;
 import database.Database;
 
@@ -28,7 +28,7 @@ public class PostgresDAOFactory extends AbstractDAOFactory{
 		case USER_DAO:
 			return new PostgresUserDAO();
 		case GAME_DAO:
-			return new GameDAO();
+			return new PostgresGameDAO();
 		default:
 			return null;
 		}

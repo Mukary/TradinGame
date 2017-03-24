@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by mukary on 23/03/2017.
  */
-public class ServiceTypeDAO extends AbstractDAO<ServiceType>{
+public class PostgresServiceTypeDAO extends AbstractDAO<ServiceType>{
 
     @Override
 
