@@ -4,10 +4,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DAO.PostgresGameDAO;
-import DAO.PostgresUserDAO;
 import factories.AbstractDAOFactory;
 import factories.PostgresDAOFactory;
 import models.Game;
+import models.ServiceType;
 
 public class GameFacade {
 	
@@ -29,6 +29,10 @@ public class GameFacade {
 	
 	public ArrayList<Game> getAllGames() throws SQLException{
 		return gameDao.getAll();
+	}
+	
+	public ArrayList<Game> getAllGamesByServiceType(ServiceType serviceType) throws SQLException{
+		return gameDao.getAllByServiceType(serviceType);
 	}
 
 }

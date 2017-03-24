@@ -1,6 +1,7 @@
 package DAO;
 
 import models.Game;
+import models.ServiceType;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -117,5 +118,22 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
         rs.close();
         stmt.close();
         return games;
+    }
+    
+    public ArrayList<Game> getAllByServiceType(ServiceType serviceType) throws SQLException{
+    	ArrayList<Game> games = new ArrayList<Game>();
+    	PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"Game\" g,\"GameType\" gt, \"Compatibilities\" c "
+    			+ "WHERE g.GameTypeLabel = gt.label AND c.GameTypeLabel = "+serviceType.labelProperty().get());
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            String name = rs.getString("name");
+            String editor = rs.getString("editor");
+            Date releaseDate = rs.getDate("releaseDate");
+            String gameTypeLabel = rs.getString("gameTypeLabel");
+            games.add(new Game(name, editor, releaseDate, gameTypeLabel));
+        }
+        rs.close();
+        stmt.close();
+    	return games;
     }
 }
