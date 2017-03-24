@@ -95,19 +95,17 @@ public class PostgresServiceTypeDAO extends AbstractDAO<ServiceType>{
             return null;
     }
 
-    public ServiceType findServiceFromGameName(String gameName) throws SQLException{
-        PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"ServiceType\" s JOIN \"Game\" g on g.gameTypeLabel = s.label WHERE g.name = ?");
-        stmt.setString(1, gameName);
+    public ArrayList<ServiceType> getAllByGameType(String gameTypeLabel) throws SQLException{
+        PreparedStatement stmt = connect.prepareStatement("SELECT s.label, s.description FROM \"ServiceType\" s JOIN \"Compatibility\" c on c.gameTypeLabel = s.label WHERE  c.gameTypeLabel = ?");
+        ArrayList<ServiceType> serviceTypes = new ArrayList<ServiceType>();
+        stmt.setString(1, gameTypeLabel);
         ResultSet rs = stmt.executeQuery();
-        if(rs.next()){
+        while(rs.next()){
             String label = rs.getString("label");
             String description = rs.getString("description");
-            rs.close();
-            stmt.close();
-            return new ServiceType(label, description);
+            serviceTypes.add(new ServiceType(label, description));
         }
-        else
-            return null;
+        return serviceTypes;
     }
 
     @Override

@@ -77,7 +77,7 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
             String name = rs.getString("name");
             String editor = rs.getString("editor");
             Date releaseDate = rs.getDate("releaseDate");
-            String gameTypeLabel = rs.getString("gameTypeLabel");
+            String gameTypeLabel = rs.getString("GameTypeLabel");
             rs.close();
             stmt.close();
             return new Game(name, editor, releaseDate, gameTypeLabel);
@@ -94,7 +94,7 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
             name = rs.getString("name");
             String editor = rs.getString("editor");
             Date releaseDate = rs.getDate("releaseDate");
-            String gameTypeLabel = rs.getString("gameTypeLabel");
+            String gameTypeLabel = rs.getString("GameTypeLabel");
             rs.close();
             stmt.close();
             return new Game(name, editor, releaseDate, gameTypeLabel);
@@ -112,7 +112,7 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
             String name = rs.getString("name");
             String editor = rs.getString("editor");
             Date releaseDate = rs.getDate("releaseDate");
-            String gameTypeLabel = rs.getString("gameTypeLabel");
+            String gameTypeLabel = rs.getString("GameTypeLabel");
             games.add(new Game(name, editor, releaseDate, gameTypeLabel));
         }
         rs.close();
@@ -129,7 +129,7 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
             String name = rs.getString("name");
             String editor = rs.getString("editor");
             Date releaseDate = rs.getDate("releaseDate");
-            String gameTypeLabel = rs.getString("gameTypeLabel");
+            String gameTypeLabel = rs.getString("GameTypeLabel");
             games.add(new Game(name, editor, releaseDate, gameTypeLabel));
         }
         rs.close();

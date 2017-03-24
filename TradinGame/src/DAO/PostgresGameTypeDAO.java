@@ -99,4 +99,18 @@ public class PostgresGameTypeDAO extends AbstractDAO<GameType>{
         stmt.close();
         return gameTypes;
     }
+
+    public ArrayList<GameType> getAllByServiceType(String serviceType) throws SQLException {
+        ArrayList<GameType> gameTypes = new ArrayList<GameType>();
+        PreparedStatement stmt = connect.prepareStatement("SELECT g.label FROM \"GameType\" g JOIN \"Compatibility\" c on c.gameTypeLabel = g.label WHERE  c.ServiceTypeLabel = ?");
+        stmt.setString(1, serviceType);
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            String label = rs.getString("label");
+            gameTypes.add(new GameType(label));
+        }
+        rs.close();
+        stmt.close();
+        return gameTypes;
+    }
 }
