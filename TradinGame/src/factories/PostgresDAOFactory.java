@@ -1,6 +1,7 @@
 package factories;
 
 import DAO.AbstractDAO;
+import DAO.GameDAO;
 import DAO.PostgresUserDAO;
 import database.Database;
 
@@ -15,6 +16,7 @@ public class PostgresDAOFactory extends AbstractDAOFactory{
 	 * Static constant representing an user dao. To be used in the getDao method
 	 */
 	public final static int USER_DAO = 0;
+	public final static int GAME_DAO = 1;
 	
 	/**
 	 * Produces a concrete DAO object given the type
@@ -25,6 +27,8 @@ public class PostgresDAOFactory extends AbstractDAOFactory{
 		switch(type){
 		case USER_DAO:
 			return new PostgresUserDAO();
+		case GAME_DAO:
+			return new GameDAO();
 		default:
 			return null;
 		}

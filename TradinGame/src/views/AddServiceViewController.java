@@ -1,12 +1,16 @@
 package views;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+import facades.GameFacade;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
+import models.Game;
 import javafx.scene.control.Alert.AlertType;
 
 public class AddServiceViewController extends ViewController{
@@ -19,6 +23,19 @@ public class AddServiceViewController extends ViewController{
 	private ComboBox serviceTypeBox;
 	@FXML
 	private DatePicker datePicker;
+	
+	private ArrayList<Game> proposableGames;
+	private GameFacade gameFacade;
+	
+	@FXML
+	private void initialize(){
+		gameFacade = GameFacade.getInstance();
+		try {
+			proposableGames = gameFacade.getAllGames();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@FXML
 	private void handleAddServiceButton(){
