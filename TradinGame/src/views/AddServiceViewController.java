@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import facades.GameFacade;
 import facades.ServiceTypeFacade;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -28,8 +30,8 @@ public class AddServiceViewController extends ViewController{
 	@FXML
 	private DatePicker datePicker;
 	
-	private ArrayList<Game> proposableGames;
-	private ArrayList<ServiceType> proposableServiceTypes;
+	private ObservableList<Game> proposableGames;
+	private ObservableList<ServiceType> proposableServiceTypes;
 	private GameFacade gameFacade;
 	private ServiceTypeFacade serviceTypeFacade;
 	private Game selectedGame;
@@ -42,8 +44,8 @@ public class AddServiceViewController extends ViewController{
 		selectedGame = null;
 		selectedServiceType = null;
 		try {
-			proposableGames = gameFacade.getAllGames();
-			proposableServiceTypes = serviceTypeFacade.getAllServiceTypes();
+			proposableGames = FXCollections.observableList(gameFacade.getAllGames());
+			proposableServiceTypes = FXCollections.observableList(serviceTypeFacade.getAllServiceTypes());
 			for(Game g: proposableGames){
 				gameBox.getItems().add(g);
 			}
@@ -127,7 +129,7 @@ public class AddServiceViewController extends ViewController{
 			serviceTypeBox.setOnAction((event) -> {
 			    selectedServiceType = serviceTypeBox.getSelectionModel().getSelectedItem();
 			    try {
-					proposableGames = gameFacade.getAllGamesByServiceType(selectedServiceType);
+					proposableGames = FXCollections.observableList(gameFacade.getAllGamesByServiceType(selectedServiceType));
 					gameBox.getItems().clear();
 					//Only put game compatible with the current service type
 					for(Game g: proposableGames){

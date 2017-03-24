@@ -120,16 +120,23 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
         return games;
     }
     
+    /**
+     * Returns all the game associated to a service type
+     * @param serviceType The concerned service type
+     * @return an ArrayList of Game objects
+     * @throws SQLException when the query fails
+     */
     public ArrayList<Game> getAllByServiceType(ServiceType serviceType) throws SQLException{
     	ArrayList<Game> games = new ArrayList<Game>();
-    	PreparedStatement stmt = connect.prepareStatement("SELECT g.name as name, g.editor as editor, g.releaseDate as releaseDate, g.GameTypeLabel as GameTypeLabel FROM \"Game\" g,\"GameType\" gt, \"Compatibilities\" c "
-    			+ "WHERE g.GameTypeLabel = gt.label AND c.GameTypeLabel = '"+serviceType.labelProperty().get()+"';");
+    	PreparedStatement stmt = connect.prepareStatement("SELECT g.name as name, g.editor as editor, g.\"releaseDate\" as releaseDate, g.\"GameTypeLabel\" as GameTypeLabel FROM \"Game\" g,\"GameType\" gt, \"Compatibilities\" c "
+    			+ "WHERE g.\"GameTypeLabel\" = gt.label AND c.\"ServiceTypeLabel\" = '"+serviceType.labelProperty().get()+"'"
+    			+ " AND c.\"GameTypeLabel\" = g.\"GameTypeLabel\";");
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             String name = rs.getString("name");
             String editor = rs.getString("editor");
-            Date releaseDate = rs.getDate("releaseDate");
-            String gameTypeLabel = rs.getString("GameTypeLabel");
+            Date releaseDate = rs.getDate("releasedate");
+            String gameTypeLabel = rs.getString("gametypelabel");
             games.add(new Game(name, editor, releaseDate, gameTypeLabel));
         }
         rs.close();
