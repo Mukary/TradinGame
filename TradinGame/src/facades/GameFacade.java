@@ -34,5 +34,9 @@ public class GameFacade {
 	public ArrayList<Game> getAllGamesByServiceType(ServiceType serviceType) throws SQLException{
 		return gameDao.getAllByServiceType(serviceType);
 	}
+	
+	public boolean isCompatibleWithServiceType(Game game, ServiceType serviceType) throws SQLException{
+		return gameDao.isCompatibleWithServiceType(game, serviceType);
+	}
 
 }

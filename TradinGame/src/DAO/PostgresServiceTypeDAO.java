@@ -1,5 +1,6 @@
 package DAO;
 
+import models.Game;
 import models.ServiceType;
 import util.Util;
 
@@ -95,10 +96,13 @@ public class PostgresServiceTypeDAO extends AbstractDAO<ServiceType>{
             return null;
     }
 
-    public ArrayList<ServiceType> getAllByGameType(String gameTypeLabel) throws SQLException{
-        PreparedStatement stmt = connect.prepareStatement("SELECT s.label, s.description FROM \"ServiceType\" s JOIN \"Compatibility\" c on c.gameTypeLabel = s.label WHERE  c.gameTypeLabel = ?");
+    public ArrayList<ServiceType> getAllByGame(Game game) throws SQLException{
+        PreparedStatement stmt = connect.prepareStatement("SELECT s.label as label, s.description as description FROM \"Game\" g, \"ServiceType\" s, \"Compatibilities\" c"
+        	+ " WHERE g.\"GameTypeLabel\" = c.\"GameTypeLabel\""
+        	+ " AND s.label = c.\"ServiceTypeLabel\""
+        	+ " AND g.name = ?");
         ArrayList<ServiceType> serviceTypes = new ArrayList<ServiceType>();
-        stmt.setString(1, gameTypeLabel);
+        stmt.setString(1, game.getName());
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             String label = rs.getString("label");

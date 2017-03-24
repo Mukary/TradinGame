@@ -86,7 +86,6 @@ public class AddServiceViewController extends ViewController{
 			
 			gameBox.setOnAction((event) -> {
 			    selectedGame = gameBox.getSelectionModel().getSelectedItem();
-			    //proposableServiceTypes = serviceTypeFacade.get
 			});
 			
 			for(ServiceType st: proposableServiceTypes){
@@ -128,22 +127,9 @@ public class AddServiceViewController extends ViewController{
 			
 			serviceTypeBox.setOnAction((event) -> {
 			    selectedServiceType = serviceTypeBox.getSelectionModel().getSelectedItem();
-			    try {
-					proposableGames = FXCollections.observableList(gameFacade.getAllGamesByServiceType(selectedServiceType));
-					gameBox.getItems().clear();
-					//Only put game compatible with the current service type
-					for(Game g: proposableGames){
-						gameBox.getItems().add(g);
-					}
-					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			});
 			//proposableServiceTypes = 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} catch (SQLException e) {}
 	}
 	
 	@FXML
@@ -164,15 +150,28 @@ public class AddServiceViewController extends ViewController{
 	        alert.setTitle("Error");
 	        alert.setContentText("Please pick a date after the current date");
 	        alert.showAndWait();
-		}
-		else{
-			alert = new Alert(AlertType.CONFIRMATION);
-			alert.setHeaderText(null);
-	        alert.initOwner(stage);
-	        alert.setTitle("Service added");
-	        alert.setContentText("Your service has been well added");
-	        alert.showAndWait();
-		}
+		} else
+			try {
+				if(!gameFacade.isCompatibleWithServiceType(selectedGame, selectedServiceType)){
+					alert = new Alert(AlertType.ERROR);
+					alert.setHeaderText(null);
+			        alert.initOwner(stage);
+			        alert.setTitle("Error");
+			        alert.setContentText("You cannot associated the game "+selectedGame.getName()+" to the service type : "+selectedServiceType.getLabel());
+			        alert.showAndWait();
+				}
+				else{
+					alert = new Alert(AlertType.CONFIRMATION);
+					alert.setHeaderText(null);
+				    alert.initOwner(stage);
+				    alert.setTitle("Service added");
+				    alert.setContentText("Your service has been well added");
+				    alert.showAndWait();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		
 	}

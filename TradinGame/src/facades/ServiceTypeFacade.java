@@ -7,6 +7,7 @@ import DAO.PostgresGameDAO;
 import DAO.PostgresServiceTypeDAO;
 import factories.AbstractDAOFactory;
 import factories.PostgresDAOFactory;
+import models.Game;
 import models.ServiceType;
 
 public class ServiceTypeFacade {
@@ -30,5 +31,9 @@ public class ServiceTypeFacade {
 	
 	public ArrayList<ServiceType> getAllServiceTypes() throws SQLException{
 		return postgresServiceTypeDao.getAll();
+	}
+	
+	public ArrayList<ServiceType> getAllByGame(Game game) throws SQLException{
+		return postgresServiceTypeDao.getAllByGame(game);
 	}
 }

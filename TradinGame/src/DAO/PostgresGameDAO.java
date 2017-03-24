@@ -129,8 +129,9 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
     public ArrayList<Game> getAllByServiceType(ServiceType serviceType) throws SQLException{
     	ArrayList<Game> games = new ArrayList<Game>();
     	PreparedStatement stmt = connect.prepareStatement("SELECT g.name as name, g.editor as editor, g.\"releaseDate\" as releaseDate, g.\"GameTypeLabel\" as GameTypeLabel FROM \"Game\" g,\"GameType\" gt, \"Compatibilities\" c "
-    			+ "WHERE g.\"GameTypeLabel\" = gt.label AND c.\"ServiceTypeLabel\" = '"+serviceType.labelProperty().get()+"'"
+    			+ "WHERE g.\"GameTypeLabel\" = gt.label AND c.\"ServiceTypeLabel\" = ?"
     			+ " AND c.\"GameTypeLabel\" = g.\"GameTypeLabel\";");
+    	stmt.setString(1, serviceType.getLabel());
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             String name = rs.getString("name");
@@ -142,5 +143,16 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
         rs.close();
         stmt.close();
     	return games;
+    }
+    
+    public boolean isCompatibleWithServiceType(Game game, ServiceType serviceType) throws SQLException{
+    	PreparedStatement stmt = connect.prepareStatement("SELECT g.name as name, g.editor as editor, g.\"releaseDate\" as releaseDate, g.\"GameTypeLabel\" as GameTypeLabel FROM \"Game\" g,\"GameType\" gt, \"Compatibilities\" c "
+    			+ "WHERE g.\"GameTypeLabel\" = gt.label AND c.\"ServiceTypeLabel\" = ?"
+    			+ "AND g.name = ?"
+    			+ " AND c.\"GameTypeLabel\" = g.\"GameTypeLabel\";");
+    	stmt.setString(1, serviceType.getLabel());
+    	stmt.setString(2, game.getName());
+    	ResultSet rs = stmt.executeQuery();
+    	return rs.next();
     }
 }
