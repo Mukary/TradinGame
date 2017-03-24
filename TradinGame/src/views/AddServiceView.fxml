@@ -37,8 +37,8 @@
       <DatePicker fx:id="datePicker" layoutX="191.0" layoutY="380.0" />
       <ButtonBar layoutX="354.0" layoutY="495.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Cancel" />
-            <Button layoutX="140.0" layoutY="17.0" mnemonicParsing="false" text="Submit !" />
+          <Button mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" />
+            <Button layoutX="140.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleAddServiceButton" text="Submit !" />
         </buttons>
       </ButtonBar>
    </children>
