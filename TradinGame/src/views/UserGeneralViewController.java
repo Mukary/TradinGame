@@ -30,6 +30,8 @@ public class UserGeneralViewController extends ViewController{
 	
 	private ServiceFacade serviceFacade;
 	private ObservableList<Service> servicesList;
+	
+	private Service selectedService;
 
     
 	/**
@@ -37,6 +39,7 @@ public class UserGeneralViewController extends ViewController{
 	 */
     @FXML
     private void initialize() {
+    	selectedService = null;
     	serviceFacade = ServiceFacade.getInstance();
     	try {
 			servicesList = FXCollections.observableList(serviceFacade.getAllServices());
@@ -47,6 +50,9 @@ public class UserGeneralViewController extends ViewController{
     	descriptionServiceColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
     	providerNameColumn.setCellValueFactory(cellData -> cellData.getValue().sellerNicknameProperty());
     	gameNameColumn.setCellValueFactory(cellData -> cellData.getValue().gameNameProperty());
+    	
+    	services.getSelectionModel().selectedItemProperty().addListener(
+    			(observable, oldValue, newValue) -> selectedService = newValue);
     }
 
     @FXML
