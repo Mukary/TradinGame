@@ -1,6 +1,7 @@
 package facades;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import DAO.PostgresGameDAO;
 import DAO.PostgresServiceDAO;
@@ -29,6 +30,10 @@ public class ServiceFacade {
 	
 	public int insertService(Service service) throws SQLException{
 		return serviceDao.create(service);
+	}
+	
+	public ArrayList<Service> getAllServices() throws SQLException{
+		return serviceDao.getAll();
 	}
 
 }
