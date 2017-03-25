@@ -69,12 +69,16 @@ public class Main extends Application {
             AnchorPane serviceDetailView = (AnchorPane) loader.load();
 
             Scene scene = new Scene(serviceDetailView);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Service details");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            dialogStage.setScene(scene);
 
             ServiceDetailViewController controller = loader.getController();
+            controller.setStage(dialogStage);
             controller.setService(service);
-            controller.setMainApp(this);
+            dialogStage.showAndWait();
 
         } catch(IOException e){
             e.printStackTrace();
