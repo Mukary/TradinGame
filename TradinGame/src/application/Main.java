@@ -7,8 +7,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import models.Service;
 import views.AddServiceViewController;
 import views.LoginController;
+import views.ServiceDetailViewController;
 import views.SignupViewController;
 import views.UserGeneralViewController;
 import javafx.scene.Scene;
@@ -59,7 +61,7 @@ public class Main extends Application {
     /**
      * Shows the details of the selected service.
      */
-    public void showServiceDetailView(){
+    public void showServiceDetailView(Service service){
         try{
             //Load the service detail view.
             FXMLLoader loader = new FXMLLoader();
@@ -70,7 +72,8 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            LoginController controller = loader.getController();
+            ServiceDetailViewController controller = loader.getController();
+            controller.setService(service);
             controller.setMainApp(this);
 
         } catch(IOException e){

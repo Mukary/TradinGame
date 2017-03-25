@@ -4,17 +4,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.ServiceDetailViewController">
    <children>
-      <Label layoutX="25.0" layoutY="29.0" text="ServiceName" />
-      <Label layoutX="153.0" layoutY="28.0" text="ProviderName" />
-      <Label layoutX="23.0" layoutY="50.0" text="PublicationDate" />
-      <Label layoutX="23.0" layoutY="74.0" text="ServiceType" />
-      <Label layoutX="14.0" layoutY="102.0" text="Description" />
-      <Button layoutX="260.0" layoutY="118.0" mnemonicParsing="false" text="Book service" />
-      <Button layoutX="261.0" layoutY="170.0" mnemonicParsing="false" text="Report service" />
-      <TextArea editable="false" layoutX="23.0" layoutY="131.0" prefHeight="200.0" prefWidth="226.0" />
+      <Label fx:id="descriptionLabel" layoutX="29.0" layoutY="205.0" text="IntroService">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="29.0" layoutY="239.0" text="Description">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button layoutX="349.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleBookButton" text="Book service" />
+      <Button layoutX="147.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleReportButton" text="Report service" textFill="RED" />
+      <TextArea fx:id="descriptionArea" editable="false" layoutX="24.0" layoutY="276.0" prefHeight="200.0" prefWidth="408.0" />
+      <Button layoutX="257.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="25.0" prefWidth="73.0" text="Cancel" />
    </children>
 </AnchorPane>

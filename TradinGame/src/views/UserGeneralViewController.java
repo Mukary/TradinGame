@@ -57,14 +57,7 @@ public class UserGeneralViewController extends ViewController{
 
     @FXML
     private void handleServiceDetailButton(){
-
-//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//
-//        alert.initOwner(stage);
-//        alert.setTitle("Service details");
-//        alert.showAndWait();
-
-        mainApp.showServiceDetailView();
+        mainApp.showServiceDetailView(selectedService);
     }
     
     @FXML
