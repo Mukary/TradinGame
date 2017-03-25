@@ -57,12 +57,7 @@ public class LoginController extends ViewController{
 			e.printStackTrace();
 		}
     	if(userFound == null){
-    		 Alert alert = new Alert(AlertType.ERROR);
-             alert.initOwner(stage);
-             alert.setTitle("Invalid Fields");
-             alert.setHeaderText("Please correct invalid fields");
-             alert.setContentText("Nickname or password incorrect");
-             alert.showAndWait();
+    		 Util.displayAlert(AlertType.ERROR, "Bad login", "Bad nickname or password.");
     	}
     	else{
     		UserFacade.setUserLogged(userFound);

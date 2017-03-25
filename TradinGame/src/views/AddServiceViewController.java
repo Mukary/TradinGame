@@ -20,6 +20,7 @@ import javafx.util.StringConverter;
 import models.Game;
 import models.Service;
 import models.ServiceType;
+import util.Util;
 import javafx.scene.control.Alert.AlertType;
 
 public class AddServiceViewController extends ViewController{
@@ -141,41 +142,21 @@ public class AddServiceViewController extends ViewController{
 	private void handleAddServiceButton(){
 		Alert alert;
 		if(!validInputs()){
-			alert = new Alert(AlertType.ERROR);
-			alert.setHeaderText(null);
-	        alert.initOwner(stage);
-	        alert.setTitle("Error");
-	        alert.setContentText("Please fill the required fields");
-	        alert.showAndWait();
+			Util.displayAlert(AlertType.ERROR, "Error", "Please fill the required fields");
 		}
 		else if(pickedDateBeforeNow()){
-			alert = new Alert(AlertType.ERROR);
-			alert.setHeaderText(null);
-	        alert.initOwner(stage);
-	        alert.setTitle("Error");
-	        alert.setContentText("Please pick a date after the current date");
-	        alert.showAndWait();
+			Util.displayAlert(AlertType.ERROR, "Error", "Please choose an expiration date after the current date");
 		} else
 			try {
 				if(!gameFacade.isCompatibleWithServiceType(selectedGame, selectedServiceType)){
-					alert = new Alert(AlertType.ERROR);
-					alert.setHeaderText(null);
-			        alert.initOwner(stage);
-			        alert.setTitle("Error");
-			        alert.setContentText("You cannot associated the game "+selectedGame.getName()+" to the service type : "+selectedServiceType.getLabel());
-			        alert.showAndWait();
+			        Util.displayAlert(AlertType.ERROR, "Error", "You cannot associated the game "+selectedGame.getName()+" to the service type : "+selectedServiceType.getLabel());
 				}
 				else{
 					Date convertedDate = Date.valueOf(datePicker.getValue()); //Convert LocalDate into Date
 					Service service = new Service(1, descriptionArea.getText(), convertedDate, UserFacade.userLogged.getNickname(),
 							selectedServiceType.getLabel(), selectedGame.getName(), null);
 					serviceFacade.insertService(service);
-					alert = new Alert(AlertType.CONFIRMATION);
-					alert.setHeaderText(null);
-				    alert.initOwner(stage);
-				    alert.setTitle("Service added");
-				    alert.setContentText("Your service has been well added");
-				    alert.showAndWait();
+					Util.displayAlert(AlertType.CONFIRMATION, "Service added", "Your service has been well added !");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
