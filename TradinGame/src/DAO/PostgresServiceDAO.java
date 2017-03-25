@@ -18,14 +18,13 @@ public class PostgresServiceDAO extends AbstractDAO<Service>{
     public int create(Service obj) throws SQLException {
         int res = 0;
         try{
-            PreparedStatement stmt = connect.prepareStatement("INSERT INTO \"Service\"(idService, description, expirationDate, sellerNickname, serviceTypeLabel, gameName, consumerNickname) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            stmt.setInt(1, obj.getIdService());
-            stmt.setString(2, obj.getDescription());
-            stmt.setDate(3, obj.getExpirationDate());
-            stmt.setString(4, obj.getSellerNickname());
-            stmt.setString(5, obj.getServiceTypeLabel());
-            stmt.setString(6, obj.getGameName());
-            stmt.setString(7, obj.getConsumerNickname());
+            PreparedStatement stmt = connect.prepareStatement("INSERT INTO \"Service\"(description, \"expirationDate\", \"sellerNickname\", \"serviceTypeLabel\", \"gameName\", \"consumerNickname\") VALUES (?, ?, ?, ?, ?, ?)");
+            stmt.setString(1, obj.getDescription());
+            stmt.setDate(2, obj.getExpirationDate());
+            stmt.setString(3, obj.getSellerNickname());
+            stmt.setString(4, obj.getServiceTypeLabel());
+            stmt.setString(5, obj.getGameName());
+            stmt.setString(6, obj.getConsumerNickname());
             res = stmt.executeUpdate();
         }catch(SQLException se){
             se.printStackTrace();

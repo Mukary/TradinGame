@@ -1,11 +1,13 @@
 package views;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import facades.GameFacade;
+import facades.ServiceFacade;
 import facades.ServiceTypeFacade;
+import facades.UserFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.TextArea;
 import javafx.util.StringConverter;
 import models.Game;
+import models.Service;
 import models.ServiceType;
 import javafx.scene.control.Alert.AlertType;
 
@@ -34,6 +37,7 @@ public class AddServiceViewController extends ViewController{
 	private ObservableList<ServiceType> proposableServiceTypes;
 	private GameFacade gameFacade;
 	private ServiceTypeFacade serviceTypeFacade;
+	private ServiceFacade serviceFacade;
 	private Game selectedGame;
 	private ServiceType selectedServiceType;
 	
@@ -41,6 +45,7 @@ public class AddServiceViewController extends ViewController{
 	private void initialize(){
 		gameFacade = GameFacade.getInstance();
 		serviceTypeFacade = ServiceTypeFacade.getInstance();
+		serviceFacade = ServiceFacade.getInstance();
 		selectedGame = null;
 		selectedServiceType = null;
 		try {
@@ -161,6 +166,10 @@ public class AddServiceViewController extends ViewController{
 			        alert.showAndWait();
 				}
 				else{
+					Date convertedDate = Date.valueOf(datePicker.getValue()); //Convert LocalDate into Date
+					Service service = new Service(1, descriptionArea.getText(), convertedDate, UserFacade.userLogged.getNickname(),
+							selectedServiceType.getLabel(), selectedGame.getName(), null);
+					serviceFacade.insertService(service);
 					alert = new Alert(AlertType.CONFIRMATION);
 					alert.setHeaderText(null);
 				    alert.initOwner(stage);

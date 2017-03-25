@@ -64,8 +64,11 @@ public class LoginController extends ViewController{
              alert.setContentText("Nickname or password incorrect");
              alert.showAndWait();
     	}
-    	else
-    		mainApp.showUserGeneralViewDialog();
+    	else{
+    		UserFacade.setUserLogged(userFound);
+    		mainApp.showUserGeneralViewDialog();		
+    	}
+    		
     	
     }
     

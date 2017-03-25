@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Service {
@@ -25,13 +27,13 @@ public class Service {
 	 */
 	public Service(int idService, String description, Date expirationDate, String sellerNickname, String serviceTypeLabel, String gameName, String consumerNickName){
 		super();
-		this.setIdService(idService);
-		this.setDescription(description);
-		this.setExpirationDate(expirationDate);
-		this.setSellerNickName(sellerNickname);
-		this.setServiceTypeLabel(serviceTypeLabel);
-		this.setGameName(gameName);
-		this.setConsumerNickname(consumerNickName);
+		this.idService = new SimpleIntegerProperty(idService);
+		this.description = new SimpleStringProperty(description);
+		this.expirationDate = expirationDate;
+		this.sellerNickname = new SimpleStringProperty(sellerNickname);
+		this.serviceTypeLabel = new SimpleStringProperty(serviceTypeLabel);
+		this.gameName = new SimpleStringProperty(gameName);
+		this.consumerNickname = new SimpleStringProperty(consumerNickName);
 	}
 
 	public final IntegerProperty idServiceProperty() {

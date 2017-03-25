@@ -16,7 +16,7 @@ import DAO.PostgresUserDAO;
  */
 public class UserFacade {
 	
-	private User user;
+	public static User userLogged;
 	private PostgresUserDAO userDAO;
 	private static UserFacade userFacade;
 	
@@ -26,7 +26,7 @@ public class UserFacade {
 	 */
 	private UserFacade(User user){
 		this();
-		this.user = user;
+		userLogged = user;
 	}
 	
 	/**
@@ -58,6 +58,10 @@ public class UserFacade {
 	
 	public int insertUser(User user) throws SQLException{
 		return userDAO.create(user);
+	}
+	
+	public static void setUserLogged(User user){
+		userLogged = user;
 	}
 
 }
