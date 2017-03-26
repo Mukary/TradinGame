@@ -17,7 +17,7 @@ public class GameFacade {
 	private GameFacade(){
 		//Creates DAOfactory
 		AbstractDAOFactory daoFactory = AbstractDAOFactory.getFactory(AbstractDAOFactory.POSTGRES_DAO_FACTORY);
-		//Creates userDAO object with factory;
+		//Creates gameDAO object with factory;
 		gameDao = (PostgresGameDAO) daoFactory.getDao(PostgresDAOFactory.GAME_DAO);
 	}
 	
@@ -37,6 +37,10 @@ public class GameFacade {
 	
 	public boolean isCompatibleWithServiceType(Game game, ServiceType serviceType) throws SQLException{
 		return gameDao.isCompatibleWithServiceType(game, serviceType);
+	}
+	
+	public int insertGame(Game game) throws SQLException{
+		return gameDao.create(game);
 	}
 
 }

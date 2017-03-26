@@ -19,7 +19,7 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
     public int create(Game obj) throws SQLException {
         int res = 0;
         try{
-            PreparedStatement stmt = connect.prepareStatement("INSERT INTO \"Game\"(name, editor, releaseDate, gameTypeLabel) VALUES (?, ?, ?, ?)");
+            PreparedStatement stmt = connect.prepareStatement("INSERT INTO \"Game\"(name, editor, \"releaseDate\", \"GameTypeLabel\") VALUES (?, ?, ?, ?)");
             stmt.setString(1, obj.getName());
             stmt.setString(2, obj.getEditor());
             stmt.setDate(3, obj.getReleaseDate());

@@ -19,7 +19,7 @@ public class GameType {
 	}
 
 	public final StringProperty labelProperty() {
-		return this.labelProperty();
+		return this.label;
 	}
 
 

@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Service;
+import views.AddGameViewController;
 import views.AddServiceViewController;
 import views.AdminGeneralViewController;
 import views.LoginController;
@@ -86,6 +87,28 @@ public class Main extends Application {
         }
     }
     
+    public void showAddGameView(){
+    	try{
+            //Load the service detail view.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/views/AddGameView.fxml"));
+            AnchorPane addGameView = (AnchorPane) loader.load();
+
+            Scene scene = new Scene(addGameView);
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Add game");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            dialogStage.setScene(scene);
+
+            AddGameViewController controller = loader.getController();
+            controller.setStage(dialogStage);
+            dialogStage.showAndWait();
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
     
     public void showMyServiceDetailView(){
     	try {
