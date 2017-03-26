@@ -9,6 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Service;
 import views.AddServiceViewController;
+import views.AdminGeneralViewController;
 import views.LoginController;
 import views.ServiceDetailViewController;
 import views.SignupViewController;
@@ -126,6 +127,28 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void showAdminGenereralView(){
+    	try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/views/AdminGeneralView.fxml"));
+            AnchorPane adminGeneralView = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            primaryStage.setTitle("TradinGame");
+            Scene scene = new Scene(adminGeneralView);
+            primaryStage.setScene(scene);
+
+            // Set the person into the controller.
+            AdminGeneralViewController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
     
     public void showSignupView(){

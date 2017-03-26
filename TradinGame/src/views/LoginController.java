@@ -61,7 +61,10 @@ public class LoginController extends ViewController{
     	}
     	else{
     		UserFacade.setUserLogged(userFound);
-    		mainApp.showUserGeneralViewDialog();		
+    		if(!userFound.isIsAdmin())
+    			mainApp.showUserGeneralViewDialog();
+    		else
+    			mainApp.showAdminGenereralView();
     	}
     		
     	
