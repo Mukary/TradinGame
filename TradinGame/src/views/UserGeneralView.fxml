@@ -31,9 +31,10 @@
                         <Button layoutX="389.0" layoutY="88.0" mnemonicParsing="false" text="Search" AnchorPane.leftAnchor="389.0" AnchorPane.rightAnchor="805.0" AnchorPane.topAnchor="88.0" />
                         <TableView fx:id="services" layoutX="50.0" layoutY="130.0" prefHeight="385.0" prefWidth="1142.0" AnchorPane.bottomAnchor="144.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="130.0">
                           <columns>
-                            <TableColumn fx:id="descriptionServiceColumn" prefWidth="834.0" text="Description" />
-                            <TableColumn fx:id="providerNameColumn" minWidth="0.0" prefWidth="172.0" text="Provider" />
-                              <TableColumn fx:id="gameNameColumn" minWidth="0.0" prefWidth="135.0" text="Game" />
+                            <TableColumn fx:id="descriptionServiceColumn" prefWidth="683.0" text="Description" />
+                            <TableColumn fx:id="providerNameColumn" minWidth="0.0" prefWidth="148.0" text="Provider" />
+                              <TableColumn fx:id="gameNameColumn" minWidth="0.0" prefWidth="152.0" text="Game" />
+                              <TableColumn fx:id="serviceTypeColumn" prefWidth="158.0" text="Type" />
                           </columns>
                         </TableView>
                         <ButtonBar layoutX="1022.0" layoutY="558.0" prefHeight="40.0" prefWidth="168.0">

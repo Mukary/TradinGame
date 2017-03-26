@@ -27,9 +27,11 @@ public class UserGeneralViewController extends ViewController{
     private TableColumn<Service, String> providerNameColumn;
     @FXML
     private TableColumn<Service, String> gameNameColumn;
+    @FXML
+    private TableColumn<Service, String> serviceTypeColumn;
 	
 	private ServiceFacade serviceFacade;
-	private ObservableList<Service> servicesList;
+	public static ObservableList<Service> servicesList;
 	
 	private Service selectedService;
 
@@ -50,7 +52,7 @@ public class UserGeneralViewController extends ViewController{
     	descriptionServiceColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
     	providerNameColumn.setCellValueFactory(cellData -> cellData.getValue().sellerNicknameProperty());
     	gameNameColumn.setCellValueFactory(cellData -> cellData.getValue().gameNameProperty());
-    	
+    	serviceTypeColumn.setCellValueFactory(cellData -> cellData.getValue().serviceTypeLabelProperty());
     	services.getSelectionModel().selectedItemProperty().addListener(
     			(observable, oldValue, newValue) -> selectedService = newValue);
     }

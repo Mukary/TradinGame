@@ -156,6 +156,7 @@ public class AddServiceViewController extends ViewController{
 					Service service = new Service(1, descriptionArea.getText(), convertedDate, UserFacade.userLogged.getNickname(),
 							selectedServiceType.getLabel(), selectedGame.getName(), null);
 					serviceFacade.insertService(service);
+					UserGeneralViewController.servicesList.add(service);
 					Util.displayAlert(AlertType.CONFIRMATION, "Service added", "Your service has been well added !");
 				}
 			} catch (SQLException e) {

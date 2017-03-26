@@ -20,7 +20,7 @@ public class ServiceDetailViewController extends ViewController{
 	
 	public void setService(Service service){
 		this.service = service;
-		descriptionLabel.setText("Ce service est proposé par "+service.getSellerNickname()+". Il concerne "+service.getGameName());
+		descriptionLabel.setText("This service is proposed by "+service.getSellerNickname()+".\n It concerns "+service.getGameName()+".The theme of this service is : "+service.getServiceTypeLabel());
 		descriptionArea.setText(service.getDescription());
 	}
 	
