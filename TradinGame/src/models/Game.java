@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -22,6 +23,7 @@ public class Game {
 	private StringProperty editor;
 	private StringProperty gameTypeLabel;
 	public Date releaseDate;
+	private StringProperty yearRelease;
 	
 	
 	/**
@@ -36,6 +38,14 @@ public class Game {
 		this.editor = new SimpleStringProperty(editor);
 		this.releaseDate = releaseDate;
 		this.gameTypeLabel = new SimpleStringProperty(gameTypeLabel);
+		if(releaseDate != null){
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(releaseDate);
+			this.yearRelease = new SimpleStringProperty(String.valueOf(cal.get(Calendar.YEAR)));
+		}
+		else
+			this.yearRelease = new SimpleStringProperty("Unknown");
+		
 	}
 	
 	public final StringProperty nameProperty() {
@@ -60,6 +70,10 @@ public class Game {
 
 	public final Date getReleaseDate() { return this.releaseDate; }
 	public final void setReleaseDate(Date releaseDate) { this.releaseDate = releaseDate; }
+	
+	public final StringProperty yearReleaseProperty() { return this.yearRelease; }
+	public final String getYearRelease() { return this.yearReleaseProperty().get(); }
+	public final void setYearRelease(final String yearRelease){ this.yearReleaseProperty().set(yearRelease); }
 	
 	
 	
