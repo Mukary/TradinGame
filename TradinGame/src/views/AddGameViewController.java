@@ -36,6 +36,9 @@ public class AddGameViewController extends ViewController{
 		initializeComboBox();
 	}
 	
+	/**
+	 * Tries to add the game after the user clicked on the add button.
+	 */
 	@FXML
 	private void handleAddGameButton(){
 		if(!validInputs()){
@@ -70,17 +73,27 @@ public class AddGameViewController extends ViewController{
 		}
 	}
 	
+	/**
+	 * Closes the stage
+	 */
 	@FXML
 	private void cancelButton(){
 		stage.close();
 	}
 	
+	/**
+	 * Checks if all the inputs provided by the user are valid.
+	 * @return true if they are, false otherwise
+	 */
 	private boolean validInputs(){
 		if(titleField.getText().length() == 0 || editorField.getText().length() == 0 || selectedGameType == null || releaseDatePicker.getValue() == null)
 			return false;
 		return true;
 	}
 	
+	/**
+	 * Initializes the combobox by setting the item list and defining the behaviour on selection
+	 */
 	private void initializeComboBox(){
 		for(GameType gameType: AdminGeneralViewController.gameTypesList){
 			gameTypeBox.getItems().add(gameType);
