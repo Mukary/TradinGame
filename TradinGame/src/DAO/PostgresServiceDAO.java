@@ -1,6 +1,7 @@
 package DAO;
 
 import models.Service;
+import models.User;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -97,6 +98,26 @@ public class PostgresServiceDAO extends AbstractDAO<Service>{
     public ArrayList<Service> getAll() throws SQLException {
         ArrayList<Service> services = new ArrayList<Service>();
         PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"Service\" ");
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            int idService = rs.getInt("idService");
+            String description = rs.getString("description");
+            Date expirationDate = rs.getDate("expirationDate");
+            String sellerNickname = rs.getString("sellerNickName");
+            String serviceTypeLabel = rs.getString("serviceTypeLabel");
+            String gameName = rs.getString("gameName");
+            String consumerNickname = rs.getString("consumerNickname");
+            services.add(new Service(idService, description, expirationDate, sellerNickname, serviceTypeLabel, gameName, consumerNickname));
+        }
+        rs.close();
+        stmt.close();
+        return services;
+    }
+
+    public ArrayList<Service> getAllByUser(User user) throws SQLException {
+        ArrayList<Service> services = new ArrayList<Service>();
+        PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"Service\" WHERE \"sellerNickname\" = ? ");
+        stmt.setString(1, user.getNickname());
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             int idService = rs.getInt("idService");

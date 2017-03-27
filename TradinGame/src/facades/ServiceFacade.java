@@ -8,6 +8,7 @@ import DAO.PostgresServiceDAO;
 import factories.AbstractDAOFactory;
 import factories.PostgresDAOFactory;
 import models.Service;
+import models.User;
 
 public class ServiceFacade {
 	
@@ -34,6 +35,10 @@ public class ServiceFacade {
 	
 	public ArrayList<Service> getAllServices() throws SQLException{
 		return serviceDao.getAll();
+	}
+
+	public ArrayList<Service> getAllServicesByUser(User user) throws SQLException{
+		return serviceDao.getAllByUser(user);
 	}
 
 }
