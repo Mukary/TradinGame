@@ -217,6 +217,10 @@ public class Main extends Application {
         dialogStage.showAndWait();
     }
 	
+    /**
+     * Starting point of the application
+     * @param args
+     */
 	public static void main(String[] args) {
 		launch(args);
 	}

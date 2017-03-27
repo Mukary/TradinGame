@@ -10,12 +10,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * Data Access Object managing the Game table in the database.
  * Created by mukary on 23/03/2017.
  */
 public class PostgresGameDAO extends AbstractDAO<Game> {
 
-    @Override
-
+    
+    /**
+     * Inserts a game in the database.
+     * @param obj the game to be inserted
+     * @return 1 if the query succeeded, 0 otherwise
+     * @throw SQLException if the query fails
+     */
     public int create(Game obj) throws SQLException {
         int res = 0;
         try{
@@ -33,7 +39,12 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
         return res;
     }
 
-    @Override
+    /**
+     * Deletes a game in the database.
+     * @param obj the game to be deleted
+     * @return 1 if the query succeeded, 0 otherwise
+     * @throw SQLException if the query fails
+     */
     public int delete(Game obj) throws SQLException {
         int res = 0;
         try{
@@ -48,7 +59,12 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
         return res;
     }
 
-    @Override
+    /**
+     * Updates a game in the database.
+     * @param obj the game to be updated
+     * @return 1 if the query succeeded, 0 otherwise
+     * @throw SQLException if the query fails
+     */
     public int update(Game obj) throws SQLException {
         int res = 0;
         try{
@@ -86,6 +102,12 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
             return null;
     }
 
+    /**
+     * Finds a game in the database given its name.
+     * @param name the name of the concerned game
+     * @return The game object if it was found, null otherwise
+     * @throw SQLException if the query fails
+     */
     public Game find(String name) throws SQLException{
         PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"Game\" WHERE name = ?");
         stmt.setString(1, name);
@@ -103,7 +125,11 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
             return null;
     }
 
-    @Override
+    /**
+     * Gets all games in the database.
+     * @return an ArrayList of Game objects
+     * @throw SQLException if the query fails
+     */
     public ArrayList<Game> getAll() throws SQLException {
         ArrayList<Game> games = new ArrayList<Game>();
         PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"Game\" ");
@@ -145,6 +171,13 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
     	return games;
     }
     
+    /**
+     * Checks in a game is compatible with a service type
+     * @param game the concerned game
+     * @param serviceType the concerned service type
+     * @return true if they are compatible, false otherwise
+     * @throws SQLException if the query fails
+     */
     public boolean isCompatibleWithServiceType(Game game, ServiceType serviceType) throws SQLException{
     	PreparedStatement stmt = connect.prepareStatement("SELECT g.name as name, g.editor as editor, g.\"releaseDate\" as releaseDate, g.\"GameTypeLabel\" as GameTypeLabel FROM \"Game\" g,\"GameType\" gt, \"Compatibilities\" c "
     			+ "WHERE g.\"GameTypeLabel\" = gt.label AND c.\"ServiceTypeLabel\" = ?"

@@ -23,6 +23,9 @@ public class Database {
     public static Connection conn;
     private static Database db;
     
+    /**
+     * Static constant representing Postgresql RDBMS
+     */
     public static final int POSTGRESQL = 0;
     /**
      * Initialize the JDBC driver
@@ -71,6 +74,10 @@ public class Database {
     	
     }
     
+    /**
+     * Sets the RDBMS used by the software
+     * @param sgbd_type RDBMS to be used. It is desirable to use Database static constants.
+     */
     public static void setSgbd(int sgbd_type){
     	switch(sgbd_type){
     	case POSTGRESQL:

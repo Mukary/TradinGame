@@ -19,9 +19,21 @@ public class PostgresDAOFactory extends AbstractDAOFactory{
 	 * Static constant representing an user dao. To be used in the getDao method
 	 */
 	public final static int USER_DAO = 0;
+	/**
+	 * Static constant representing a game dao. To be used in the getDao method
+	 */
 	public final static int GAME_DAO = 1;
+	/**
+	 * Static constant representing a service type dao. To be used in the getDao method
+	 */
 	public final static int SERVICE_TYPE_DAO = 2;
+	/**
+	 * Static constant representing a service dao. To be used in the getDao method
+	 */
 	public final static int SERVICE_DAO = 3;
+	/**
+	 * Static constant representing a game type dao. To be used in the getDao method
+	 */
 	public final static int GAME_TYPE_DAO = 4;
 	
 	/**
