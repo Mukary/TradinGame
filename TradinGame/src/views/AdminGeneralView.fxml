@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="720.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AdminGeneralViewController">
+<AnchorPane prefHeight="720.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AdminGeneralViewController">
    <children>
       <TabPane prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -43,7 +43,7 @@
                         </TableView>
                         <Button layoutX="483.0" layoutY="574.0" mnemonicParsing="false" text="Edit" />
                         <Button layoutX="64.0" layoutY="574.0" mnemonicParsing="false" onAction="#handleAddGameButton" text="Add a new game" />
-                        <Button layoutX="411.0" layoutY="574.0" mnemonicParsing="false" text="Delete" textFill="#eb0808" />
+                        <Button layoutX="411.0" layoutY="574.0" mnemonicParsing="false" onAction="#handleDeleteGameButton" text="Delete" textFill="#eb0808" />
                      </children>
                   </AnchorPane>
             </content>

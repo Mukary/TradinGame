@@ -61,7 +61,8 @@ public class AddGameViewController extends ViewController{
 			}
 			if(res == 1){
 				AdminGeneralViewController.gamesList.add(game);
-				Util.displayAlert(AlertType.CONFIRMATION, "Game added", "The game has been well added !");			
+				Util.displayAlert(AlertType.CONFIRMATION, "Game added", "The game has been well added !");
+				stage.close();
 			}
 				
 			else
@@ -90,7 +91,7 @@ public class AddGameViewController extends ViewController{
 				@Override
 				protected void updateItem(GameType item, boolean empty){
 					super.updateItem(item, empty);
-					
+
 					if(item == null || empty){
 						setText(null);
 					}

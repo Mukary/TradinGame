@@ -42,6 +42,10 @@ public class GameFacade {
 	public int insertGame(Game game) throws SQLException{
 		return gameDao.create(game);
 	}
+
+	public int deleteGame(Game game) throws SQLException{
+		return gameDao.delete(game);
+	}
 	
 	public boolean gameAlreadyExists(String gameName) throws SQLException{
 		return gameDao.gameAlreadyExists(gameName);
