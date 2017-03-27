@@ -155,4 +155,17 @@ public class PostgresGameDAO extends AbstractDAO<Game> {
     	ResultSet rs = stmt.executeQuery();
     	return rs.next();
     }
+    
+    /**
+     * Checks if a game already exists in the database
+     * @param gameName name of the game
+     * @return true if the game already exists, false otherwise
+     * @throws SQLException if the query fails
+     */
+    public boolean gameAlreadyExists(String gameName) throws SQLException{
+    	PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"Game\" WHERE name = ?");
+    	stmt.setString(1, gameName);
+        ResultSet rs = stmt.executeQuery();
+        return rs.next();
+    }
 }

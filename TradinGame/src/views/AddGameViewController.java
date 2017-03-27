@@ -42,6 +42,15 @@ public class AddGameViewController extends ViewController{
 			Util.displayAlert(AlertType.ERROR, "Error", "Please fill the title and editor fields plus the game type");
 		}
 		else{
+			try {
+				if(gameFacade.gameAlreadyExists(titleField.getText())){
+					Util.displayAlert(AlertType.ERROR, "Error", "The game you try to add already exists in the database.");
+					return;
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			Date convertedDate = Date.valueOf(releaseDatePicker.getValue());
 			Game game = new Game(titleField.getText(), editorField.getText(), convertedDate, selectedGameType.getLabel());
 			int res = 0;

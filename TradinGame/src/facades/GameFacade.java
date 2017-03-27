@@ -42,5 +42,9 @@ public class GameFacade {
 	public int insertGame(Game game) throws SQLException{
 		return gameDao.create(game);
 	}
+	
+	public boolean gameAlreadyExists(String gameName) throws SQLException{
+		return gameDao.gameAlreadyExists(gameName);
+	}
 
 }
