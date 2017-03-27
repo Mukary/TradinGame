@@ -71,7 +71,7 @@
                           </columns>
                         </TableView>
                         <Button layoutX="657.0" layoutY="114.0" mnemonicParsing="false" onAction="#handleMyServiceDetailButton" text="Service details" />
-                        <Button layoutX="659.0" layoutY="154.0" mnemonicParsing="false" onAction="#handleUnbookButton" prefHeight="25.0" prefWidth="89.0" text="Unbook" />
+                        <Button layoutX="659.0" layoutY="154.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="25.0" prefWidth="89.0" text="Delete" />
                      </children></AnchorPane>
             </content>
           </Tab>

@@ -39,7 +39,7 @@ public class PostgresServiceDAO extends AbstractDAO<Service>{
     public int delete(Service obj) throws SQLException {
         int res = 0;
         try{
-            PreparedStatement stmt = connect.prepareStatement("DELETE FROM \"Service\" WHERE idService = ?");
+            PreparedStatement stmt = connect.prepareStatement("DELETE FROM \"Service\" WHERE \"idService\" = ?");
             stmt.setInt(1, obj.getIdService());
             res = stmt.executeUpdate();
         }catch(SQLException se){

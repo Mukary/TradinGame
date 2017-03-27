@@ -2,6 +2,7 @@ package views;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import application.Main;
 import facades.ServiceFacade;
@@ -9,10 +10,7 @@ import facades.UserFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.Service;
 
@@ -48,6 +46,7 @@ public class UserGeneralViewController extends ViewController{
 
 	
 	private Service selectedService;
+	private Service selectedMyService;
 
     
 	/**
@@ -89,12 +88,22 @@ public class UserGeneralViewController extends ViewController{
     }
     
     @FXML
-    private void handleUnbookButton(){
+    private void handleDeleteButton(){
     	Alert unbookAlert = new Alert(Alert.AlertType.CONFIRMATION);
     	unbookAlert.initOwner(stage);
-    	unbookAlert.setTitle("Are you sure to unbook this service ?");
-    	unbookAlert.showAndWait();
-    	
+    	unbookAlert.setTitle("Are you sure to delete this service ? ");
+		Optional<ButtonType> result = unbookAlert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			try {
+				serviceFacade.deleteService(selectedMyService);
+				UserGeneralViewController.myServicesList.remove(selectedMyService);
+				// Should refresh services table
+				UserGeneralViewController.servicesList.remove(selectedMyService);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
     	//TODO: call the delete method on the ServiceFacade.
     }
     
@@ -121,6 +130,8 @@ public class UserGeneralViewController extends ViewController{
 		descriptionMyServicesColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
 		gameMyServicesColumn.setCellValueFactory(cellData -> cellData.getValue().gameNameProperty());
 		providerMyServicesColumn.setCellValueFactory(cellData -> cellData.getValue().sellerNicknameProperty());
+		myServices.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> selectedMyService = newValue);
 	}
 
 

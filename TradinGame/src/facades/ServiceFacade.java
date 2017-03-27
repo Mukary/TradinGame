@@ -41,4 +41,8 @@ public class ServiceFacade {
 		return serviceDao.getAllByUser(user);
 	}
 
+	public int deleteService(Service service) throws SQLException{
+		return serviceDao.delete(service);
+	}
+
 }
