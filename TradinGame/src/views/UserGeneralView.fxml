@@ -77,7 +77,20 @@
           </Tab>
             <Tab text="Account">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="logoutButton" layoutX="279.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleLogoutButton" prefHeight="38.0" prefWidth="110.0" text="Logout" textFill="#141414" />
+                        <Label fx:id="nicknameLabel" layoutX="46.0" layoutY="31.0" prefHeight="79.0" prefWidth="195.0" text="Mukary">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="46.0" layoutY="107.0" prefHeight="32.0" prefWidth="129.0" text="Label" />
+                        <Label layoutX="46.0" layoutY="277.0" prefHeight="32.0" prefWidth="129.0" text="Label" />
+                        <Label layoutX="46.0" layoutY="149.0" prefHeight="32.0" prefWidth="129.0" text="Label" />
+                        <Label layoutX="46.0" layoutY="238.0" prefHeight="32.0" prefWidth="129.0" text="Label" />
+                        <Label layoutX="46.0" layoutY="193.0" prefHeight="32.0" prefWidth="129.0" text="Label" />
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab text="Settings">

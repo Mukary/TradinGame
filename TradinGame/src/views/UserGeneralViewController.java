@@ -76,7 +76,13 @@ public class UserGeneralViewController extends ViewController{
 		this.initializeMyServicesListTable();
 
     }
-
+    
+    @FXML
+    private void handleLogoutButton(){
+    	UserFacade.userLogged = null;
+    	mainApp.showLoginView();
+    }
+    
     @FXML
     private void handleServiceDetailButton(){
         mainApp.showServiceDetailView(selectedService);
