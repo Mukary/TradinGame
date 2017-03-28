@@ -40,7 +40,7 @@
                         <ButtonBar layoutX="1022.0" layoutY="558.0" prefHeight="40.0" prefWidth="168.0">
                           <buttons>
                             <Button mnemonicParsing="false" onAction="#handleServiceDetailButton" text="Details" />
-                              <Button layoutX="140.0" layoutY="17.0" mnemonicParsing="false" text="Report" />
+                              <Button fx:id="reportButton" layoutX="140.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleReportButton" text="Report" />
                           </buttons>
                         </ButtonBar>
                         <ComboBox layoutX="50.0" layoutY="88.0" prefWidth="150.0" AnchorPane.bottomAnchor="544.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="1055.0" AnchorPane.topAnchor="88.0">
@@ -79,17 +79,16 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="logoutButton" layoutX="279.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleLogoutButton" prefHeight="38.0" prefWidth="110.0" text="Logout" textFill="#141414" />
-                        <Label fx:id="nicknameLabel" layoutX="46.0" layoutY="31.0" prefHeight="79.0" prefWidth="195.0" text="Mukary">
+                        <Button fx:id="logoutButton" layoutX="424.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleLogoutButton" prefHeight="38.0" prefWidth="110.0" text="Logout" textFill="#141414" />
+                        <Label fx:id="nicknameLabel" layoutX="46.0" layoutY="31.0" prefHeight="79.0" prefWidth="320.0" text="Mukary">
                            <font>
                               <Font size="36.0" />
                            </font>
                         </Label>
-                        <Label layoutX="46.0" layoutY="107.0" prefHeight="32.0" prefWidth="129.0" text="Label" />
-                        <Label layoutX="46.0" layoutY="277.0" prefHeight="32.0" prefWidth="129.0" text="Label" />
-                        <Label layoutX="46.0" layoutY="149.0" prefHeight="32.0" prefWidth="129.0" text="Label" />
-                        <Label layoutX="46.0" layoutY="238.0" prefHeight="32.0" prefWidth="129.0" text="Label" />
-                        <Label layoutX="46.0" layoutY="193.0" prefHeight="32.0" prefWidth="129.0" text="Label" />
+                        <Label fx:id="firstNameLabel" layoutX="46.0" layoutY="107.0" prefHeight="32.0" prefWidth="148.0" text="Label" />
+                        <Label fx:id="lastNameLabel" layoutX="46.0" layoutY="149.0" prefHeight="32.0" prefWidth="158.0" text="Label" />
+                        <Label fx:id="countryLabel" layoutX="46.0" layoutY="193.0" prefHeight="32.0" prefWidth="163.0" text="Label" />
+                        <Button fx:id="resetPasswordButton" layoutX="426.0" layoutY="103.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="106.0" text="Reset password" />
                      </children></AnchorPane>
               </content>
             </Tab>

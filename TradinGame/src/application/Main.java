@@ -9,6 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Service;
 import views.AddGameViewController;
+import views.AddReportViewController;
 import views.AddServiceViewController;
 import views.AddUserViewController;
 import views.AdminGeneralViewController;
@@ -81,6 +82,30 @@ public class Main extends Application {
             ServiceDetailViewController controller = loader.getController();
             controller.setStage(dialogStage);
             controller.setService(service);
+            dialogStage.showAndWait();
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void showAddReportView(Service service){
+    	try{
+            //Load the report form detail view.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/views/AddReportView.fxml"));
+            AnchorPane addReportView = (AnchorPane) loader.load();
+
+            Scene scene = new Scene(addReportView);
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Report service");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            dialogStage.setScene(scene);
+
+            AddReportViewController controller = loader.getController();
+            controller.setStage(dialogStage);
+            controller.setReportedService(service);
             dialogStage.showAndWait();
 
         } catch(IOException e){

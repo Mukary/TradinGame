@@ -1,12 +1,17 @@
 package models;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Report {
 	
-	private User user;
-	private Service service;
-	private StringProperty content;
+	private IntegerProperty reportID;
+	private StringProperty  userNickname;
+	private IntegerProperty serviceID;
+	private StringProperty description;
+	private StringProperty topic;
 	
 	/**
 	 * Constructor with all the attributes for a Report
@@ -14,29 +19,48 @@ public class Report {
 	 * @param service : the service concerned by the report
 	 * @param content : what the report is about
 	 */
-	public Report(User user, Service service, StringProperty content){
-		this.user = user;
-		this.service = service;
-		this.content = content;
+	public Report(int reportID, String topic, String description, int serviceID, String userNickname){
+		this.reportID = new SimpleIntegerProperty(reportID);
+		this.topic = new SimpleStringProperty(topic);
+		this.description = new SimpleStringProperty(description);
+		this.serviceID = new SimpleIntegerProperty(serviceID);
+		this.userNickname = new SimpleStringProperty(userNickname);
 	}
 	
-	public StringProperty getContent() {
-		return content;
+	public String getDescription() {
+		return description.get();
 	}
-	public void setContent(StringProperty content) {
-		this.content = content;
+	public void setDescription(String description) {
+		this.description.set(description);;
 	}
-	public Service getService() {
-		return service;
+	public int getServiceID() {
+		return serviceID.get();
 	}
-	public void setService(Service service) {
-		this.service = service;
+	public void setServiceID(int serviceID) {
+		this.serviceID.set(serviceID);;
 	}
-	public User getUser() {
-		return user;
+	public String getUserNickname() {
+		return userNickname.get();
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserNickname(String userNickname) {
+		this.userNickname.set(userNickname);
 	}
+
+	public String getTopic() {
+		return topic.get();
+	}
+
+	public void setTopic(String topic) {
+		this.topic.set(topic);
+	}
+
+	public int getReportID() {
+		return reportID.get();
+	}
+
+	public void setReportID(int reportID) {
+		this.reportID.set(reportID);
+	}
+	
 
 }

@@ -3,6 +3,7 @@ package factories;
 import DAO.AbstractDAO;
 import DAO.PostgresGameDAO;
 import DAO.PostgresGameTypeDAO;
+import DAO.PostgresReportDAO;
 import DAO.PostgresServiceDAO;
 import DAO.PostgresServiceTypeDAO;
 import DAO.PostgresUserDAO;
@@ -37,6 +38,11 @@ public class PostgresDAOFactory extends AbstractDAOFactory{
 	public final static int GAME_TYPE_DAO = 4;
 	
 	/**
+	 * Static constant representing a report dao. To be use in the getDao method
+	 */
+	public final static int REPORT_DAO = 5;
+	
+	/**
 	 * Produces a concrete DAO object given the type
 	 * @param type the type of DAO we want to create : AbstractFactory.USER_DAO for userDAO
 	 * @return a concrete DAO object given the type in argument
@@ -53,6 +59,8 @@ public class PostgresDAOFactory extends AbstractDAOFactory{
 			return new PostgresServiceDAO();
 		case GAME_TYPE_DAO:
 			return new PostgresGameTypeDAO();
+		case REPORT_DAO:
+			return new PostgresReportDAO();
 		default:
 			return null;
 		}

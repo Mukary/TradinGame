@@ -40,6 +40,16 @@ public class UserGeneralViewController extends ViewController{
     @FXML
 	private TableColumn<Service, String> providerMyServicesColumn;
 	
+    
+    @FXML
+    private Label nicknameLabel;
+    @FXML
+    private Label firstNameLabel;
+    @FXML
+    private Label lastNameLabel;
+    @FXML
+    private Label countryLabel;
+    
 	private ServiceFacade serviceFacade;
 
 	public static ObservableList<Service> myServicesList;
@@ -74,6 +84,9 @@ public class UserGeneralViewController extends ViewController{
 			e.printStackTrace();
 		}
 		this.initializeMyServicesListTable();
+		
+		//Account View
+		nicknameLabel.setText(UserFacade.userLogged.getNickname());
 
     }
     
@@ -81,6 +94,18 @@ public class UserGeneralViewController extends ViewController{
     private void handleLogoutButton(){
     	UserFacade.userLogged = null;
     	mainApp.showLoginView();
+    }
+    
+    @FXML
+    private void handleResetPasswordButton(){
+    	
+    }
+    
+    @FXML
+    private void handleReportButton(){
+    	if(selectedService != null){
+        	mainApp.showAddReportView(selectedService);
+    	}
     }
     
     @FXML
