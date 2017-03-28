@@ -5,6 +5,7 @@ import factories.PostgresDAOFactory;
 import models.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import DAO.AbstractDAO;
 import DAO.PostgresUserDAO;
@@ -67,6 +68,10 @@ public class UserFacade {
 	 */
 	public int insertUser(User user) throws SQLException{
 		return userDAO.create(user);
+	}
+	
+	public ArrayList<User> getAll() throws SQLException{
+		return userDAO.getAll();
 	}
 	
 	/**
