@@ -17,7 +17,7 @@ import javafx.scene.control.ChoiceBox;
 import models.User;
 import util.Util;
 
-public class LoginController {
+public class LoginController extends ViewController{
 
 	@FXML
 	private TextField nicknameField;
@@ -25,9 +25,6 @@ public class LoginController {
 	private PasswordField passwordField;
 	
 	
-	private Stage stage;
-	
-	private Main mainApp;
 	private UserFacade userFacade;
 	
 	/**
@@ -46,18 +43,6 @@ public class LoginController {
     	
     }
     
-    public void setStage(Stage stage){
-    	this.stage = stage;
-    }
-    
-    /**
-     * Is called by the main application to give a reference back to itself.
-     * 
-     * @param mainApp
-     */
-    public void setMainApp(Main mainApp) {
-        this.mainApp = mainApp;
-    }
     
     /**
      * Method triggered by a click on the sign in button
@@ -72,15 +57,16 @@ public class LoginController {
 			e.printStackTrace();
 		}
     	if(userFound == null){
-    		 Alert alert = new Alert(AlertType.ERROR);
-             alert.initOwner(stage);
-             alert.setTitle("Invalid Fields");
-             alert.setHeaderText("Please correct invalid fields");
-             alert.setContentText("Nickname or password incorrect");
-             alert.showAndWait();
+    		 Util.displayAlert(AlertType.ERROR, "Bad login", "Bad nickname or password.");
     	}
-    	else
-    		mainApp.showUserGeneralViewDialog();
+    	else{
+    		UserFacade.setUserLogged(userFound);
+    		if(!userFound.isIsAdmin())
+    			mainApp.showUserGeneralViewDialog();
+    		else
+    			mainApp.showAdminGenereralView();
+    	}
+    		
     	
     }
     
@@ -89,7 +75,7 @@ public class LoginController {
      */
     @FXML
     private void handleSignUpButton(){
-    	System.out.println("Clicked on sign up button");
+    	mainApp.showSignupView();
     }
     
     

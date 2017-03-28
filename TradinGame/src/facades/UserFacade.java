@@ -5,6 +5,7 @@ import factories.PostgresDAOFactory;
 import models.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import DAO.AbstractDAO;
 import DAO.PostgresUserDAO;
@@ -16,7 +17,10 @@ import DAO.PostgresUserDAO;
  */
 public class UserFacade {
 	
-	private User user;
+	/**
+	 * The user currently connected is saved in this class
+	 */
+	public static User userLogged;
 	private PostgresUserDAO userDAO;
 	private static UserFacade userFacade;
 	
@@ -26,7 +30,7 @@ public class UserFacade {
 	 */
 	private UserFacade(User user){
 		this();
-		this.user = user;
+		userLogged = user;
 	}
 	
 	/**
@@ -55,5 +59,28 @@ public class UserFacade {
 	public User login(String nickname, String password) throws SQLException{
 		return userDAO.find(nickname, password);
 	}
+	
+	/**
+	 * Inserts an user in the database
+	 * @param user the user concerned
+	 * @return 1 if the query succeeded, 0 otherwise
+	 * @throws SQLException if the query fails
+	 */
+	public int insertUser(User user) throws SQLException{
+		return userDAO.create(user);
+	}
+	
+	public ArrayList<User> getAll() throws SQLException{
+		return userDAO.getAll();
+	}
+	
+	/**
+	 * Sets the user logged
+	 * @param user the user that just connected
+	 */
+	public static void setUserLogged(User user){
+		userLogged = user;
+	}
+
 
 }

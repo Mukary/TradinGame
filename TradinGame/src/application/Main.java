@@ -7,7 +7,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import models.Service;
+import views.AddGameViewController;
+import views.AddServiceViewController;
+import views.AddUserViewController;
+import views.AdminGeneralViewController;
 import views.LoginController;
+import views.ServiceDetailViewController;
+import views.SignupViewController;
 import views.UserGeneralViewController;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -57,7 +64,7 @@ public class Main extends Application {
     /**
      * Shows the details of the selected service.
      */
-    public void showServiceDetailView(){
+    public void showServiceDetailView(Service service){
         try{
             //Load the service detail view.
             FXMLLoader loader = new FXMLLoader();
@@ -65,17 +72,44 @@ public class Main extends Application {
             AnchorPane serviceDetailView = (AnchorPane) loader.load();
 
             Scene scene = new Scene(serviceDetailView);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Service details");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            dialogStage.setScene(scene);
 
-            LoginController controller = loader.getController();
-            controller.setMainApp(this);
+            ServiceDetailViewController controller = loader.getController();
+            controller.setStage(dialogStage);
+            controller.setService(service);
+            dialogStage.showAndWait();
 
         } catch(IOException e){
             e.printStackTrace();
         }
     }
     
+    public void showAddGameView(){
+    	try{
+            //Load the service detail view.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/views/AddGameView.fxml"));
+            AnchorPane addGameView = (AnchorPane) loader.load();
+
+            Scene scene = new Scene(addGameView);
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Add game");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            dialogStage.setScene(scene);
+
+            AddGameViewController controller = loader.getController();
+            controller.setStage(dialogStage);
+            dialogStage.showAndWait();
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
     
     public void showMyServiceDetailView(){
     	try {
@@ -118,7 +152,98 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
+    public void showAdminGenereralView(){
+    	try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/views/AdminGeneralView.fxml"));
+            AnchorPane adminGeneralView = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            primaryStage.setTitle("TradinGame");
+            Scene scene = new Scene(adminGeneralView);
+            primaryStage.setScene(scene);
+
+            // Set the person into the controller.
+            AdminGeneralViewController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void showSignupView(){
+    	try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/views/SignupView.fxml"));
+            AnchorPane signupView = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            primaryStage.setTitle("Register form");
+            Scene scene = new Scene(signupView);
+            primaryStage.setScene(scene);
+
+            // Set the person into the controller.
+            SignupViewController controller = loader.getController();
+            controller.setMainApp(this);
+
+        	} catch (IOException e) {
+        		e.printStackTrace();
+        	}
+    }
+    
+    public void showAddServiceDialogView() throws IOException{
+    	// Load the fxml file and create a new stage for the popup dialog.
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("/views/addServiceView.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+
+        // Create the dialog Stage.
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Add service");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+
+        // Set the person into the controller.
+        AddServiceViewController controller = loader.getController();
+        controller.setStage(dialogStage);
+
+        // Show the dialog and wait until the user closes it
+        dialogStage.showAndWait();
+    }
+    
+    public void showAddUserDialogView() throws IOException{
+    	// Load the fxml file and create a new stage for the popup dialog.
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("/views/AddUserView.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+
+        // Create the dialog Stage.
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Add an user");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+
+        // Set the person into the controller.
+        AddUserViewController controller = loader.getController();
+        controller.setStage(dialogStage);
+
+        // Show the dialog and wait until the user closes it
+        dialogStage.showAndWait();
+    }
 	
+    /**
+     * Starting point of the application
+     * @param args
+     */
 	public static void main(String[] args) {
 		launch(args);
 	}

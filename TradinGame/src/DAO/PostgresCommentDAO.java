@@ -14,21 +14,21 @@ public class PostgresCommentDAO extends AbstractDAO<Comment> {
 
 	@Override
 	
-	public void create(Comment obj) throws SQLException {
+	public int create(Comment obj) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 	@Override
-	public void delete(Comment obj) throws SQLException {
+	public int delete(Comment obj) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 	@Override
-	public void update(Comment obj) throws SQLException {
+	public int update(Comment obj) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 	@Override

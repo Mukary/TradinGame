@@ -1,6 +1,5 @@
-package tests;
+package DAO;
 
-import DAO.PostgresUserDAO;
 import factories.AbstractDAOFactory;
 import factories.PostgresDAOFactory;
 import models.User;
@@ -8,10 +7,12 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-
-public class UserTest {
+/**
+ * Created by Tsiky on 23/03/2017.
+ */
+public class PostgresUserDAOTest {
 
     //Creates DAOfactory
     AbstractDAOFactory daoFactory = AbstractDAOFactory.getFactory(AbstractDAOFactory.POSTGRES_DAO_FACTORY);
@@ -20,7 +21,19 @@ public class UserTest {
     User userTest = null;
 
     @Test
-    public void findbyNameTest(){
+    public void create() throws Exception {
+    }
+
+    @Test
+    public void delete() throws Exception {
+    }
+
+    @Test
+    public void update() throws Exception {
+    }
+
+    @Test
+    public void find() throws Exception {
         try {
             userTest = userDaoTest.find("userTest");
         } catch (SQLException e) {
@@ -31,14 +44,15 @@ public class UserTest {
     }
 
     @Test
-    public void findbyNameAndPasswordTest(){
-        try {
-            userTest = userDaoTest.find("userTest", "test");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void find1() throws Exception {
+    }
 
-        assertEquals("firstnameTest",userTest.getFirstname());
+    @Test
+    public void find2() throws Exception {
+    }
+
+    @Test
+    public void getAll() throws Exception {
     }
 
 }

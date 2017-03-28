@@ -29,23 +29,26 @@ public abstract class AbstractDAO<T> {
   /**
   * Inserts a T object in the database
   * @param obj the object to insert in the database
+  * @return 1 if the query succeeded, 0 otherwise
   * @throws SQLException
   */
-  public abstract void create(T obj) throws SQLException;
+  public abstract int create(T obj) throws SQLException;
 
   /**
   * Deletes a T object in the database
   * @param obj the object to delete
+  * @return 1 if the query succeeded, 0 otherwise
   * @throws SQLException 
   */
-  public abstract void delete(T obj) throws SQLException;
+  public abstract int delete(T obj) throws SQLException;
 
   /**
   * Updates a T object in the database
   * @param obj the object to update
+  * @return 1 if the query succeeded, 0 otherwise
   * @throws SQLException 
   */
-  public abstract void update(T obj) throws SQLException;
+  public abstract int update(T obj) throws SQLException;
 
   /**
   * Finds an object in the database thanks to its ID
