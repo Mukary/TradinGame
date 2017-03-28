@@ -54,20 +54,44 @@ public class PostgresServiceDAO extends AbstractDAO<Service>{
     public int update(Service obj) throws SQLException {
         int res = 0;
         try{
-            PreparedStatement stmt = connect.prepareStatement("UPDATE \"Service\" SET (idService = ?, description = ?, expirationDate = ?, sellerNickname = ?, serviceTypeLabel = ?, gameName = ?, consumerNickname = ?) WHERE idService = ?");
-            stmt.setInt(1, obj.getIdService());
-            stmt.setString(2, obj.getDescription());
-            stmt.setDate(3, obj.getExpirationDate());
-            stmt.setString(4, obj.getSellerNickname());
-            stmt.setString(5, obj.getServiceTypeLabel());
-            stmt.setString(6, obj.getGameName());
-            stmt.setString(7, obj.getConsumerNickname());
-            stmt.setInt(8, obj.getIdService());
+            PreparedStatement stmt = connect.prepareStatement("UPDATE \"Service\" SET (\"description\" = ?, \"expirationDate\" = ?, \"sellerNickname\" = ?, \"serviceTypeLabel\" = ?, \"gameName\" = ?, \"consumerNickname\" = ?) WHERE \"idService\" = ?");
+            stmt.setString(1, obj.getDescription());
+            stmt.setDate(2, obj.getExpirationDate());
+            stmt.setString(3, obj.getSellerNickname());
+            stmt.setString(4, obj.getServiceTypeLabel());
+            stmt.setString(5, obj.getGameName());
+            stmt.setString(6, obj.getConsumerNickname());
+            stmt.setInt(7, obj.getIdService());
+
+            System.out.println(obj.getDescription());
+            System.out.println(obj.getExpirationDate());
+            System.out.println(obj.getSellerNickname());
+            System.out.println(obj.getServiceTypeLabel());
+            System.out.println(obj.getGameName());
+            System.out.println(obj.getConsumerNickname());
+
             res = stmt.executeUpdate();
         }catch(SQLException se){
             se.printStackTrace();
         }catch(Exception e){
             e.printStackTrace();
+        }
+        return res;
+    }
+
+
+    public int bookService(Service service) throws SQLException {
+        int res = 0;
+        try{
+            PreparedStatement stmt = connect.prepareStatement("UPDATE \"Service\" SET(\"consumerNickname\" = ?) WHERE \"idService\" = ?");
+            stmt.setString(1, service.getConsumerNickname());
+            stmt.setInt(2, service.getIdService());
+            System.out.println("MUKARY");
+            System.out.println(service.getIdService());
+        } catch(SQLException e){
+            e.printStackTrace();
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
         return res;
     }

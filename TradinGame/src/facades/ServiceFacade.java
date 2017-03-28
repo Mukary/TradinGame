@@ -45,4 +45,8 @@ public class ServiceFacade {
 		return serviceDao.delete(service);
 	}
 
+	public int bookService(Service service) throws SQLException{
+		return serviceDao.bookService(service);
+	}
+
 }
