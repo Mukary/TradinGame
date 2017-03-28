@@ -59,7 +59,7 @@ public class UserGeneralViewController extends ViewController{
 
     	// Services list
     	try {
-			servicesList = FXCollections.observableList(serviceFacade.getAllServices());
+			servicesList = FXCollections.observableList(serviceFacade.getUnbookedServices());
 			services.setItems(servicesList);
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -57,6 +57,10 @@ public class ServiceFacade {
 		return serviceDao.getAll();
 	}
 
+	public ArrayList<Service> getUnbookedServices() throws  SQLException{
+		return serviceDao.getUnbookedServices();
+	}
+
 	/**
 	 * Gets all the services created by a given user
 	 * @param user the user concerned
