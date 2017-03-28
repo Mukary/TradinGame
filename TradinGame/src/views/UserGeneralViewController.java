@@ -84,7 +84,7 @@ public class UserGeneralViewController extends ViewController{
     
     @FXML
     private void handleMyServiceDetailButton(){
-    	mainApp.showMyServiceDetailView();
+    	mainApp.showServiceDetailView(selectedMyService);
     }
     
     @FXML

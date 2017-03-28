@@ -78,6 +78,7 @@ public class ServiceFacade {
 	}
 
 	public int bookService(Service service) throws SQLException{
+
 		return serviceDao.bookService(service);
 	}
 

@@ -82,17 +82,10 @@ public class PostgresServiceDAO extends AbstractDAO<Service>{
 
     public int bookService(Service service) throws SQLException {
         int res = 0;
-        try{
-            PreparedStatement stmt = connect.prepareStatement("UPDATE \"Service\" SET(\"consumerNickname\" = ?) WHERE \"idService\" = ?");
+            PreparedStatement stmt = connect.prepareStatement("UPDATE \"Service\" SET \"consumerNickname\" = ? WHERE \"idService\" = ?");
             stmt.setString(1, service.getConsumerNickname());
             stmt.setInt(2, service.getIdService());
-            System.out.println("MUKARY");
-            System.out.println(service.getIdService());
-        } catch(SQLException e){
-            e.printStackTrace();
-        } catch (Exception ex){
-            ex.printStackTrace();
-        }
+            res = stmt.executeUpdate();
         return res;
     }
 

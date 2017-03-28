@@ -43,7 +43,9 @@ public class ServiceDetailViewController extends ViewController{
 		User user = UserFacade.userLogged;
 		this.service.setConsumerNickname(user.getNickname());
 		try {
+
 			serviceFacade.bookService(service);
+
 		} catch(SQLException e){
 			e.printStackTrace();
 		}

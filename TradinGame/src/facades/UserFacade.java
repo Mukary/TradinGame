@@ -82,4 +82,5 @@ public class UserFacade {
 		userLogged = user;
 	}
 
+
 }
