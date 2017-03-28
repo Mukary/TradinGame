@@ -27,8 +27,8 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 			stmt.setString(4, obj.getCountry());
 			stmt.setString(5, obj.getCity());
 			stmt.setString(6, obj.getAddress());
-			stmt.setBoolean(7, obj.isIsBanned());
-			stmt.setBoolean(8, obj.isIsAdmin());
+			stmt.setBoolean(7, obj.isIsAdmin());
+			stmt.setBoolean(8, obj.isIsBanned());
 			stmt.setString(9, Util.sha1(obj.getPassword()));
 			res = stmt.executeUpdate();
 	   }catch(SQLException se){

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import models.Service;
 import views.AddGameViewController;
 import views.AddServiceViewController;
+import views.AddUserViewController;
 import views.AdminGeneralViewController;
 import views.LoginController;
 import views.ServiceDetailViewController;
@@ -211,6 +212,28 @@ public class Main extends Application {
 
         // Set the person into the controller.
         AddServiceViewController controller = loader.getController();
+        controller.setStage(dialogStage);
+
+        // Show the dialog and wait until the user closes it
+        dialogStage.showAndWait();
+    }
+    
+    public void showAddUserDialogView() throws IOException{
+    	// Load the fxml file and create a new stage for the popup dialog.
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("/views/AddUserView.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+
+        // Create the dialog Stage.
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Add an user");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+
+        // Set the person into the controller.
+        AddUserViewController controller = loader.getController();
         controller.setStage(dialogStage);
 
         // Show the dialog and wait until the user closes it

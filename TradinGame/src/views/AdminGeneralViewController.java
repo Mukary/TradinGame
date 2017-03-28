@@ -1,5 +1,6 @@
 package views;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.event.ActionEvent;
 import models.Game;
 import models.GameType;
 import models.User;
@@ -67,6 +69,15 @@ public class AdminGeneralViewController extends ViewController{
 	@FXML
 	private void handleAddGameButton(){
 		mainApp.showAddGameView();
+	}
+	
+	@FXML
+	private void handleAddUserButton(){
+		try {
+			mainApp.showAddUserDialogView();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
