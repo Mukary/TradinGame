@@ -24,8 +24,12 @@ public class PostgresReportDAO extends AbstractDAO<Report> {
 
 	@Override
 	public int delete(Report obj) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		PreparedStatement stmt = connect.prepareStatement("DELETE FROM \"Report\" WHERE \"reportID\" = ?");
+		stmt.setInt(1, obj.getReportID());
+		res = stmt.executeUpdate();		
+		return res;
 	}
 
 	@Override
@@ -50,7 +54,7 @@ public class PostgresReportDAO extends AbstractDAO<Report> {
 			String topic = resultSet.getString("reportTopic");
 			String description = resultSet.getString("reportDescription");
 			String userNickname = resultSet.getString("userNickname");
-			System.out.println(userNickname);
+			System.out.println(reportID);
 			int serviceID = resultSet.getInt("serviceID");
 			
 			Report report = new Report(reportID, topic, description, serviceID, userNickname);

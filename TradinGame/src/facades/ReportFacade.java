@@ -29,6 +29,10 @@ public class ReportFacade {
 		 return reportDao.create(report);
 	}
 	
+	public int deleteReport(Report report) throws SQLException{
+		return reportDao.delete(report);
+	}
+	
 	public ArrayList<Report> getAllReports() throws SQLException{
 		return reportDao.getAll();
 	}

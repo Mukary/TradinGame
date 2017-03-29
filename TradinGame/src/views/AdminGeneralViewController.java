@@ -121,6 +121,25 @@ public class AdminGeneralViewController extends ViewController{
 	}
 	
 	/**
+	 * Handles the delete report button action
+	 */
+	@FXML
+	private void handleDeleteReportButton(){
+		Alert deleteReportAlert = new Alert(Alert.AlertType.CONFIRMATION);
+		deleteReportAlert.initOwner(stage);
+		deleteReportAlert.setTitle("Do you really want to delete this report ?");
+		Optional<ButtonType> answer = deleteReportAlert.showAndWait();
+		if(answer.get() == ButtonType.OK){
+			try {
+				reportFacade.deleteReport(selectedReport);
+				AdminGeneralViewController.reportsList.remove(selectedReport);
+			} catch (SQLException sql){
+				sql.printStackTrace();
+			}
+		}
+	}
+	
+	/**
 	 * Initialize the games table view
 	 */
 	private void initializeGamesTableView(){
