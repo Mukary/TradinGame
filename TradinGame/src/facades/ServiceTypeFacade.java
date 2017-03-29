@@ -56,4 +56,11 @@ public class ServiceTypeFacade {
 	public ArrayList<ServiceType> getAllByGame(Game game) throws SQLException{
 		return postgresServiceTypeDao.getAllByGame(game);
 	}
+	
+	/**
+	 * Deletes a service type from the admin panel
+	 */
+	public int deleteServiceType(ServiceType serviceType) throws SQLException{
+		return postgresServiceTypeDao.delete(serviceType);
+	}
 }

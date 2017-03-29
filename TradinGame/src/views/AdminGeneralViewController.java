@@ -8,6 +8,7 @@ import facades.GameFacade;
 import facades.GameTypeFacade;
 import facades.ReportFacade;
 import facades.UserFacade;
+import facades.ServiceTypeFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import models.Game;
 import models.GameType;
 import models.Report;
 import models.User;
+import models.ServiceType;
 
 public class AdminGeneralViewController extends ViewController{
 	
@@ -58,21 +60,31 @@ public class AdminGeneralViewController extends ViewController{
 	private TableColumn<Report, String> authorColumn;
 	
 	
+	@FXML
+	private TableView<ServiceType> serviceTypesTable;
+	@FXML
+	private TableColumn<ServiceType, String> serviceTypeLabelColumn;
+	@FXML
+	private TableColumn<ServiceType, String> serviceTypeDescriptionColumn;
+	
 	
 	
 	public static ObservableList<Game> gamesList;
 	public static ObservableList<GameType> gameTypesList;
 	public static ObservableList<User> usersList;
 	public static ObservableList<Report> reportsList;
+	public static ObservableList<ServiceType> serviceTypesList;
 	
 	private GameFacade gameFacade;
 	private GameTypeFacade gameTypeFacade;
 	private UserFacade userFacade;
 	private ReportFacade reportFacade;
+	private ServiceTypeFacade serviceTypeFacade;
 	
 	private Game selectedGame;
 	private User selectedUser;
 	private Report selectedReport;
+	private ServiceType selectedServiceType;
 
 	@FXML
 	public void initialize(){
@@ -85,6 +97,7 @@ public class AdminGeneralViewController extends ViewController{
 		initializeGamesTableView();
 		initializeUsersTableView();
 		initializeReportsTableView();
+		initializeServiceTypesTableView();
 	}
 	
 	@FXML
@@ -121,7 +134,7 @@ public class AdminGeneralViewController extends ViewController{
 	}
 	
 	/**
-	 * Handles the delete report button action
+	 * Handles the delete report button
 	 */
 	@FXML
 	private void handleDeleteReportButton(){
@@ -134,6 +147,25 @@ public class AdminGeneralViewController extends ViewController{
 				reportFacade.deleteReport(selectedReport);
 				AdminGeneralViewController.reportsList.remove(selectedReport);
 			} catch (SQLException sql){
+				sql.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * Handles the delete service type button
+	 */
+	@FXML
+	private void handleDeleteServiceTypeButton(){
+		Alert deleteServiceTypeAlert = new Alert(Alert.AlertType.CONFIRMATION);
+		deleteServiceTypeAlert.initOwner(stage);
+		deleteServiceTypeAlert.setTitle("Do you really want to delete this service type ?");
+		Optional<ButtonType> answer = deleteServiceTypeAlert.showAndWait();
+		if(answer.get() == ButtonType.OK){
+			try {
+				serviceTypeFacade.deleteServiceType(selectedServiceType);
+				AdminGeneralViewController.serviceTypesList.remove(selectedServiceType);
+			} catch(SQLException sql){
 				sql.printStackTrace();
 			}
 		}
@@ -170,6 +202,8 @@ public class AdminGeneralViewController extends ViewController{
 		gameTypeFacade = GameTypeFacade.getInstance();
 		userFacade = UserFacade.getInstance();
 		reportFacade = ReportFacade.getInstance();
+		serviceTypeFacade = ServiceTypeFacade.getInstance();
+		System.out.println("ST facade");
 	}
 	
 	/**
@@ -181,6 +215,7 @@ public class AdminGeneralViewController extends ViewController{
 		gameTypesList = FXCollections.observableList(gameTypeFacade.getAll());
 		usersList = FXCollections.observableList(userFacade.getAll());
 		reportsList = FXCollections.observableList(reportFacade.getAllReports());
+		serviceTypesList = FXCollections.observableList(serviceTypeFacade.getAllServiceTypes());
 	}
 	
 	/**
@@ -193,5 +228,17 @@ public class AdminGeneralViewController extends ViewController{
 		userLastnameColumn.setCellValueFactory(cellData -> cellData.getValue().lastnameProperty());
 		usersTableView.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> selectedUser = newValue);
+	}
+	
+	/**
+	 * Initializes the service types table view
+	 */
+	private void initializeServiceTypesTableView(){
+		serviceTypesTable.setItems(serviceTypesList);
+		serviceTypeLabelColumn.setCellValueFactory(cellData -> cellData.getValue().labelProperty());
+		serviceTypeDescriptionColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
+		
+		serviceTypesTable.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue)-> selectedServiceType = newValue);
 	}
 }

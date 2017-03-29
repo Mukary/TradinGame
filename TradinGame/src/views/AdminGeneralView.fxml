@@ -84,14 +84,15 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="48.0" layoutY="39.0" prefHeight="527.0" prefWidth="545.0">
+                        <TableView fx:id="serviceTypesTable" layoutX="48.0" layoutY="39.0" prefHeight="527.0" prefWidth="545.0">
                           <columns>
-                            <TableColumn prefWidth="119.0" text="Label" />
-                            <TableColumn prefWidth="425.0" text="Description" />
+                            <TableColumn fx:id="serviceTypeLabelColumn" prefWidth="119.0" text="Label" />
+                            <TableColumn fx:id="serviceTypeDescriptionColumn" prefWidth="425.0" text="Description" />
                           </columns>
                         </TableView>
                         <Button layoutX="551.0" layoutY="595.0" mnemonicParsing="false" text="Edit" />
-                        <Button layoutX="480.0" layoutY="595.0" mnemonicParsing="false" text="Delete" textFill="#eb0808" />
+                        <Button fx:id="deleteServiceTypeButton" layoutX="480.0" layoutY="595.0" mnemonicParsing="false" onAction="#handleDeleteServiceTypeButton" text="Delete" textFill="#eb0808" />
+                        <Button fx:id="addServiceTypeButton" layoutX="404.0" layoutY="595.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Add" />
                      </children>
                   </AnchorPane>
               </content>

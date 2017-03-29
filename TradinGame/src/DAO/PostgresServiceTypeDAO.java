@@ -35,15 +35,9 @@ public class PostgresServiceTypeDAO extends AbstractDAO<ServiceType>{
     @Override
     public int delete(ServiceType obj) throws SQLException {
         int res = 0;
-        try{
-            PreparedStatement stmt = connect.prepareStatement("DELETE FROM \"ServiceType\" WHERE label = ?");
-            stmt.setString(1, obj.getLabel());
-            res = stmt.executeUpdate();
-        }catch(SQLException se){
-            se.printStackTrace();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        PreparedStatement stmt = connect.prepareStatement("DELETE FROM \"ServiceType\" WHERE \"label\" = ?");
+        stmt.setString(1, obj.getLabel());
+        res = stmt.executeUpdate();
         return res;
     }
 
