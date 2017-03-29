@@ -38,17 +38,10 @@ public class PostgresServiceTypeDAO extends AbstractDAO<ServiceType>{
     @Override
     public int update(ServiceType obj) throws SQLException {
         int res = 0;
-        try{
-            PreparedStatement stmt = connect.prepareStatement("UPDATE \"ServiceType\" SET (label = ?, description = ?) WHERE label = ?");
-            stmt.setString(1, obj.getLabel());
-            stmt.setString(2, obj.getDescription());
-            stmt.setString(3, obj.getLabel());
-            res = stmt.executeUpdate();
-        }catch(SQLException se){
-            se.printStackTrace();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        PreparedStatement stmt = connect.prepareStatement("UPDATE \"ServiceType\" SET \"description\" = ? WHERE \"label\" = ?");
+        stmt.setString(1, obj.getDescription());
+        stmt.setString(2, obj.getLabel());
+        res = stmt.executeUpdate();
         return res;
     }
 

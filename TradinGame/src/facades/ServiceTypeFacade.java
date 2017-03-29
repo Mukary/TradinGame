@@ -65,6 +65,13 @@ public class ServiceTypeFacade {
 	}
 	
 	/**
+	 * Updates a service type
+	 */
+	public int updateServiceType(ServiceType serviceType) throws SQLException{
+		return postgresServiceTypeDao.update(serviceType);
+	}
+	
+	/**
 	 * Deletes a service type from the admin panel
 	 */
 	public int deleteServiceType(ServiceType serviceType) throws SQLException{

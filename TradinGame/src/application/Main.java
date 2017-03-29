@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Service;
+import models.ServiceType;
 import views.AddGameViewController;
 import views.AddReportViewController;
 import views.AddServiceViewController;
@@ -16,7 +17,9 @@ import views.AdminGeneralViewController;
 import views.LoginController;
 import views.ServiceDetailViewController;
 import views.SignupViewController;
+import views.AddServiceTypeViewController;
 import views.UserGeneralViewController;
+import views.EditServiceTypeViewController;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -263,6 +266,53 @@ public class Main extends Application {
 
         // Show the dialog and wait until the user closes it
         dialogStage.showAndWait();
+    }
+    
+    public void showAddServiceTypeView(){
+    	try{
+            //Load the service type form detail view.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/views/AddServiceTypeView.fxml"));
+            AnchorPane addServiceTypeView = (AnchorPane) loader.load();
+
+            Scene scene = new Scene(addServiceTypeView);
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Create service type");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            dialogStage.setScene(scene);
+
+            AddServiceTypeViewController controller = loader.getController();
+            controller.setStage(dialogStage);
+            dialogStage.showAndWait();
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void showEditServiceTypeView(ServiceType serviceType){
+    	try{
+            //Load the service type form detail view.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/views/EditServiceTypeView.fxml"));
+            AnchorPane editServiceTypeView = (AnchorPane) loader.load();
+
+            Scene scene = new Scene(editServiceTypeView);
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit service type");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            dialogStage.setScene(scene);
+
+            EditServiceTypeViewController controller = loader.getController();
+            controller.setStage(dialogStage);
+            controller.setServiceType(serviceType);
+            dialogStage.showAndWait();
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
     }
 	
     /**

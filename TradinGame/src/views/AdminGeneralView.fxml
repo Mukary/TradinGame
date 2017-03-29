@@ -90,7 +90,7 @@
                             <TableColumn fx:id="serviceTypeDescriptionColumn" prefWidth="425.0" text="Description" />
                           </columns>
                         </TableView>
-                        <Button layoutX="551.0" layoutY="595.0" mnemonicParsing="false" text="Edit" />
+                        <Button layoutX="551.0" layoutY="595.0" mnemonicParsing="false" onAction="#handleEditServiceTypeButton" text="Edit" />
                         <Button fx:id="deleteServiceTypeButton" layoutX="480.0" layoutY="595.0" mnemonicParsing="false" onAction="#handleDeleteServiceTypeButton" text="Delete" textFill="#eb0808" />
                         <Button fx:id="addServiceTypeButton" layoutX="404.0" layoutY="595.0" mnemonicParsing="false" onAction="#handleAddServiceTypeButton" prefHeight="25.0" prefWidth="50.0" text="Add" />
                      </children>

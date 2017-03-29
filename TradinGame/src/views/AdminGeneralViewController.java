@@ -160,7 +160,13 @@ public class AdminGeneralViewController extends ViewController{
 		mainApp.showAddServiceTypeView();
 	}
 	
-	
+	/**
+	 * Handles the edit service type button
+	 */
+	@FXML
+	private void handleEditServiceTypeButton(){
+		mainApp.showEditServiceTypeView(selectedServiceType);
+	}
 	
 	
 	/**
