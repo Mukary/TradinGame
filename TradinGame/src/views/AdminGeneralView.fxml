@@ -105,7 +105,7 @@
                             <TableColumn fx:id="reportTopicColumn" prefWidth="75.0" text="Topic" />
                             <TableColumn fx:id="serviceIDColumn" prefWidth="75.0" text="Service ID" />
                               <TableColumn fx:id="sellerColumn" prefWidth="75.0" text="Seller" />
-                              <TableColumn prefWidth="75.0" text="Author" />
+                              <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Author" />
                           </columns>
                         </TableView>
                         <Button layoutX="402.0" layoutY="440.0" mnemonicParsing="false" text="Details" />

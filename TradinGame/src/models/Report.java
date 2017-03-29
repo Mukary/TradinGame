@@ -36,7 +36,7 @@ public class Report {
 	}
 	
 	public void setDescription(String description) {
-		this.description.set(description);;
+		this.description.set(description);
 	}
 	public int getServiceID() {
 		return serviceID.get();
@@ -46,13 +46,13 @@ public class Report {
 	}
 	
 	public void setServiceID(int serviceID) {
-		this.serviceID.set(serviceID);;
+		this.serviceID.set(serviceID);
 	}
 	public String getUserNickname() {
 		return userNickname.get();
 	}
 	
-	public final StringProperty userNicknameProperty(){
+	public final StringProperty nicknameP(){
 		return this.userNickname;
 	}
 	

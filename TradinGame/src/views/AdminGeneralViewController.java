@@ -138,7 +138,7 @@ public class AdminGeneralViewController extends ViewController{
 		reportTopicColumn.setCellValueFactory(cellData -> cellData.getValue().topicProperty());
 		serviceIDColumn.setCellValueFactory(cellData -> cellData.getValue().serviceIDProperty());
 		//sellerColumn.setCellValueFactory(cellData -> cellData.getValue().)
-		//authorColumn.setCellValueFactory(cellData -> cellData.getValue().userNicknameProperty());
+		authorColumn.setCellValueFactory(cellData -> cellData.getValue().nicknameP());
 		
 		reportsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectedReport = newValue);
 	}

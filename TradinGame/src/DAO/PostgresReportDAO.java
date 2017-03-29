@@ -50,6 +50,7 @@ public class PostgresReportDAO extends AbstractDAO<Report> {
 			String topic = resultSet.getString("reportTopic");
 			String description = resultSet.getString("reportDescription");
 			String userNickname = resultSet.getString("userNickname");
+			System.out.println(userNickname);
 			int serviceID = resultSet.getInt("serviceID");
 			
 			Report report = new Report(reportID, topic, description, serviceID, userNickname);
