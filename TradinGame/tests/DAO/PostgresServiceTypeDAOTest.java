@@ -17,7 +17,7 @@ public class PostgresServiceTypeDAOTest {
     //Creates userDAO object with factory;
     PostgresServiceTypeDAO serviceTypeDaoTest = (PostgresServiceTypeDAO) daoFactory.getDao(PostgresDAOFactory.SERVICE_TYPE_DAO);
 
-    ServiceType newServiceTypeTest = new ServiceType("labelTest3", "descriptionTest");
+    ServiceType newServiceTypeTest = new ServiceType("serviceTypeTest", "descriptionTest");
 
     @Test
     public void create() throws Exception {
@@ -26,7 +26,7 @@ public class PostgresServiceTypeDAOTest {
 
     @Test
     public void find() throws Exception {
-        ServiceType serviceTypeTest = serviceTypeDaoTest.find("labelTest3");
+        ServiceType serviceTypeTest = serviceTypeDaoTest.find("serviceTypeTest");
         assertEquals(newServiceTypeTest, serviceTypeTest);
     }
 

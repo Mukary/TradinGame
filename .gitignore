@@ -5,3 +5,5 @@ TradinGame/src/database/database.properties
 /bin/
 ./.idea/
 ./.recommenders/
+.idea/
+/out/

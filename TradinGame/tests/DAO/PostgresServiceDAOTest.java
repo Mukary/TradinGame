@@ -2,33 +2,29 @@ package DAO;
 
 import factories.AbstractDAOFactory;
 import factories.PostgresDAOFactory;
-import models.Game;
+import models.Service;
 import org.junit.Test;
+
+import java.sql.Date;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by mukary on 24/03/2017.
+ * Created by bouygueq on 29/03/2017.
  */
-public class PostgresGameDAOTest {
+public class PostgresServiceDAOTest {
 
     //Creates DAOfactory
     AbstractDAOFactory daoFactory = AbstractDAOFactory.getFactory(AbstractDAOFactory.POSTGRES_DAO_FACTORY);
     //Creates userDAO object with factory;
-    PostgresGameDAO gameDaoTest = (PostgresGameDAO) daoFactory.getDao(PostgresDAOFactory.GAME_DAO);
+    PostgresServiceDAO serviceDaoTest = (PostgresServiceDAO) daoFactory.getDao(PostgresDAOFactory.SERVICE_DAO);
     java.util.Date utilDate = new java.util.Date();
     java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-    Game newGameTest = new Game("gameTest", "editorTest", sqlDate, "gameTypeTest" );
+    Service newServiceTest = new Service(1, "descriptionTest", sqlDate, "userTest", "serviceTypeTest", "gameTest", "userTest");
 
     @Test
     public void create() throws Exception {
-        assertEquals(1, gameDaoTest.create(newGameTest));
-    }
-
-    @Test
-    public void find() throws Exception {
-        Game gameTest = gameDaoTest.find("gameTest");
-        assertEquals(newGameTest.getName(), gameTest.getName());
+        assertEquals(1, serviceDaoTest.create(newServiceTest));
     }
 
 }
