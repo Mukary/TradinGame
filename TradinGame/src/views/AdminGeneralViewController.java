@@ -153,6 +153,17 @@ public class AdminGeneralViewController extends ViewController{
 	}
 	
 	/**
+	 * Handles the add service type button
+	 */
+	@FXML
+	private void handleAddServiceTypeButton(){
+		mainApp.showAddServiceTypeView();
+	}
+	
+	
+	
+	
+	/**
 	 * Handles the delete service type button
 	 */
 	@FXML

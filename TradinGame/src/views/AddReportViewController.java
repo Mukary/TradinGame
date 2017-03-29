@@ -40,10 +40,7 @@ public class AddReportViewController extends ViewController {
 	}
 	
 	@FXML
-	private void handleSendButton(){
-		System.out.println("TOPIC: "+topicTextField.getText());
-		System.out.println("DESCRIPTION: "+descriptionTextArea.getText());
-		
+	private void handleSendButton(){		
 		Report report = new Report(1, topicTextField.getText(), descriptionTextArea.getText(), reportedService.getIdService(), UserFacade.userLogged.getNickname());
 		try {
 			reportFacade.insertReport(report);

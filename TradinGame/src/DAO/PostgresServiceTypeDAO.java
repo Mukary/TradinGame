@@ -19,16 +19,10 @@ public class PostgresServiceTypeDAO extends AbstractDAO<ServiceType>{
 
     public int create(ServiceType obj) throws SQLException {
         int res = 0;
-        try{
-            PreparedStatement stmt = connect.prepareStatement("INSERT INTO \"ServiceType\"(label, description) VALUES (?, ?)");
-            stmt.setString(1, obj.getLabel());
-            stmt.setString(2, obj.getDescription());
-            res = stmt.executeUpdate();
-        }catch(SQLException se){
-            se.printStackTrace();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        PreparedStatement stmt = connect.prepareStatement("INSERT INTO \"ServiceType\"(\"label\", \"description\") VALUES (?, ?)");
+        stmt.setString(1, obj.getLabel());
+        stmt.setString(2, obj.getDescription());
+        res = stmt.executeUpdate();
         return res;
     }
 
