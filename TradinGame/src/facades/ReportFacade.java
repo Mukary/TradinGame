@@ -1,6 +1,7 @@
 package facades;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import DAO.PostgresReportDAO;
 import factories.AbstractDAOFactory;
@@ -26,6 +27,10 @@ public class ReportFacade {
 	
 	public int insertReport(Report report) throws SQLException{
 		 return reportDao.create(report);
+	}
+	
+	public ArrayList<Report> getAllReports() throws SQLException{
+		return reportDao.getAll();
 	}
 	
 	

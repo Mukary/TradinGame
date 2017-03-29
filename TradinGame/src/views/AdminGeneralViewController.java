@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import facades.GameFacade;
 import facades.GameTypeFacade;
+import facades.ReportFacade;
 import facades.UserFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
 import models.Game;
 import models.GameType;
+import models.Report;
 import models.User;
 
 public class AdminGeneralViewController extends ViewController{
@@ -43,16 +45,34 @@ public class AdminGeneralViewController extends ViewController{
 	@FXML
 	private TableColumn<User, String> userStatusColumn;
 	
+	
+	@FXML
+	private TableView<Report> reportsTable;
+	@FXML
+	private TableColumn<Report, String> reportTopicColumn;
+	@FXML
+	private TableColumn<Report, Number> serviceIDColumn;
+	@FXML
+	private TableColumn<Report, String> sellerColumn;
+	@FXML
+	private TableColumn<Report, String> authorColumn;
+	
+	
+	
+	
 	public static ObservableList<Game> gamesList;
 	public static ObservableList<GameType> gameTypesList;
 	public static ObservableList<User> usersList;
+	public static ObservableList<Report> reportsList;
 	
 	private GameFacade gameFacade;
 	private GameTypeFacade gameTypeFacade;
 	private UserFacade userFacade;
+	private ReportFacade reportFacade;
 	
 	private Game selectedGame;
 	private User selectedUser;
+	private Report selectedReport;
 
 	@FXML
 	public void initialize(){
@@ -64,6 +84,7 @@ public class AdminGeneralViewController extends ViewController{
 		}
 		initializeGamesTableView();
 		initializeUsersTableView();
+		initializeReportsTableView();
 	}
 	
 	@FXML
@@ -112,6 +133,16 @@ public class AdminGeneralViewController extends ViewController{
 				(observable, oldValue, newValue) -> selectedGame = newValue);
 	}
 	
+	private void initializeReportsTableView(){
+		reportsTable.setItems(reportsList);
+		reportTopicColumn.setCellValueFactory(cellData -> cellData.getValue().topicProperty());
+		serviceIDColumn.setCellValueFactory(cellData -> cellData.getValue().serviceIDProperty());
+		//sellerColumn.setCellValueFactory(cellData -> cellData.getValue().)
+		//authorColumn.setCellValueFactory(cellData -> cellData.getValue().userNicknameProperty());
+		
+		reportsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectedReport = newValue);
+	}
+	
 	/**
 	 * Initialiazes the different facades
 	 */
@@ -119,6 +150,7 @@ public class AdminGeneralViewController extends ViewController{
 		gameFacade = GameFacade.getInstance();
 		gameTypeFacade = GameTypeFacade.getInstance();
 		userFacade = UserFacade.getInstance();
+		reportFacade = ReportFacade.getInstance();
 	}
 	
 	/**
@@ -129,6 +161,7 @@ public class AdminGeneralViewController extends ViewController{
 		gamesList = FXCollections.observableList(gameFacade.getAllGames());
 		gameTypesList = FXCollections.observableList(gameTypeFacade.getAll());
 		usersList = FXCollections.observableList(userFacade.getAll());
+		reportsList = FXCollections.observableList(reportFacade.getAllReports());
 	}
 	
 	/**

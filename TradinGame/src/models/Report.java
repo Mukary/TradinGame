@@ -30,24 +30,42 @@ public class Report {
 	public String getDescription() {
 		return description.get();
 	}
+	
+	public final StringProperty descriptionProperty(){
+		return this.description;
+	}
+	
 	public void setDescription(String description) {
 		this.description.set(description);;
 	}
 	public int getServiceID() {
 		return serviceID.get();
 	}
+	public final IntegerProperty serviceIDProperty(){
+		return this.serviceID;
+	}
+	
 	public void setServiceID(int serviceID) {
 		this.serviceID.set(serviceID);;
 	}
 	public String getUserNickname() {
 		return userNickname.get();
 	}
+	
+	public final StringProperty userNicknameProperty(){
+		return this.userNickname;
+	}
+	
 	public void setUserNickname(String userNickname) {
 		this.userNickname.set(userNickname);
 	}
 
 	public String getTopic() {
 		return topic.get();
+	}
+	
+	public final StringProperty topicProperty(){
+		return this.topic;
 	}
 
 	public void setTopic(String topic) {
@@ -56,6 +74,10 @@ public class Report {
 
 	public int getReportID() {
 		return reportID.get();
+	}
+	
+	public final IntegerProperty reportIDProperty(){
+		return this.reportID;
 	}
 
 	public void setReportID(int reportID) {

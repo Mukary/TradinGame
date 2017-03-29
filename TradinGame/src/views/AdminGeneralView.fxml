@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="720.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AdminGeneralViewController">
+<AnchorPane prefHeight="720.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AdminGeneralViewController">
    <children>
       <TabPane prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -98,7 +98,19 @@
             </Tab>
             <Tab text="Reports">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="reportsTable" layoutX="51.0" layoutY="105.0" prefHeight="324.0" prefWidth="534.0">
+                          <columns>
+                            <TableColumn fx:id="reportTopicColumn" prefWidth="75.0" text="Topic" />
+                            <TableColumn fx:id="serviceIDColumn" prefWidth="75.0" text="Service ID" />
+                              <TableColumn fx:id="sellerColumn" prefWidth="75.0" text="Seller" />
+                              <TableColumn prefWidth="75.0" text="Author" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="402.0" layoutY="440.0" mnemonicParsing="false" text="Details" />
+                        <Button layoutX="513.0" layoutY="440.0" mnemonicParsing="false" text="Delete" />
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>

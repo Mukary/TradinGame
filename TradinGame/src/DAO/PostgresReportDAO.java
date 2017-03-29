@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import DAO.AbstractDAO;
@@ -41,8 +42,23 @@ public class PostgresReportDAO extends AbstractDAO<Report> {
 
 	@Override
 	public ArrayList<Report> getAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Report> allReports = new ArrayList<Report>();
+		PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"Report\"");
+		ResultSet resultSet = stmt.executeQuery();
+		while(resultSet.next()){
+			int reportID = resultSet.getInt("reportID");
+			String topic = resultSet.getString("reportTopic");
+			String description = resultSet.getString("reportDescription");
+			String userNickname = resultSet.getString("userNickname");
+			int serviceID = resultSet.getInt("serviceID");
+			
+			Report report = new Report(reportID, topic, description, serviceID, userNickname);
+			allReports.add(report);
+			
+		}
+		resultSet.close();
+		stmt.close();
+		return allReports;
 	}
 
 }
