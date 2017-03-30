@@ -106,6 +106,10 @@ public class AdminGeneralViewController extends ViewController{
 
 	@FXML
 	public void initialize(){
+		init();
+	}
+	
+	public void init() {
 		initialiazeFacades();
 		try {
 			initializeLists();
