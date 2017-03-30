@@ -17,23 +17,25 @@ public class ServiceDetailViewController extends ViewController{
 	private Label descriptionLabel;
 	@FXML
 	private TextArea descriptionArea;
-
 	@FXML
 	private Button bookButton;
 
 	private Service service;
 	
-	public void initialiaze(){
-		System.out.println("intialize");
-
-		// bookButton should be hidden when coming from my services
-		//bookButton.setVisible(false);
+	@FXML
+	public void initialize(){
+		
 	}
 	
 	public void setService(Service service){
 		this.service = service;
 		descriptionLabel.setText("This service is proposed by "+service.getSellerNickname()+".\n It concerns "+service.getGameName()+".The theme of this service is : "+service.getServiceTypeLabel());
 		descriptionArea.setText(service.getDescription());
+		if (UserFacade.userLogged.isIsAdmin()) {
+			bookButton.setVisible(false);
+		} else if (UserFacade.userLogged.getNickname().equals(service.getSellerNickname())) {
+			bookButton.setVisible(false);
+		}
 	}
 	
 	@FXML

@@ -75,8 +75,8 @@
                               <TableColumn fx:id="serviceGameColumn" prefWidth="131.0" text="Game" />
                           </columns>
                         </TableView>
-                        <Button layoutX="573.0" layoutY="590.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="59.0" text="Edit" />
-                        <Button layoutX="502.0" layoutY="590.0" mnemonicParsing="false" text="Delete" textFill="#eb0808" />
+                        <Button layoutX="573.0" layoutY="590.0" mnemonicParsing="false" onAction="#handleDetailServiceButton" prefHeight="27.0" prefWidth="59.0" text="Detail" />
+                        <Button layoutX="502.0" layoutY="590.0" mnemonicParsing="false" onAction="#handleDeleteServiceButton" text="Delete" textFill="#eb0808" />
                      </children>
                   </AnchorPane>
               </content>
