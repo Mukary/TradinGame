@@ -54,12 +54,18 @@ public class AddUserViewController extends ViewController{
 		else{
 			User user = new User(nicknameField.getText(), firstnameField.getText(), lastnameField.getText(), passwordField.getText(), countryField.getText(), cityField.getText(), addressField.getText(), false, isAdminCheckbox.isSelected());
 			try {
-				userFacade.insertUser(user);
+				int res = userFacade.insertUser(user);
+				if (res == 1) {
+					Util.displayAlert(AlertType.INFORMATION, "User add", "The user has been well added !");
+					stage.close();
+				}
+				else {
+					Util.displayAlert(AlertType.ERROR, "Error", "This nickname is already used by another user.");
+				}
 			} catch (SQLException e) {
 				Util.displayAlert(AlertType.ERROR, "Error", "It seems there is a problem with the database. Try again later");
 				e.printStackTrace();
 			}
-			Util.displayAlert(AlertType.CONFIRMATION, "User add", "The user has been well added !");
 		}
 	}
 	
