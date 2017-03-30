@@ -76,6 +76,13 @@ public class AdminGeneralViewController extends ViewController{
 	@FXML
 	private TableColumn<ServiceType, String> serviceTypeDescriptionColumn;
 	
+	@FXML
+	private TableView<GameType> gameTypeTableView;
+	@FXML
+	private TableColumn<GameType, String> gameTypeNameColumn;
+	
+	
+	
 	
 	
 	public static ObservableList<Game> gamesList;
@@ -93,6 +100,7 @@ public class AdminGeneralViewController extends ViewController{
 	private ServiceFacade serviceFacade;
 	
 	private Game selectedGame;
+	private GameType selectedGameType;
 	private User selectedUser;
 	private Report selectedReport;
 	private ServiceType selectedServiceType;
@@ -111,6 +119,7 @@ public class AdminGeneralViewController extends ViewController{
 		initializeReportsTableView();
 		initializeServiceTypesTableView();
 		initializeServicesTableView();
+		initializeGameTypeTableView();
 	}
 	
     @FXML
@@ -187,6 +196,13 @@ public class AdminGeneralViewController extends ViewController{
 		mainApp.showEditServiceTypeView(selectedServiceType);
 	}
 	
+	/**
+	 * Handles the edit service type button
+	 */
+	@FXML
+	private void handleDetailServiceButton(){
+		mainApp.showServiceDetailView(selectedService);
+	}
 	
 	/**
 	 * Handles the delete service type button
@@ -207,6 +223,24 @@ public class AdminGeneralViewController extends ViewController{
 		}
 	}
 	
+    @FXML
+    private void handleDeleteServiceButton(){
+    	Alert unbookAlert = new Alert(Alert.AlertType.CONFIRMATION);
+    	unbookAlert.initOwner(stage);
+    	unbookAlert.setTitle("Are you sure to delete this service ? ");
+		Optional<ButtonType> result = unbookAlert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			try {
+				serviceFacade.deleteService(selectedService);
+				AdminGeneralViewController.serviceList.remove(selectedService);
+				// Should refresh services table
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+    	//TODO: call the delete method on the ServiceFacade.
+    }
+	
 	/**
 	 * Handles the ban  user type button
 	 */
@@ -221,6 +255,29 @@ public class AdminGeneralViewController extends ViewController{
 			try {
 				userFacade.updateUser(selectedUser);
 			} catch(SQLException sql){
+				sql.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * Handles the delete game type button
+	 */
+	@FXML
+	private void handleDeleteGameTypeButton(){
+		Alert deleteGameType = new Alert(Alert.AlertType.CONFIRMATION);
+		deleteGameType.initOwner(stage);
+		deleteGameType.setTitle("Do you really want to delete this game type ?");
+		Optional<ButtonType> answer = deleteGameType.showAndWait();
+		if(answer.get() == ButtonType.OK){
+			try{
+				int res = 0;
+				gameTypeFacade.delete(selectedGameType);
+				if(res == 1){
+					gameTypesList.remove(selectedGameType);
+				}
+				
+			} catch (SQLException sql){
 				sql.printStackTrace();
 			}
 		}
@@ -303,7 +360,6 @@ public class AdminGeneralViewController extends ViewController{
 	 * Initializes the services table view
 	 */
 	private void initializeServicesTableView(){
-		System.out.println(serviceList);
 		servicesTableView.setItems(serviceList);
 		serviceTitleColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
 		serviceProviderColumn.setCellValueFactory(cellData -> cellData.getValue().sellerNicknameProperty());
@@ -311,6 +367,16 @@ public class AdminGeneralViewController extends ViewController{
 
 		servicesTableView.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue)-> selectedService = newValue);
+	}
+	/**
+	 * Initializes the game type table view
+	 */
+	private void initializeGameTypeTableView(){
+		gameTypeTableView.setItems(gameTypesList);
+		gameTypeNameColumn.setCellValueFactory(cellData -> cellData.getValue().labelProperty());
+		
+		gameTypeTableView.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> selectedGameType = newValue);
 	}
 	
 }
