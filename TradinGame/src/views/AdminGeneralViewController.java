@@ -286,21 +286,39 @@ public class AdminGeneralViewController extends ViewController{
 	 * Handles the ban  user type button
 	 */
 	@FXML
-	private void handleDeleteUserButton(){
-		Alert deleteUserAlert = new Alert(Alert.AlertType.CONFIRMATION);
-		deleteUserAlert.initOwner(stage);
-		deleteUserAlert.setTitle("Do you really want to ban this user ?");
-		Optional<ButtonType> answer = deleteUserAlert.showAndWait();
+	private void handleBanUserButton(){
+		Alert banUserAlert = new Alert(Alert.AlertType.CONFIRMATION);
+		banUserAlert.initOwner(stage);
+		banUserAlert.setTitle("Do you really want to ban this user ?");
+		Optional<ButtonType> answer = banUserAlert.showAndWait();
 		if(answer.get() == ButtonType.OK){
 			selectedUser.setIsBanned(true);
 			try {
 				userFacade.updateUser(selectedUser);
+				usersTableView.refresh();
 			} catch(SQLException sql){
 				sql.printStackTrace();
 			}
 		}
 	}
-	
+
+	@FXML
+	private void handleUnbanUserButton(){
+		Alert unbanUserAlert = new Alert(Alert.AlertType.CONFIRMATION);
+		unbanUserAlert.initOwner(stage);
+		unbanUserAlert.setTitle("Do you really want to unban this user ?");
+		Optional<ButtonType> answer = unbanUserAlert.showAndWait();
+		if(answer.get() == ButtonType.OK){
+			selectedUser.setIsBanned(false);
+			try {
+				userFacade.updateUser(selectedUser);
+				usersTableView.refresh();
+			} catch(SQLException sql){
+				sql.printStackTrace();
+			}
+		}
+	}
+
 	/**
 	 * Handles the delete game type button
 	 */
