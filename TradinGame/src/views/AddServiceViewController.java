@@ -158,7 +158,7 @@ public class AddServiceViewController extends ViewController{
 					serviceFacade.insertService(service);
 					UserGeneralViewController.servicesList.add(service);
 					UserGeneralViewController.myServicesList.add(service);
-					Util.displayAlert(AlertType.CONFIRMATION, "Service added", "Your service has been well added !");
+					Util.displayAlert(AlertType.INFORMATION, "Service added", "Your service has been well added !");
 					stage.close();
 				}
 			} catch (SQLException e) {

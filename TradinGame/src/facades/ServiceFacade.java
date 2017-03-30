@@ -49,6 +49,16 @@ public class ServiceFacade {
 	}
 	
 	/**
+	 * Returns a service based on its ID
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	public Service getServiceFromID(int id) throws SQLException {
+		return serviceDao.find(id);
+	}
+	
+	/**
 	 * Gets all the services contained in the database
 	 * @return an ArrayList of services
 	 * @throws SQLException if the query fails

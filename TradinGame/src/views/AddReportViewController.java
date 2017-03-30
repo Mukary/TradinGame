@@ -12,9 +12,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import models.Report;
 import models.Service;
+import util.Util;
 
 public class AddReportViewController extends ViewController {
 	
@@ -43,7 +45,15 @@ public class AddReportViewController extends ViewController {
 	private void handleSendButton(){		
 		Report report = new Report(1, topicTextField.getText(), descriptionTextArea.getText(), reportedService.getIdService(), UserFacade.userLogged.getNickname());
 		try {
-			reportFacade.insertReport(report);
+			int res = 0;
+			res = reportFacade.insertReport(report);
+			if(res == 1){
+				Util.displayAlert(AlertType.INFORMATION, "Report", "Service successfully reported !");
+				stage.close();
+			}
+			else {
+				Util.displayAlert(AlertType.ERROR, "Report", "Could not send report. Please try again later.");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

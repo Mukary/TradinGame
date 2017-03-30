@@ -109,7 +109,7 @@ public class PostgresServiceDAO extends AbstractDAO<Service>{
 
     @Override
     public Service find(int id) throws SQLException {
-        PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"Service\" WHERE idService = ?");
+        PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"Service\" WHERE \"idService\" = ?");
         stmt.setInt(1, id);
 
         ResultSet rs = stmt.executeQuery();
