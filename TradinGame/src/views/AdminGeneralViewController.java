@@ -217,10 +217,9 @@ public class AdminGeneralViewController extends ViewController{
 		deleteUserAlert.setTitle("Do you really want to ban this user ?");
 		Optional<ButtonType> answer = deleteUserAlert.showAndWait();
 		if(answer.get() == ButtonType.OK){
-			User newUsr = selectedUser;
 			selectedUser.setIsBanned(true);
 			try {
-				userFacade.updateUser(newUsr);
+				userFacade.updateUser(selectedUser);
 			} catch(SQLException sql){
 				sql.printStackTrace();
 			}

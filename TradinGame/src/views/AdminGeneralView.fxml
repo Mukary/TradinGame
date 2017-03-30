@@ -25,7 +25,7 @@
                         </TableView>
                         <Button layoutX="380.0" layoutY="602.0" mnemonicParsing="false" text="Edit" />
                         <Button layoutX="65.0" layoutY="602.0" mnemonicParsing="false" onAction="#handleAddUserButton" prefHeight="27.0" prefWidth="157.0" text="Create a new account" />
-                        <Button layoutX="311.0" layoutY="602.0" mnemonicParsing="false" text="Delete" textFill="#eb0808" />
+                        <Button layoutX="311.0" layoutY="602.0" mnemonicParsing="false" onAction="#handleDeleteUserButton" text="Delete" textFill="#eb0808" />
                         <Button layoutX="490.0" layoutY="602.0" mnemonicParsing="false" onAction="#handleLogoutButton" text="Logout" />
                      </children>
                   </AnchorPane>
