@@ -1,16 +1,23 @@
 package models;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  * Created by trade on 24/03/17.
  */
 public class AdminRole extends UserRole{
 
-    public int banUser(User user){
-        return 1;
+    public void banUser(User user){
+    	user.setIsBanned(true);
+    	return;
     }
 
-    public int unBanUser(User user){
-        return 1;
+    public void unBanUser(User user){
+    	user.setIsBanned(false);
+    	return;
     }
 
     public int createGame(Game game){
