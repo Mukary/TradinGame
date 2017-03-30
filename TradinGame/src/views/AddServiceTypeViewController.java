@@ -32,7 +32,7 @@ public class AddServiceTypeViewController extends ViewController{
 			res = serviceTypeFacade.createServiceType(serviceType);
 			if(res == 1){
 				AdminGeneralViewController.serviceTypesList.add(serviceType);
-				Util.displayAlert(AlertType.CONFIRMATION, "Service type added", "The game has been added !");
+				Util.displayAlert(AlertType.INFORMATION, "Service type added", "The service type has been added !");
 				stage.close();
 			}
 			else {

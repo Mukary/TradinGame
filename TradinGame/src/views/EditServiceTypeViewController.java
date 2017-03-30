@@ -30,14 +30,14 @@ public class EditServiceTypeViewController extends ViewController{
 	@FXML
 	private void handleSaveServiceTypeButton(){
 		serviceType.setDescription(new SimpleStringProperty(editSTDescription.getText()));
-		
+
 		try{
 			int res = 0;
 			serviceTypeFacade = ServiceTypeFacade.getInstance();
 			res = serviceTypeFacade.updateServiceType(serviceType);
 			if(res == 1){
 				AdminGeneralViewController.serviceTypesList.add(serviceType);
-				Util.displayAlert(AlertType.CONFIRMATION, "Service type updated", "The service type has been updated !");
+				Util.displayAlert(AlertType.INFORMATION, "Service type updated", "The service type has been updated !");
 				stage.close();
 			}
 			else {
