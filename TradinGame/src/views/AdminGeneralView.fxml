@@ -106,12 +106,12 @@
                           <columns>
                             <TableColumn fx:id="reportTopicColumn" prefWidth="75.0" text="Topic" />
                             <TableColumn fx:id="serviceIDColumn" prefWidth="75.0" text="Service ID" />
-                              <TableColumn fx:id="sellerColumn" prefWidth="75.0" text="Seller" />
                               <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Author" />
                           </columns>
                         </TableView>
-                        <Button layoutX="402.0" layoutY="440.0" mnemonicParsing="false" text="Details" />
-                        <Button fx:id="deleteReportButton" layoutX="513.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleDeleteReportButton" text="Delete" />
+                        <Button fx:id="detailReportButton" layoutX="166.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleDetailReportButton" text="View service" />
+                        <Button fx:id="deleteReportButton" layoutX="482.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleDeleteReportButton" text="Delete Report" />
+                        <Button layoutX="283.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleReportServiceDeleteButton" text="Delete associated service" />
                      </children></AnchorPane>
               </content>
             </Tab>

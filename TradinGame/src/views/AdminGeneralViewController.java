@@ -56,8 +56,6 @@ public class AdminGeneralViewController extends ViewController{
 	@FXML
 	private TableColumn<Report, Number> serviceIDColumn;
 	@FXML
-	private TableColumn<Report, String> sellerColumn;
-	@FXML
 	private TableColumn<Report, String> authorColumn;
 	
 	@FXML
@@ -188,11 +186,54 @@ public class AdminGeneralViewController extends ViewController{
 	}
 	
 	/**
-	 * Handles the edit service type button
+	 * Handles the detail service  button
 	 */
 	@FXML
 	private void handleDetailServiceButton(){
 		mainApp.showServiceDetailView(selectedService);
+	}
+	
+	/**
+	 * Handles the detail report button
+	 */
+	@FXML
+	private void handleDetailReportButton(){
+		Service associatedService;
+		try {
+			associatedService = serviceFacade.getServiceFromID(selectedReport.getServiceID());
+			mainApp.showServiceDetailView(associatedService);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
+	/**
+	 * Handles the detail report button
+	 */
+	@FXML
+	private void handleReportServiceDeleteButton(){
+		Service associatedService;
+		try {
+			associatedService = serviceFacade.getServiceFromID(selectedReport.getServiceID());
+
+			Alert deleteServiceTypeAlert = new Alert(Alert.AlertType.CONFIRMATION);
+			deleteServiceTypeAlert.initOwner(stage);
+			deleteServiceTypeAlert.setContentText("Do you really want to delete the associated ?");
+			Optional<ButtonType> answer = deleteServiceTypeAlert.showAndWait();
+			if(answer.get() == ButtonType.OK){
+				try {
+					serviceFacade.deleteService(associatedService);
+					this.reportsList = FXCollections.observableList(reportFacade.getAllReports());
+				} catch(SQLException sql){
+					sql.printStackTrace();
+				}
+			}
+			initializeReportsTableView();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 	
 	/**
@@ -269,10 +310,10 @@ public class AdminGeneralViewController extends ViewController{
 		reportsTable.setItems(reportsList);
 		reportTopicColumn.setCellValueFactory(cellData -> cellData.getValue().topicProperty());
 		serviceIDColumn.setCellValueFactory(cellData -> cellData.getValue().serviceIDProperty());
-		//sellerColumn.setCellValueFactory(cellData -> cellData.getValue().)
 		authorColumn.setCellValueFactory(cellData -> cellData.getValue().nicknameP());
 		
-		reportsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectedReport = newValue);
+		reportsTable.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> selectedReport = newValue);
 	}
 	
 	/**

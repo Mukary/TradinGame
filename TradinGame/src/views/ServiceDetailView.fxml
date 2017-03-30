@@ -17,7 +17,7 @@
             <Font size="18.0" />
          </font></Label>
       <Button fx:id="bookButton" layoutX="349.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleBookButton" text="Book service" />
-      <Button layoutX="147.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleReportButton" text="Report service" textFill="RED" />
+      <Button fx:id="reportServiceButton" layoutX="147.0" layoutY="494.0" mnemonicParsing="false" text="Report service" textFill="RED" />
       <TextArea fx:id="descriptionArea" editable="false" layoutX="24.0" layoutY="276.0" prefHeight="200.0" prefWidth="408.0" />
       <Button layoutX="257.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="25.0" prefWidth="73.0" text="Cancel" />
    </children>
