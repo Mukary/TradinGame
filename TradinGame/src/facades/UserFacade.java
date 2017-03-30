@@ -4,6 +4,7 @@ import factories.AbstractDAOFactory;
 import factories.PostgresDAOFactory;
 import models.User;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -47,6 +48,10 @@ public class UserFacade {
 		if(userFacade == null)
 			userFacade = new UserFacade();
 		return userFacade;
+	}
+	
+	public int setPassword(String nickname, String password) throws NoSuchAlgorithmException, SQLException {
+		return userDAO.update(nickname, password);
 	}
 	
 	/**

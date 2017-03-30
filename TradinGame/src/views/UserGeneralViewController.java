@@ -1,6 +1,7 @@
 package views;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import models.Service;
+import models.User;
 import util.Util;
 
 public class UserGeneralViewController extends ViewController{
@@ -64,6 +66,16 @@ public class UserGeneralViewController extends ViewController{
     private TextField cityField;
     @FXML
     private TextField addressField;
+    @FXML 
+    private PasswordField passwordTB;
+    @FXML
+    private PasswordField passwordTB2;
+    @FXML 
+    private Button confirmPasswordChangeButton;
+    @FXML
+    private Label passwordLabel;
+    @FXML
+    private Label passwordLabel2;
     
 	private ServiceFacade serviceFacade;
 	private UserFacade userFacade;
@@ -113,11 +125,15 @@ public class UserGeneralViewController extends ViewController{
 		this.initializeMyServicesListTable();
 		this.initializeServicesBookedListTable();
 		this.initialiazeAccountView();
+		this.passwordTB.setVisible(false);
+        this.passwordTB2.setVisible(false);
+        this.confirmPasswordChangeButton.setVisible(false);
+        this.passwordLabel.setVisible(false);
+        this.passwordLabel2.setVisible(false);
 		
 		//Account View
-		
-
     }
+    
     
     @FXML
     private void handleLogoutButton(){
@@ -127,7 +143,34 @@ public class UserGeneralViewController extends ViewController{
     
     @FXML
     private void handleResetPasswordButton(){
-    	
+        passwordTB.setVisible(true);
+        passwordTB2.setVisible(true);
+        confirmPasswordChangeButton.setVisible(true);
+        passwordLabel.setVisible(true);
+        passwordLabel2.setVisible(true);
+    }
+    
+    @FXML 
+    private void handleUpdatePasswordButton() {
+    	try {
+        	if(this.passwordTB.getText().equals(this.passwordTB2.getText()) && this.passwordTB.getText().length() != 0) {
+				userFacade.setPassword(UserFacade.userLogged.getNickname(), passwordTB.getText());
+				util.Util.displayAlert(AlertType.INFORMATION, "Success", "Password updated");
+				this.passwordTB.setVisible(false);
+		        this.passwordTB2.setVisible(false);
+		        this.confirmPasswordChangeButton.setVisible(false);
+		        this.passwordLabel.setVisible(false);
+		        this.passwordLabel2.setVisible(false);
+        	} else {
+        		util.Util.displayAlert(AlertType.ERROR, "Error", "Password can not be empty and the two fields must match");
+        	}
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     @FXML

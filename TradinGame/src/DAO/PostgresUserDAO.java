@@ -86,7 +86,24 @@ public class PostgresUserDAO extends AbstractDAO<User>{
             e.printStackTrace();
         }
         return res;
+	}
+	
+	/**
+	 * 
+	 * @param nickname
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 * @throws NoSuchAlgorithmException 
+	 */
+	public int update(String nickname, String password) throws SQLException, NoSuchAlgorithmException {
+        int res = 0;
+        PreparedStatement stmt = connect.prepareStatement("UPDATE \"user\" SET password = ? WHERE nickname = ?");
+        stmt.setString(1, Util.sha1(password));
+        stmt.setString(2, nickname);
+        res = stmt.executeUpdate();
 
+        return res;
 	}
 	
 	@Override
