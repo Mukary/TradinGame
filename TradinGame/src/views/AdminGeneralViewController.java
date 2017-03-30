@@ -339,7 +339,7 @@ public class AdminGeneralViewController extends ViewController{
 		userNicknameColumn.setCellValueFactory(cellData -> cellData.getValue().nicknameProperty());
 		userFirstnameColumn.setCellValueFactory(cellData -> cellData.getValue().firstnameProperty());
 		userLastnameColumn.setCellValueFactory(cellData -> cellData.getValue().lastnameProperty());
-		//userStatusColumn.setCellValueFactory(cellData -> cellData.getValue().isBannedProperty());
+		userStatusColumn.setCellValueFactory(cellData -> cellData.getValue().getIsbannedString());
 		usersTableView.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> selectedUser = newValue);
 	}

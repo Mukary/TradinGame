@@ -60,6 +60,13 @@ public class User {
 		this.isAdmin = new SimpleBooleanProperty(isAdmin);
 	}
 
+	public final StringProperty getIsbannedString(){
+		if (this.isIsBanned()){
+			return new SimpleStringProperty("Banned");
+		}
+		else return new SimpleStringProperty("Active");
+	}
+
 	public final StringProperty nicknameProperty() {
 		return this.nickname;
 	}
