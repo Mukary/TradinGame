@@ -189,6 +189,26 @@ public class AdminGeneralViewController extends ViewController{
 	}
 	
 	/**
+	 * Handles the ban  user type button
+	 */
+	@FXML
+	private void handleDeleteUserTypeButton(){
+		Alert deleteUserAlert = new Alert(Alert.AlertType.CONFIRMATION);
+		deleteUserAlert.initOwner(stage);
+		deleteUserAlert.setTitle("Do you really want to ban this user ?");
+		Optional<ButtonType> answer = deleteUserAlert.showAndWait();
+		if(answer.get() == ButtonType.OK){
+			User newUsr = selectedUser;
+			selectedUser.setIsBanned(true);
+			try {
+				userFacade.updateUser(newUsr);
+			} catch(SQLException sql){
+				sql.printStackTrace();
+			}
+		}
+	}
+	
+	/**
 	 * Initialize the games table view
 	 */
 	private void initializeGamesTableView(){
@@ -243,6 +263,7 @@ public class AdminGeneralViewController extends ViewController{
 		userNicknameColumn.setCellValueFactory(cellData -> cellData.getValue().nicknameProperty());
 		userFirstnameColumn.setCellValueFactory(cellData -> cellData.getValue().firstnameProperty());
 		userLastnameColumn.setCellValueFactory(cellData -> cellData.getValue().lastnameProperty());
+		//userStatusColumn.setCellValueFactory(cellData -> cellData.getValue().isBannedProperty());
 		usersTableView.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> selectedUser = newValue);
 	}
