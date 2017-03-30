@@ -68,7 +68,7 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 	public int update(User obj) throws SQLException {
         int res = 0;
         try{
-            PreparedStatement stmt = connect.prepareStatement("UPDATE \"user\" SET (nickname = ?, firstname = ?, lastname = ?, country = ?, city = ?, address = ?, is_admin = ?, is_banned = ?, password = ?) WHERE nickname = ?");
+            PreparedStatement stmt = connect.prepareStatement("UPDATE \"user\" SET nickname = ?, firstname = ?, lastname = ?, country = ?, city = ?, address = ?, is_admin = ?, is_banned = ?, password = ? WHERE nickname = ?");
             stmt.setString(1, obj.getNickname());
             stmt.setString(2, obj.getFirstname());
             stmt.setString(3, obj.getLastname());

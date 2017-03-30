@@ -11,8 +11,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import models.Service;
+import util.Util;
 
 public class UserGeneralViewController extends ViewController{
 	
@@ -44,13 +46,18 @@ public class UserGeneralViewController extends ViewController{
     @FXML
     private Label nicknameLabel;
     @FXML
-    private Label firstNameLabel;
+    private TextField firstNameField;
     @FXML
-    private Label lastNameLabel;
+    private TextField lastNameField;
     @FXML
-    private Label countryLabel;
+    private TextField countryField;
+    @FXML
+    private TextField cityField;
+    @FXML
+    private TextField addressField;
     
 	private ServiceFacade serviceFacade;
+	private UserFacade userFacade;
 
 	public static ObservableList<Service> myServicesList;
 
@@ -66,6 +73,7 @@ public class UserGeneralViewController extends ViewController{
     private void initialize() {
     	selectedService = null;
     	serviceFacade = ServiceFacade.getInstance();
+    	userFacade = UserFacade.getInstance();
 
     	// Services list
     	try {
@@ -84,9 +92,10 @@ public class UserGeneralViewController extends ViewController{
 			e.printStackTrace();
 		}
 		this.initializeMyServicesListTable();
+		this.initialiazeAccountView();
 		
 		//Account View
-		nicknameLabel.setText(UserFacade.userLogged.getNickname());
+		
 
     }
     
@@ -147,7 +156,30 @@ public class UserGeneralViewController extends ViewController{
 			e.printStackTrace();
 		}
     }
+    
+    @FXML
+    private void updateAccountButton(){
+    	UserFacade.userLogged.setFirstname(firstNameField.getText());
+    	UserFacade.userLogged.setLastname(lastNameField.getText());
+    	UserFacade.userLogged.setCountry(countryField.getText());
+    	UserFacade.userLogged.setCity(cityField.getText());
+    	UserFacade.userLogged.setAddress(addressField.getText());
+    	try {
+			int result = userFacade.updateUser(UserFacade.userLogged);
+			if(result == 1){
+				Util.displayAlert(AlertType.CONFIRMATION, "Account updated", "Your account has been well updated !");
+			}
+			else
+				Util.displayAlert(AlertType.ERROR, "Error", "Couldn't update your account :(");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
+    /**
+     * Initializes the service market tableview
+     */
     private void initializeServicesListTable(){
 		descriptionServiceColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
 		providerNameColumn.setCellValueFactory(cellData -> cellData.getValue().sellerNicknameProperty());
@@ -157,6 +189,9 @@ public class UserGeneralViewController extends ViewController{
 				(observable, oldValue, newValue) -> selectedService = newValue);
 	}
 
+    /**
+     * Initialiazes my services tableview
+     */
 	private void initializeMyServicesListTable(){
 		descriptionMyServicesColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
 		gameMyServicesColumn.setCellValueFactory(cellData -> cellData.getValue().gameNameProperty());
@@ -165,7 +200,17 @@ public class UserGeneralViewController extends ViewController{
 				(observable, oldValue, newValue) -> selectedMyService = newValue);
 	}
 
-
+	/**
+	 * Initializes the account tab with the user logged infos
+	 */
+	private void initialiazeAccountView(){
+		nicknameLabel.setText(UserFacade.userLogged.getNickname());
+		firstNameField.setText(UserFacade.userLogged.getFirstname());
+		lastNameField.setText(UserFacade.userLogged.getLastname());
+		countryField.setText(UserFacade.userLogged.getCountry());
+		cityField.setText(UserFacade.userLogged.getCity());
+		addressField.setText(UserFacade.userLogged.getAddress());
+	}
     /**
      * Is called by the main application to give a reference back to itself.
      * 

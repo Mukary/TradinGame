@@ -70,8 +70,17 @@ public class UserFacade {
 		return userDAO.create(user);
 	}
 	
+	/**
+	 * Gets all the user contained in the database
+	 * @return an ArrayList of User objects
+	 * @throws SQLException if the query fails
+	 */
 	public ArrayList<User> getAll() throws SQLException{
 		return userDAO.getAll();
+	}
+	
+	public int updateUser(User user)throws SQLException{
+		return userDAO.update(user);
 	}
 	
 	/**
