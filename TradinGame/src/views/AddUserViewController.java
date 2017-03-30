@@ -58,6 +58,7 @@ public class AddUserViewController extends ViewController{
 				if (res == 1) {
 					Util.displayAlert(AlertType.INFORMATION, "User add", "The user has been well added !");
 					stage.close();
+					AdminGeneralViewController.usersList.add(user);
 				}
 				else {
 					Util.displayAlert(AlertType.ERROR, "Error", "This nickname is already used by another user.");
