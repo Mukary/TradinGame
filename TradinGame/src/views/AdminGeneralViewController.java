@@ -211,7 +211,7 @@ public class AdminGeneralViewController extends ViewController{
 	 * Handles the ban  user type button
 	 */
 	@FXML
-	private void handleDeleteUserTypeButton(){
+	private void handleDeleteUserButton(){
 		Alert deleteUserAlert = new Alert(Alert.AlertType.CONFIRMATION);
 		deleteUserAlert.initOwner(stage);
 		deleteUserAlert.setTitle("Do you really want to ban this user ?");
