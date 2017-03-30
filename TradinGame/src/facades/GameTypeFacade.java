@@ -44,4 +44,8 @@ public class GameTypeFacade {
 	public ArrayList<GameType> getAll() throws SQLException{
 		return gameTypeDao.getAll();
 	}
+	
+	public int delete(GameType gameType) throws SQLException{
+		return gameTypeDao.delete(gameType);
+	}
 }

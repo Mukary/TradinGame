@@ -262,6 +262,29 @@ public class AdminGeneralViewController extends ViewController{
 	}
 	
 	/**
+	 * Handles the delete game type button
+	 */
+	@FXML
+	private void handleDeleteGameTypeButton(){
+		Alert deleteGameType = new Alert(Alert.AlertType.CONFIRMATION);
+		deleteGameType.initOwner(stage);
+		deleteGameType.setTitle("Do you really want to delete this game type ?");
+		Optional<ButtonType> answer = deleteGameType.showAndWait();
+		if(answer.get() == ButtonType.OK){
+			try{
+				int res = 0;
+				gameTypeFacade.delete(selectedGameType);
+				if(res == 1){
+					gameTypesList.remove(selectedGameType);
+				}
+				
+			} catch (SQLException sql){
+				sql.printStackTrace();
+			}
+		}
+	}
+	
+	/**
 	 * Initialize the games table view
 	 */
 	private void initializeGamesTableView(){

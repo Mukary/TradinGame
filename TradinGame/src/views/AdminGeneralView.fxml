@@ -59,7 +59,7 @@
                             <TableColumn fx:id="gameTypeNameColumn" prefWidth="213.0" text="Name" />
                           </columns>
                         </TableView>
-                        <Button layoutX="50.0" layoutY="535.0" mnemonicParsing="false" text="Delete" textFill="#eb0808" />
+                        <Button layoutX="50.0" layoutY="535.0" mnemonicParsing="false" onAction="#handleDeleteGameTypeButton" text="Delete" textFill="#eb0808" />
                         <Button layoutX="205.0" layoutY="535.0" mnemonicParsing="false" text="Add" />
                      </children>
                   </AnchorPane>
