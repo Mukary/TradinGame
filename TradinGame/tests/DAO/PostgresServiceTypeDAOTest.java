@@ -20,6 +20,11 @@ public class PostgresServiceTypeDAOTest {
     ServiceType newServiceTypeTest = new ServiceType("serviceTypeTest", "descriptionTest");
 
     @Test
+    public void delete() throws Exception {
+        assertEquals(1, serviceTypeDaoTest.delete(newServiceTypeTest));
+    }
+
+    @Test
     public void create() throws Exception {
         assertEquals(1, serviceTypeDaoTest.create(newServiceTypeTest));
     }
@@ -27,7 +32,7 @@ public class PostgresServiceTypeDAOTest {
     @Test
     public void find() throws Exception {
         ServiceType serviceTypeTest = serviceTypeDaoTest.find("serviceTypeTest");
-        assertEquals(newServiceTypeTest, serviceTypeTest);
+        assertEquals(newServiceTypeTest.getLabel(), serviceTypeTest.getLabel());
     }
 
 }

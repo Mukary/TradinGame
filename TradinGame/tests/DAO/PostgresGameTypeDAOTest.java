@@ -27,7 +27,7 @@ public class PostgresGameTypeDAOTest {
     @Test
     public void find() throws Exception {
         GameType gameTypeTest = gameTypeDaoTest.find("gameTypeTest");
-        assertEquals(newGameTypeTest, gameTypeTest);
+        assertEquals(newGameTypeTest.getLabel(), gameTypeTest.getLabel());
     }
 
 }

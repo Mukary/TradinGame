@@ -20,6 +20,12 @@ public class PostgresGameDAOTest {
     java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
     Game newGameTest = new Game("gameTest", "editorTest", sqlDate, "gameTypeTest" );
 
+
+    @Test
+    public void delete() throws Exception {
+        assertEquals(1, gameDaoTest.delete(newGameTest));
+    }
+
     @Test
     public void create() throws Exception {
         assertEquals(1, gameDaoTest.create(newGameTest));
