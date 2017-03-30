@@ -7,6 +7,7 @@ import java.util.Optional;
 import facades.GameFacade;
 import facades.GameTypeFacade;
 import facades.ReportFacade;
+import facades.ServiceFacade;
 import facades.UserFacade;
 import facades.ServiceTypeFacade;
 import javafx.collections.FXCollections;
@@ -22,6 +23,7 @@ import models.GameType;
 import models.Report;
 import models.User;
 import models.ServiceType;
+import models.Service;
 
 public class AdminGeneralViewController extends ViewController{
 	
@@ -47,7 +49,6 @@ public class AdminGeneralViewController extends ViewController{
 	@FXML
 	private TableColumn<User, String> userStatusColumn;
 	
-	
 	@FXML
 	private TableView<Report> reportsTable;
 	@FXML
@@ -59,6 +60,14 @@ public class AdminGeneralViewController extends ViewController{
 	@FXML
 	private TableColumn<Report, String> authorColumn;
 	
+	@FXML
+	private TableView<Service> servicesTableView;
+	@FXML
+	private TableColumn<Service, String> serviceTitleColumn;
+	@FXML
+	private TableColumn<Service, String> serviceProviderColumn;
+	@FXML
+	private TableColumn<Service, String> serviceGameColumn;	
 	
 	@FXML
 	private TableView<ServiceType> serviceTypesTable;
@@ -74,17 +83,20 @@ public class AdminGeneralViewController extends ViewController{
 	public static ObservableList<User> usersList;
 	public static ObservableList<Report> reportsList;
 	public static ObservableList<ServiceType> serviceTypesList;
+	public static ObservableList<Service> serviceList;
 	
 	private GameFacade gameFacade;
 	private GameTypeFacade gameTypeFacade;
 	private UserFacade userFacade;
 	private ReportFacade reportFacade;
 	private ServiceTypeFacade serviceTypeFacade;
+	private ServiceFacade serviceFacade;
 	
 	private Game selectedGame;
 	private User selectedUser;
 	private Report selectedReport;
 	private ServiceType selectedServiceType;
+	private Service selectedService;
 
 	@FXML
 	public void initialize(){
@@ -98,7 +110,14 @@ public class AdminGeneralViewController extends ViewController{
 		initializeUsersTableView();
 		initializeReportsTableView();
 		initializeServiceTypesTableView();
+		initializeServicesTableView();
 	}
+	
+    @FXML
+    private void handleLogoutButton(){
+    	UserFacade.userLogged = null;
+    	mainApp.showLoginView();
+    }
 	
 	@FXML
 	private void handleAddGameButton(){
@@ -240,7 +259,7 @@ public class AdminGeneralViewController extends ViewController{
 		userFacade = UserFacade.getInstance();
 		reportFacade = ReportFacade.getInstance();
 		serviceTypeFacade = ServiceTypeFacade.getInstance();
-		System.out.println("ST facade");
+		serviceFacade = ServiceFacade.getInstance();
 	}
 	
 	/**
@@ -253,6 +272,7 @@ public class AdminGeneralViewController extends ViewController{
 		usersList = FXCollections.observableList(userFacade.getAll());
 		reportsList = FXCollections.observableList(reportFacade.getAllReports());
 		serviceTypesList = FXCollections.observableList(serviceTypeFacade.getAllServiceTypes());
+		serviceList = FXCollections.observableList(serviceFacade.getAllServices());
 	}
 	
 	/**
@@ -279,4 +299,19 @@ public class AdminGeneralViewController extends ViewController{
 		serviceTypesTable.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue)-> selectedServiceType = newValue);
 	}
+	
+	/**
+	 * Initializes the services table view
+	 */
+	private void initializeServicesTableView(){
+		System.out.println(serviceList);
+		servicesTableView.setItems(serviceList);
+		serviceTitleColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
+		serviceProviderColumn.setCellValueFactory(cellData -> cellData.getValue().sellerNicknameProperty());
+		serviceGameColumn.setCellValueFactory(cellData -> cellData.getValue().gameNameProperty());
+
+		servicesTableView.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue)-> selectedService = newValue);
+	}
+	
 }
