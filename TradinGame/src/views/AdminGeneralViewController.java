@@ -196,6 +196,13 @@ public class AdminGeneralViewController extends ViewController{
 		mainApp.showEditServiceTypeView(selectedServiceType);
 	}
 	
+	/**
+	 * Handles the edit service type button
+	 */
+	@FXML
+	private void handleDetailServiceButton(){
+		mainApp.showServiceDetailView(selectedService);
+	}
 	
 	/**
 	 * Handles the delete service type button
@@ -216,11 +223,29 @@ public class AdminGeneralViewController extends ViewController{
 		}
 	}
 	
+    @FXML
+    private void handleDeleteServiceButton(){
+    	Alert unbookAlert = new Alert(Alert.AlertType.CONFIRMATION);
+    	unbookAlert.initOwner(stage);
+    	unbookAlert.setTitle("Are you sure to delete this service ? ");
+		Optional<ButtonType> result = unbookAlert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			try {
+				serviceFacade.deleteService(selectedService);
+				AdminGeneralViewController.serviceList.remove(selectedService);
+				// Should refresh services table
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+    	//TODO: call the delete method on the ServiceFacade.
+    }
+	
 	/**
 	 * Handles the ban  user type button
 	 */
 	@FXML
-	private void handleDeleteUserTypeButton(){
+	private void handleDeleteUserButton(){
 		Alert deleteUserAlert = new Alert(Alert.AlertType.CONFIRMATION);
 		deleteUserAlert.initOwner(stage);
 		deleteUserAlert.setTitle("Do you really want to ban this user ?");
