@@ -67,6 +67,11 @@ public class ServiceFacade {
 		return serviceDao.getAll();
 	}
 
+	/**
+	 *
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Service> getUnbookedServices() throws  SQLException{
 		return serviceDao.getUnbookedServices();
 	}
@@ -80,6 +85,18 @@ public class ServiceFacade {
 	public ArrayList<Service> getAllServicesByUser(User user) throws SQLException{
 		return serviceDao.getAllByUser(user);
 	}
+
+	/**
+	 *
+	 * @param user
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<Service> getAllBookedServicesByUser(User user) throws SQLException{
+		return serviceDao.getAllBookedByUser(user);
+	}
+
+
 
 	/**
 	 * Deletes a service in the database

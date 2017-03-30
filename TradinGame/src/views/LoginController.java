@@ -23,61 +23,71 @@ public class LoginController extends ViewController{
 	private TextField nicknameField;
 	@FXML
 	private PasswordField passwordField;
-	
-	
+
+
 	private UserFacade userFacade;
-	
+
 	/**
-     * The constructor.
-     * The constructor is called before the initialize() method.
-     */
-    public LoginController() {
-    	userFacade = UserFacade.getInstance();
-    }
-    
-    @FXML
-    /**
-     * Initializes the controller
-     */
-    private void initialize() {
-    	
-    }
-    
-    
-    /**
-     * Method triggered by a click on the sign in button
-     */
-    @FXML
-    private void handleSignInButton(){
-    	User userFound = null;
+	 * The constructor.
+	 * The constructor is called before the initialize() method.
+	 */
+	public LoginController() {
+		userFacade = UserFacade.getInstance();
+	}
+
+	@FXML
+	/**
+	 * Initializes the controller
+	 */
+	private void initialize() {
+
+	}
+
+
+	/**
+	 * Method triggered by a click on the sign in button
+	 */
+	@FXML
+	private void handleSignInButton(){
+		User userFound = null;
 		try {
 			userFound = userFacade.login(nicknameField.getText(), passwordField.getText());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	if(userFound == null){
-    		 Util.displayAlert(AlertType.ERROR, "Bad login", "Bad nickname or password.");
-    	}
-    	else{
-    		UserFacade.setUserLogged(userFound);
-    		if(!userFound.isIsAdmin())
-    			mainApp.showUserGeneralViewDialog();
-    		else
-    			mainApp.showAdminGenereralView();
-    	}
-    		
-    	
-    }
-    
-    /**
-     * Method triggered by a cick on the sign up button
-     */
-    @FXML
-    private void handleSignUpButton(){
-    	mainApp.showSignupView();
-    }
-    
-    
+		if(userFound == null){
+
+			Util.displayAlert(AlertType.ERROR, "Bad login", "Bad nickname or password.");
+		}
+		else{
+			if (userFound.isIsBanned()){
+
+
+				Util.displayAlert(AlertType.ERROR, "Your account was banned", "You have been banned. Contact an Admin for further information");
+			}
+			else{
+
+
+				UserFacade.setUserLogged(userFound);
+				if(!userFound.isIsAdmin())
+					mainApp.showUserGeneralViewDialog();
+				else
+					mainApp.showAdminGenereralView();
+			}
+		}
+
+
+	}
+
+	/**
+	 * Method triggered by a cick on the sign up button
+	 */
+	@FXML
+	private void handleSignUpButton(){
+		mainApp.showSignupView();
+	}
+
+
 
 }

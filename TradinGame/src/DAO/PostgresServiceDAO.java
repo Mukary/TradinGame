@@ -168,4 +168,25 @@ public class PostgresServiceDAO extends AbstractDAO<Service>{
         stmt.close();
         return services;
     }
+
+    public ArrayList<Service> getAllBookedByUser(User consumer) throws SQLException {
+        ArrayList<Service> services = new ArrayList<Service>();
+        PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"Service\" WHERE \"consumerNickname\" = ? ");
+        stmt.setString(1, consumer.getNickname());
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            int idService = rs.getInt("idService");
+            String description = rs.getString("description");
+            Date expirationDate = rs.getDate("expirationDate");
+            String sellerNickname = rs.getString("sellerNickName");
+            String serviceTypeLabel = rs.getString("serviceTypeLabel");
+            String gameName = rs.getString("gameName");
+            String consumerNickname = rs.getString("consumerNickname");
+            services.add(new Service(idService, description, expirationDate, sellerNickname, serviceTypeLabel, gameName, consumerNickname));
+        }
+        rs.close();
+        stmt.close();
+        return services;
+    }
+
 }

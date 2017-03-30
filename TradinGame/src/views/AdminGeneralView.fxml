@@ -25,7 +25,7 @@
                         </TableView>
                         <Button layoutX="380.0" layoutY="602.0" mnemonicParsing="false" text="Edit" />
                         <Button layoutX="65.0" layoutY="602.0" mnemonicParsing="false" onAction="#handleAddUserButton" prefHeight="27.0" prefWidth="157.0" text="Create a new account" />
-                        <Button layoutX="311.0" layoutY="602.0" mnemonicParsing="false" text="Delete" textFill="#eb0808" />
+                        <Button layoutX="311.0" layoutY="602.0" mnemonicParsing="false" onAction="#handleDeleteUserButton" text="Delete" textFill="#eb0808" />
                         <Button layoutX="490.0" layoutY="602.0" mnemonicParsing="false" onAction="#handleLogoutButton" text="Logout" />
                      </children>
                   </AnchorPane>
@@ -54,12 +54,13 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="50.0" layoutY="61.0" prefHeight="445.0" prefWidth="159.0">
+                        <TableView fx:id="gameTypeTableView" layoutX="50.0" layoutY="61.0" prefHeight="445.0" prefWidth="214.0">
                           <columns>
-                            <TableColumn prefWidth="158.0" text="Name" />
+                            <TableColumn fx:id="gameTypeNameColumn" prefWidth="213.0" text="Name" />
                           </columns>
                         </TableView>
-                        <Button layoutX="101.0" layoutY="536.0" mnemonicParsing="false" text="Delete" textFill="#eb0808" />
+                        <Button layoutX="50.0" layoutY="535.0" mnemonicParsing="false" onAction="#handleDeleteGameTypeButton" text="Delete" textFill="#eb0808" />
+                        <Button layoutX="205.0" layoutY="535.0" mnemonicParsing="false" text="Add" />
                      </children>
                   </AnchorPane>
               </content>

@@ -41,6 +41,15 @@ public class UserGeneralViewController extends ViewController{
 	private TableColumn<Service, String> gameMyServicesColumn;
     @FXML
 	private TableColumn<Service, String> providerMyServicesColumn;
+
+    @FXML
+	private TableView<Service> servicesBooked;
+    @FXML
+	private TableColumn<Service, String> descriptionServicesBookedColumn;
+    @FXML
+	private TableColumn<Service, String> gameServicesBookedColumn;
+    @FXML
+	private TableColumn<Service, String> providerServicesBookedColumn;
 	
     
     @FXML
@@ -60,10 +69,12 @@ public class UserGeneralViewController extends ViewController{
 	private UserFacade userFacade;
 
 	public static ObservableList<Service> myServicesList;
+	public static ObservableList<Service> bookedServicesList;
 
 	
 	private Service selectedService;
 	private Service selectedMyService;
+	private Service selectedServiceBooked;
 
     
 	/**
@@ -91,7 +102,16 @@ public class UserGeneralViewController extends ViewController{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+		// Booked Services list
+		try {
+			bookedServicesList = FXCollections.observableList(serviceFacade.getAllBookedServicesByUser(UserFacade.userLogged));
+			servicesBooked.setItems(bookedServicesList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		this.initializeMyServicesListTable();
+		this.initializeServicesBookedListTable();
 		this.initialiazeAccountView();
 		
 		//Account View
@@ -125,6 +145,11 @@ public class UserGeneralViewController extends ViewController{
     @FXML
     private void handleMyServiceDetailButton(){
     	mainApp.showServiceDetailView(selectedMyService);
+    }
+
+    @FXML
+    private void handleServicesBookedDetailButton(){
+    	mainApp.showServiceDetailView(selectedServiceBooked);
     }
     
     @FXML
@@ -198,6 +223,17 @@ public class UserGeneralViewController extends ViewController{
 		providerMyServicesColumn.setCellValueFactory(cellData -> cellData.getValue().sellerNicknameProperty());
 		myServices.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> selectedMyService = newValue);
+	}
+
+	/**
+     * Initialiazes services booked tableview
+     */
+	private void initializeServicesBookedListTable(){
+		descriptionServicesBookedColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
+		gameServicesBookedColumn.setCellValueFactory(cellData -> cellData.getValue().gameNameProperty());
+		providerServicesBookedColumn.setCellValueFactory(cellData -> cellData.getValue().sellerNicknameProperty());
+		servicesBooked.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> selectedServiceBooked = newValue);
 	}
 
 	/**

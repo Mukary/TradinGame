@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import models.User;
 import javafx.scene.control.Alert.AlertType;
+import util.Util;
 
 public class SignupViewController extends ViewController{
 
@@ -48,12 +49,6 @@ public class SignupViewController extends ViewController{
 	        alert.showAndWait();
 		}
 		else{
-			alert = new Alert(AlertType.INFORMATION);
-	        alert.initOwner(stage);
-	        alert.setHeaderText(null);
-	        alert.setTitle("User registered");
-	        alert.setContentText("You have been registered correctly !");
-	        alert.showAndWait();
 			//TODO : USE FACADE TO INSERT USER
 	        String nickname = nicknameField.getText();
 	        String firstname = firstnameField.getText();
@@ -66,6 +61,14 @@ public class SignupViewController extends ViewController{
 	        UserFacade userFacade = UserFacade.getInstance();
 	        try {
 				int res = userFacade.insertUser(userToInsert);
+				if (res == 1) {
+					Util.displayAlert(AlertType.INFORMATION, "User registered", "You have been registered correctly !");
+	        		mainApp.showLoginView();
+				}
+				else
+				{
+					Util.displayAlert(AlertType.ERROR, "Failed to insert user", "This nickname is already used by another user.");
+				}
 				System.out.println(res);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -77,8 +80,7 @@ public class SignupViewController extends ViewController{
 		        alert.showAndWait();
 				e.printStackTrace();
 			}
-	        
-	        mainApp.showLoginView();
+
 		}
 			
 		

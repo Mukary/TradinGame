@@ -74,6 +74,13 @@ public class AdminGeneralViewController extends ViewController{
 	@FXML
 	private TableColumn<ServiceType, String> serviceTypeDescriptionColumn;
 	
+	@FXML
+	private TableView<GameType> gameTypeTableView;
+	@FXML
+	private TableColumn<GameType, String> gameTypeNameColumn;
+	
+	
+	
 	
 	
 	public static ObservableList<Game> gamesList;
@@ -91,6 +98,7 @@ public class AdminGeneralViewController extends ViewController{
 	private ServiceFacade serviceFacade;
 	
 	private Game selectedGame;
+	private GameType selectedGameType;
 	private User selectedUser;
 	private Report selectedReport;
 	private ServiceType selectedServiceType;
@@ -109,6 +117,7 @@ public class AdminGeneralViewController extends ViewController{
 		initializeReportsTableView();
 		initializeServiceTypesTableView();
 		initializeServicesTableView();
+		initializeGameTypeTableView();
 	}
 	
     @FXML
@@ -283,11 +292,33 @@ public class AdminGeneralViewController extends ViewController{
 		deleteUserAlert.setTitle("Do you really want to ban this user ?");
 		Optional<ButtonType> answer = deleteUserAlert.showAndWait();
 		if(answer.get() == ButtonType.OK){
-			User newUsr = selectedUser;
 			selectedUser.setIsBanned(true);
 			try {
-				userFacade.updateUser(newUsr);
+				userFacade.updateUser(selectedUser);
 			} catch(SQLException sql){
+				sql.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * Handles the delete game type button
+	 */
+	@FXML
+	private void handleDeleteGameTypeButton(){
+		Alert deleteGameType = new Alert(Alert.AlertType.CONFIRMATION);
+		deleteGameType.initOwner(stage);
+		deleteGameType.setTitle("Do you really want to delete this game type ?");
+		Optional<ButtonType> answer = deleteGameType.showAndWait();
+		if(answer.get() == ButtonType.OK){
+			try{
+				int res = 0;
+				gameTypeFacade.delete(selectedGameType);
+				if(res == 1){
+					gameTypesList.remove(selectedGameType);
+				}
+				
+			} catch (SQLException sql){
 				sql.printStackTrace();
 			}
 		}
@@ -349,7 +380,7 @@ public class AdminGeneralViewController extends ViewController{
 		userNicknameColumn.setCellValueFactory(cellData -> cellData.getValue().nicknameProperty());
 		userFirstnameColumn.setCellValueFactory(cellData -> cellData.getValue().firstnameProperty());
 		userLastnameColumn.setCellValueFactory(cellData -> cellData.getValue().lastnameProperty());
-		//userStatusColumn.setCellValueFactory(cellData -> cellData.getValue().isBannedProperty());
+		userStatusColumn.setCellValueFactory(cellData -> cellData.getValue().getIsbannedString());
 		usersTableView.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> selectedUser = newValue);
 	}
@@ -377,6 +408,16 @@ public class AdminGeneralViewController extends ViewController{
 
 		servicesTableView.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue)-> selectedService = newValue);
+	}
+	/**
+	 * Initializes the game type table view
+	 */
+	private void initializeGameTypeTableView(){
+		gameTypeTableView.setItems(gameTypesList);
+		gameTypeNameColumn.setCellValueFactory(cellData -> cellData.getValue().labelProperty());
+		
+		gameTypeTableView.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> selectedGameType = newValue);
 	}
 	
 }

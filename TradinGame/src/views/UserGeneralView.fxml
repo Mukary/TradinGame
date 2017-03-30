@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.UserGeneralViewController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.UserGeneralViewController">
    <children>
       <TabPane layoutX="14.0" layoutY="14.0" prefHeight="692.0" prefWidth="1255.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="14.0">
         <tabs>
@@ -75,6 +75,22 @@
                      </children></AnchorPane>
             </content>
           </Tab>
+            <Tab text="Services booked">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="servicesBooked" layoutX="88.0" layoutY="190.0" prefHeight="388.0" prefWidth="520.0" AnchorPane.bottomAnchor="161.0" AnchorPane.leftAnchor="89.0" AnchorPane.rightAnchor="646.0" AnchorPane.topAnchor="114.0">
+                           <columns>
+                              <TableColumn fx:id="descriptionServicesBookedColumn" prefWidth="238.0" text="Description" />
+                              <TableColumn fx:id="gameServicesBookedColumn" minWidth="0.0" prefWidth="141.0" text="Game" />
+                              <TableColumn fx:id="providerServicesBookedColumn" prefWidth="139.0" text="Provider" />
+                           </columns>
+                        </TableView>
+                        <Button layoutX="661.0" layoutY="112.0" mnemonicParsing="false" onAction="#handleServicesBookedDetailButton" text="Service details" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
             <Tab text="Account">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">

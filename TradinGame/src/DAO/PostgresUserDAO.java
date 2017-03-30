@@ -68,7 +68,7 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 	public int update(User obj) throws SQLException {
         int res = 0;
         try{
-            PreparedStatement stmt = connect.prepareStatement("UPDATE \"user\" SET nickname = ?, firstname = ?, lastname = ?, country = ?, city = ?, address = ?, is_admin = ?, is_banned = ?, password = ? WHERE nickname = ?");
+            PreparedStatement stmt = connect.prepareStatement("UPDATE \"user\" SET nickname = ?, firstname = ?, lastname = ?, country = ?, city = ?, address = ?, is_admin = ?, is_banned = ? WHERE nickname = ?");
             stmt.setString(1, obj.getNickname());
             stmt.setString(2, obj.getFirstname());
             stmt.setString(3, obj.getLastname());
@@ -77,8 +77,8 @@ public class PostgresUserDAO extends AbstractDAO<User>{
             stmt.setString(6, obj.getAddress());
             stmt.setBoolean(7, obj.isIsAdmin());
             stmt.setBoolean(8, obj.isIsBanned());
-            stmt.setString(9, Util.sha1(obj.getPassword()));
-            stmt.setString(10, obj.getNickname());
+
+            stmt.setString(9, obj.getNickname());
             res = stmt.executeUpdate();
         }catch(SQLException se){
             se.printStackTrace();
@@ -121,15 +121,19 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 	 * @throws SQLException
 	 */
 	public User find(String nickname, String password) throws SQLException{
+
 		PreparedStatement stmt = connect.prepareStatement("SELECT * FROM \"user\" WHERE nickname = ? AND password = ?");
 		stmt.setString(1, nickname);
 		try {
 			stmt.setString(2,  Util.sha1(password));
+
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next()){
+
+
 			String firstname = rs.getString("firstname");
 			String lastname = rs.getString("lastname");
 			String country = rs.getString("country");
@@ -142,6 +146,7 @@ public class PostgresUserDAO extends AbstractDAO<User>{
 			return new User(nickname, firstname, lastname, password, country, city, address, isBanned, isAdmin);
 		}
 		else
+
 			return null;
 		
 	}
